@@ -55,16 +55,16 @@
 				<form id="loginform" action="${pageContext.request.contextPath}/doLogin"	method="post">
 					<h3 class="logintitle">欢迎登录</h3>
 					<div class="login-IconBg loginuser">
-						<input type="text" id="username" name="username" /> <label
-							id="unprompt">用户名</label>
+						<input type="text" id="username" name="username" />
+						<label id="unprompt">用户名</label>
 					</div>
 					<div class="login-IconBg loginclert">
-						<input type="text" id="clertNum" name="clertNum" /> <label
-							id="cnprompt">工号，可为空</label>
+						<input type="text" id="clertNum" name="clertNum" />
+						<label id="cnprompt">工号，可为空</label>
 					</div>
 					<div class="login-IconBg loginpwd">
-						<input type="password" id="password" name="password" /> <label
-							id="pwprompt">密码</label>
+						<input type="password" id="password" name="password" />
+						<label id="pwprompt">密码</label>
 					</div>
 					<div class="login-IconBg logincode">
 						<input type="text" id="code" name="challenge" /> 
