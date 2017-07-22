@@ -1,5 +1,5 @@
 /**
- * 库存管理功能
+ * 库存管理功能11
  */
 HOME.Core.register("plugin-axss", function(box) {
 	
