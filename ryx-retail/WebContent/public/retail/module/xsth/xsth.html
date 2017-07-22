@@ -1,0 +1,142 @@
+<script type="text/mustache" id="view_xsth">
+	<div>
+		<div>
+			<table style="width: 100%;" class="table_view clickable" data-onkey="true">
+			<thead>
+				<tr>
+					<th style="width: 20%;">退货单号</th>
+					<th style="width: 20%;">销售单号</th>
+				<!--<th style="width: 15%;">退货日期</th>-->
+					<th style="width: 15%;">退货时间</th>
+					<th style="width: 10%;">退货量</th>
+					<th style="width: 20%;">金额合计</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#sale_order}}
+				<tr title="{{note}}">
+					<td id="return_order_id">{{return_order_id}}</td>
+					<td id="order_id">{{order_id}}</td>
+					<td>{{return_order_date}}</td>
+					<!--<td>{{return_order_time}}</td>-->
+					<td>{{qty_return_total}}</td>
+					<td>{{amt_return_total}}</td>
+				</tr>
+				{{/sale_order}}
+			</tbody>
+		</table>
+		</div>
+		<div class="view_footer">
+			<input type="text"  data-enter="query" class="striking_input" id="query_return_order_id"  name="orderId" placeholder="请输入销售单号" maxlength="25" />
+			<input type="button" class="primary_button" id="query" name="selewares" style="margin-left:10px;" value="查 询" />
+		</div>
+	</div>
+</script>
+<script type="text/mustache" id="view_xsth_detail">
+<div>
+	<div style="overflow-y: auto; position: absolute; top: 0px; left: 0px; bottom: 60px;width: 100%">
+		<table style="width: 100%;" class="table_view" data-onkey="true">
+			<thead>
+				<tr>
+					<th style="width: 5%;">序号</th>
+					<th style="width: 15%;">商品条码</th>
+					<th style="width: 15%;">商品名称</th>
+					<th style="width: 8%;">售价</th>
+					<th style="width: 6%;">销售量</th>
+					<th style="width: 8%;">金额</th>
+					<th style="width: 6%;">已退量</th>
+					<th style="width: 6%;">退货量</th>
+					<th style="width: 9%">最大可退量</th>
+					<th style="width: 8%;">退货金额</th>
+					<th style="width: 8%;">入库</th>
+					<th style="width: 4%;">退货</th>
+				</tr>
+			</thead>
+			<tbody id="returnTbody" data-order-id="{{order_id}}" data-consumer-id="{{consumer_id}}" data-merch-id="{{merch_id}}" data-order-type="{{order_type}}" data-status="{{order.status}}" data-consumer-rebate-amount="{{order.consumer_rebate_amount}}">
+				{{#order.list}} 
+				<tr  data-discount="{{discount}}" data-unit-name="{{unit_name}}" data-line-num="{{line_num}}" data-profit="{{profit}}" data-adjusted-amount="{{adjusted_amount}}"
+				 data-item-bar="{{item_bar}}" data-big-bar="{{big_bar}}" data-big-unit-name="{{big_unit_name}}" data-unit-ratio="{{unit_ratio}}"
+				 data-big-pri3="{{big_pri3}}" data-item-id="{{item_id}}" data-cost="{{cost}}" data-pri3="{{pri3}}" data-other-adjusted-amount="{{other_adjusted_amount}}">
+					<td >{{line_num}}</td>
+					<td ><label id="item_bar">{{big_bar}}</label></td>
+					<td><label id="item_name">{{item_name}}</label></td> 
+					<td><label id="pri3">{{big_pri3}}</label></td>
+					<td><label id="qty_ord" class="qtyords">{{qty_ord}}</label></td>
+					<td><label id="amt_ord" class="amtord">{{amt_ord}}</label></td>
+					<td><label id="qty_returned" class="returnNum" style="{{ret_color}}">{{qty_ret}}</label></td>
+					<td><input id="qty_ret" name="qty_ret" disabled="disabled" data-verify="number" style="width: 60px;" type="text" value="{{default_qty_ret}}"  verify-message="退货量格式错误！" /></td>
+					<td><label name="max_qty_ret" id="max_qty_ret" data-ret="{{max_qty_ret}}">{{max_qty_ret}}</label></td>
+					<td><input id="return_money" name="returnMoney" disabled="disabled" data-verify="number" style="width: 60px;" type="text" value="{{return_money}}"  verify-message="退货金额格式错误！" /></td>
+					<td><input type="checkbox" id="checkbox_ruku" name="checkbox_ruku" disabled="disabled" checked="checked"/></td>
+					<td><input type="checkbox" id="checkbox_tuihuo" name="checkbox" {{style}}/></td>		
+				</tr>
+				{{/order.list}}
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer" style="height: 60px; line-height: 50px;margin-left: 0px;font-weight:bold;text-align:left;" class="view_footer" > 
+		销售单号：<label id="order_id"  class="primary_label" style="font-size: 13px;">{{order.order_id}}</label>
+		&nbsp; &nbsp;&nbsp;
+		总金额：<label id="amtys_ord_total"  class="striking_label" style="font-size: 13px;">{{order.amtys_ord_total}}</label>
+		&nbsp;&nbsp;&nbsp;
+		总数量：<label id="qty_ord_total" class="striking_label" style="font-size: 13px;">{{order.qty_ord_total}}</label>
+		&nbsp;&nbsp;&nbsp; 
+		退货总量：<label id="qty_ret_total" class="striking_label" style="font-size: 13px;{{order.return_color}}">{{order.qty_ret_total}}</label>
+		<div style="float:right;">
+		<input type="button" class="striking_button" data-doubleclick="false" id="return_all" value="全单退货" />
+		&nbsp;&nbsp;
+		<input type="button" class="primary_button" data-doubleclick="false" id="return" value="退货" />
+		&nbsp;&nbsp;
+		<input type="button" class="minor_button" id="cancel" value="取消" />
+	</div>
+</div>
+</script>
+
+
+
+<script type="text/mustache" id="view_return_detail">
+<div>
+	<div style="overflow-y: auto; position: absolute; top: 0px; left: 0px; bottom: 60px;width: 100%">
+		
+		<table style="width: 100%;" class="table_view">
+			<thead>
+				<tr>
+					<th style="width: 5%;">序号</th>
+					<th style="width: 15%;">商品条码</th>
+					<th style="width: 15%;">商品名称</th>
+					<th style="width: 8%;">单位</th>
+					<th style="width: 8%;">售价</th>
+					<th style="width: 6%;">已退货量</th>
+					<th style="width: 8%;">退货金额</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#order.list}} 
+				<tr  data-discount="{{discount}}" data-unit-name="{{unit_name}}" data-line-num="{{line_num}}" data-profit="{{profit}}"
+				 data-item-bar="{{item_bar}}" data-big-bar="{{big_bar}}" data-big-unit-name="{{big_unit_name}}" data-unit-ratio="{{unit_ratio}}"
+				 data-big-pri3="{{big_pri3}}" data-item-id="{{item_id}}" data-cost="{{cost}}" data-pri3="{{pri3}}">
+					<td >{{line_num}}</td>
+					<td ><label id="item_bar">{{big_bar}}</label></td>
+					<td><label id="item_name">{{item_name}}</label></td> 
+					<td><label id="unit_name">{{big_unit_name}}</label></td>
+					<td><label id="pri3">{{big_pri3}}</label></td>
+					<td style="{{ret_color}}"> {{qty_ord}} </td>
+					<td> {{amt_ord}}</td>
+				</tr>
+				{{/order.list}}
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer" style="height: 60px; line-height: 50px;margin-left: 0px;font-weight:bold;text-align:left;" class="view_footer" > 
+		退货单号：<label id="order_id"  class="primary_label" style="font-size: 13px;">{{order.return_order_id}}</label>
+		&nbsp; &nbsp;&nbsp;
+		销售单号：<label id="order_id"  class="primary_label" style="font-size: 13px;">{{order.order_id}}</label>
+		&nbsp; &nbsp;&nbsp;
+		退货金额：<label id="amtys_ord_total"  class="striking_label" style="font-size: 13px;">{{order.amt_return_total}}</label>
+		&nbsp;&nbsp;&nbsp;
+		退货数量：<label id="qty_ord_total" class="striking_label" style="font-size: 13px;">{{order.qty_return_total}}</label>
+		<div style="float:right;">
+		<input type="button" class="closebtn_button" style="margin-top:15px;" id="cancel" value="关 闭" />
+	</div>
+</div>
+</script>

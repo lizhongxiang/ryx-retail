@@ -1,0 +1,58 @@
+<script type="text/mustache" id="view_kcgl_kcpd">
+<div>
+	<div>
+		<table style="width: 100%;" class="table_view" data-onkey="true">
+			<thead>
+				<tr>
+					<th style="width: 7%;">序号</th>
+					<th style="width: 13%;">商品条码</th>
+					<th style="width: 16%;">商品名称</th>
+					<th style="width: 9%;">零售价</th>
+					<th style="width: 13%;">当前库存</th>
+					<th style="width: 1%;"></th>
+					<th style="width: 9%;">单位</th>
+					<th style="width: 10%;">盘差量</th>
+					<!--<th style="width: 9%;">合理库存</th>-->
+					<th style="width: 23%;">损益原因</th>	
+				</tr>
+			</thead>
+			<tbody>
+				{{#list}}
+					<tr>
+						<td>{{index}}</td>
+						<td>{{item_bar}}</td>
+						<td>{{item_name}}</td>
+						<td>{{pri4}}</td>
+						<td>
+							<lable style="display:none" >{{qty_whse}}</lable>
+							<input class="inventory" id="qtywhse"  type="text" value="{{qty_whse}}" style="width: 90px; text-align:center;border:1px solid #eaeaea;" data-verify="number" data-empty="false" verify-message="当前库存不能为空且必须为数字" data-id="{{item_id}}" data-item-name={{item_name}} data-kind="{{item_kind_id}}" data-whse="{{original_qty_whse}}" data-ratio="{{unit_ratio}}" data-cost="{{cost}}" maxlength="7" />
+						</td>
+						<td>
+							<span name="whse_remind_icon" class="pageIcon pageIcon_info" alt='jifen' style='{{^whse_remind}}display:none;{{/whse_remind}} vertical-align:middle;cursor:pointer' title="{{whse_remind}}" />
+						</td>
+						<td>{{unit_name}}</td>
+						<td><label class="qtypl">{{pcl}}</label></td>
+						<!--<td>{{qty_whse_warn}}</td>-->
+						<td><input class="cause" style="width: 200px;border:1px solid #eaeaea;" maxlength="100" type="text" value="{{pl_reason}}" /></td>
+					</tr>
+				{{/list}}
+			</tbody>
+		</table>
+	</div>
+	
+	<div class="view_footer">
+		<input type="button" class="striking_button right" id="submit" value="提 交" />
+		<input  type="text" class="striking_input" id="tiaoma" name="tiaoma" data-enter="selewares" placeholder="请输入条码/品名/拼音" value="{{static_item_bar}}" style="width:160px;"/>
+		&nbsp;
+		<select name="item_kind" id="item_kind" style="height:30px;">
+			<option value="">全部商品</option>
+			{{#item_kind_list}}
+			<option value="{{id}}">{{name}}</option>
+			{{/item_kind_list}}
+		</select>&nbsp;
+	    <input  type="button" class="primary_button" id="selewares" data-doubleclick="false" name="selewares" value="查 询" />
+		&nbsp;&nbsp;<label class="primary_label" style="font-size: 13px;">库存量：</label><label class="striking_label" id="sum_qty_whse" style="font-size: 13px;">0</label>
+        &nbsp;&nbsp;<label class="primary_label" style="font-size: 13px;">库存金额：</label><label class="striking_label" id="sum_money" style="font-size: 13px;">0</label>元
+	</div>
+</div>
+</script>

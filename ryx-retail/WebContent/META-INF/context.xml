@@ -1,0 +1,14 @@
+<!-- The contents of this file will be loaded for each web application -->
+<Context reloadable="true">
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+ <Resource
+      name="jdbc/rtms"
+      type="javax.sql.DataSource"
+      username="vsuser"
+      password="vspass"
+      driverClassName="oracle.jdbc.driver.OracleDriver"
+      maxIdle="2"
+      maxWait="5000"
+      url="jdbc:oracle:thin:@192.168.0.3:1521:orcl"
+      maxActive="30"/>
+</Context>

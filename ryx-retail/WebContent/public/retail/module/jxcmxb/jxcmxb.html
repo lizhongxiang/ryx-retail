@@ -1,0 +1,89 @@
+<script type="text/mustache" id="view_jxcmxb">
+	<style type="text/css">
+	.mytable
+	{
+		border:1px solid black;
+		text-align:center;
+		line-height:33px;
+	}
+	th{
+		text-align:center;
+		font-weight:bold;
+	}
+	td{
+		font-size:14px;
+	}
+	</style>
+
+	<div>
+		<div >
+            <table style="width:100%; " class="table_view">
+            	<thead>
+                  <tr>
+                    <th width="154"style="width: 10%;">商品名称</th>
+                    <th width="72" style="width: 10%;">商品条码</th>
+                    <th width="24" style="width: 5%;">单位</th>
+                    <th width="77" style="width: 7%;">期初库存量</th>
+                    <th width="71" style="width: 7%;">期初库存额</th>
+                    <th width="70" style="width: 7%;">本期购进量</th>
+                    <th width="75" style="width: 7%;">本期购进额</th>
+                    <th width="70" style="width: 7%;">本期销售量</th>
+                    <th width="75" style="width: 7%;">本期销售额</th>
+                    <th width="69" style="width: 7%;">库存盘差量</th>
+                    <th width="71" style="width: 7%;">库存盘差额</th>
+                    <th width="77" style="width: 7%;">期末库存量</th>
+                    <th width="83" style="width: 7%;">期末库存额</th>
+                  </tr>
+               </thead>
+               <tbody>
+				{{#jsclist}}
+                  <tr>
+                    <td align="center">{{item_name}}</td>
+                    <td align="center">{{item_bar}}</td>
+                    <td align="center">{{unit_name}}</td>
+                    <td align="center">{{begin_whse_quantity}}</td>
+                    <td align="center">{{begin_whse_amount}}</td>
+                    <td align="center">{{sum_purch_quantity}}</td>
+                    <td align="center">{{sum_purch_amount}}</td>
+                    <td align="center">{{sum_sale_quantity}}</td>
+                    <td align="center">{{sum_sale_amount}}</td>
+                    <td align="center">{{sum_whse_turn_pl_quantity}}</td>
+                    <td align="center">{{sum_whse_turn_pl_amount}}</td>
+                    <td align="center">{{end_whse_quantity}}</td>
+                    <td align="center">{{end_whse_amount}}</td>
+                  </tr>
+				{{/jsclist}}
+			</tbody> 
+          </table>
+		<div>
+		<div class="view_footer" align="left"> 
+				起止日期：<input type="text" id="beginTime" name="beginTime"  data-enter="selewares" style="width:90px;" class="striking_input" />
+				 - 
+                <input type="text" id="endTime" name="endTime" data-enter="selewares" style="width:90px;"  value="" class="striking_input" />
+			    &nbsp;
+				<select name="item_kind" id="item_kind" style="height:30px;">
+					<option value="00">全部商品</option>
+					{{#item_kind_list}}
+						<option value="{{id}}">{{name}}</option>
+					{{/item_kind_list}}
+				</select>
+				<input type="button" class="primary_button" id="selewares" name="selewares" style="margin-left:5px;" value="查 询" />
+                <div>
+				期初库存总额：
+				<label class="striking_label" style="font-size: 13px;">{{grand_total.sum_all_begin_whse_amount}}</label>
+				&nbsp;
+				期末库存总额：
+				<label class="striking_label" style="font-size: 13px;">{{grand_total.sum_all_end_whse_amount}}</label>
+				&nbsp;
+				盘点总额：
+				<label class="striking_label" style="font-size: 13px;">{{grand_total.sum_all_whse_turn_pl_amount}}</label>
+				&nbsp;
+				进货总量：
+				<label class="striking_label" style="font-size: 13px;">{{grand_total.sum_all_push_amount}}</label>
+				&nbsp;
+				销售总额：
+				<label class="striking_label" style="font-size: 13px;">{{grand_total.sum_all_sale_amount}}</label>
+		      </div>
+     </div>
+</div>
+</script>

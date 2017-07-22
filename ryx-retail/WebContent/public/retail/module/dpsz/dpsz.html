@@ -1,0 +1,237 @@
+<script type="text/mustache" id="view_dpsz">
+<div>
+	<style>
+	.datatip {
+		background:#FFF; 
+		border: 1px solid #CCC; 
+		padding: 10px;
+		position: absolute;
+		display: none;
+		z-index: 1000;
+		top: 5; left: 0;
+	}
+#myselectscope{
+  display:block;
+  width:180px;
+  margin-top:8px;
+}
+	</style>
+	
+	<div style="width:400px; margin-left:16px; margin-top:0px; float:left;border :0px solid #000;  ">
+		<table style="margin-top:22px; height:360px;">
+			<tr>
+				<td colspan="3" align="center">
+					<label style="font-size:22px;"> {{merch_name}} </label>
+				</td>
+		 	</tr>
+		 	<tr>
+				<td align="right">
+					<label>负责人：</label>
+				</td>
+				<td colspan="2" align="left">
+					<label>{{manager}}</label>
+					<!--<input id="manager" type="text" value="{{manager}}" disabled="disabled"/>-->
+				</td>
+		 	</tr>
+		 	<tr>
+				<td align="right">
+					<label>联系电话：</label>
+				</td>
+				<td colspan="2" align="left">
+					<label>{{telephone}}</label>
+				</td>
+		 	</tr>
+		 	<tr>
+				<td align="right">
+					<label>经营地址：</label>
+				</td>
+				<td colspan="2" align="left">
+					<label>{{address}}</label>
+				</td>
+		 	</tr>
+		 	<tr>
+				<td align="right">
+					<label>营业时间：</label>
+				</td>
+				<td colspan="2" style="position: relative;">
+					<!--<label id="myselecttime">{{start_time}} &nbsp;&nbsp; {{end_time}}</label>-->
+					<label id="myselecttime">{{time}}</label>
+					<a id="selecttime" style="color: #56AD02; cursor: pointer; position: absolute; right:20px; top: 8px;">选择营业时间</a>
+				</td>
+				<!--<td><input id="updateTimeBtn" type="button"  value="我的营业时间" /></td>-->
+		 	</tr>
+		 	<tr>
+				<td align="right" style="vertical-align:top;">
+					<label style="display:block;margin-top:8px;">经营范围：</label>
+				</td>
+				<td colspan="2" style="vertical-align:top;" data-scope="{{busi_scope}}" >
+					<a id="selectscope" style="color: #56AD02; cursor: pointer; float:right;margin-right:20px;margin-top:8px;">选择经营范围</a>
+					<label id="myselectscope" >{{busi_scope}}</label>
+				</td>
+				<!--<td  ><input id="updateScope" type="button" style="" value="我的经营范围" /></td>-->
+		 	</tr>
+		 	<tr>
+				<td align="right" style="vertical-align:top;">
+					<label>送货方式：</label>
+				</td>
+				<td colspan="2" style="position: relative;vertical-align:top;" >
+					<a id="selectdelivery" style="color: #56AD02; cursor: pointer; float:right;margin-right:20px;">选择送货方式</a>
+					<label id="mydelivery">{{delivery_type_str}}</label>
+				</td>
+		 	</tr>
+		 	<tr>
+				<td align="right" style="vertical-align:top;">
+					<label>地理位置：</label>
+				</td>
+				<td colspan="2" style="position: relative;vertical-align:top;" >
+					<a id="latLonMerchBtn" style="display:none; color: #FF0000; cursor: pointer; float:right;margin-right:20px;">保存修改</a>
+					<label id="latlab">{{latitude}}</label>&nbsp; - &nbsp;<label id="lonlab">{{longitude}}</label>
+				</td>
+		 	</tr>
+		 	<tr>
+				<td align="right" style="vertical-align:top;">
+					<label>烟草专卖证号：</label>
+				</td>
+				<td colspan="2"  style="position: relative;vertical-align:top;">
+					<!--<a id="updatePwd" style="color: #56AD02; cursor: pointer; float:right;margin-right:20px;">修改密码</a>-->
+					<label>{{lice_id}}</label>
+				</td>
+		 	</tr>
+		 	<tr>
+				<td align="right" style="vertical-align:top;">
+					<label>自动卷烟配货：</label>
+				</td>
+				<td colspan="2" style="position: relative;vertical-align:top;" >
+					<a id="choice_order" style="color: #56AD02; cursor: pointer; float:right;margin-right:20px;">选择卷烟配货方式</a>
+					<label id='order_type_string'>{{order_type_string}}</label>
+				</td>
+		 	</tr>
+			<!--
+			<tr>
+				<td colspan="3" style="text-align:center;">
+					<input id="updatePwd" type="button" style="width: 100px;" class="primary_button" value="修改密码" />
+				</td>
+			</tr>
+			-->
+		</table>
+	</div>
+	<div style="position: absolute; right: 16px; top: 86px; bottom: 20px; left: 440px;">
+		<div >
+			<form action="" method="get">
+				<div style="height:450px; width: 100%; border:1px solid #CCC; " id="container"></div>
+			</form>
+			<p style="margin-top:6px;" >
+				<input style="width:200px;height:22px;" id="where" name="where" placeholder="请输入地理位置查找" type="text" data-enter="wherebtn" >
+				<input type="button" id="wherebtn"  class="primary_button" value="查找位置" />
+			</p>
+		</div>	
+	<div>
+</div>
+</script>
+
+<script type="text/mustache" id="view_dpsz_pwd">
+	<div >
+		<div align="center" style="padding-top: 30px;" >
+				<form>
+					<p>
+						<span>原密码：</span><input type="password" id="oldPwd" size=22 placeholder=""/>
+					</p>
+					<br/>
+					<p>
+						<span>新密码：</span><input type="password" id="newPwd1" size=22   placeholder=""/>
+					</p>
+					<br/>
+					<p>
+						<span>新密码：</span><input type="password" id="newPwd2" size=22  placeholder=""/>
+					</p>
+					<br/>
+					<p>
+						<!--<input type="reset" style="" class="primary_button" value="重置" />-->
+						<input type="button" style="margin-top: 20px;" class="primary_button" value="保 存" id="pwdSubmit" />
+					</p>
+				</form>
+		</div>
+	</div>
+</script>
+<script type="text/mustache" id="view_dpsz_scope">
+	<div >
+		<div align="center" style="padding-top: 5px;" >
+			<form method="get">
+				<br/>
+				<label align="center"  style="font-size:16px ;font-weight:bold;">经营范围</label>
+				<br/>
+				<br/>
+				<div align="left"  style="border:0px solid #000; width:400px;" >
+						<label><input name="scopetype" type="checkbox" value="日用百货" />&nbsp;日用百货</label> &nbsp;&nbsp;
+						<label><input name="scopetype" type="checkbox" value="服装服饰" />&nbsp;服装服饰</label> &nbsp;&nbsp;
+						<label><input name="scopetype" type="checkbox" value="洗涤用品" />&nbsp;洗涤用品</label> &nbsp;&nbsp;
+						<label><input name="scopetype" type="checkbox" value="化妆品" />&nbsp;化妆品</label> &nbsp;&nbsp;
+						<label><input name="scopetype" type="checkbox" value="食品" />&nbsp;食品</label>
+						<br/><br/>
+						<label><input name="scopetype" type="checkbox" value="办公用品" />&nbsp;办公用品</label> &nbsp;&nbsp;
+						<label><input name="scopetype" type="checkbox" value="工艺品" />&nbsp;工艺品</label> &nbsp;&nbsp;
+						<label><input name="scopetype" type="checkbox" value="五金交电" />&nbsp;五金交电</label> &nbsp;&nbsp;
+						<label><input name="scopetype" type="checkbox" value="电子产品" />&nbsp;电子产品</label> &nbsp;&nbsp;
+						<label><input name="scopetype" type="checkbox" value="烟酒" />&nbsp;烟酒</label> 
+						<br/> <br/>
+						<label><input name="scopetype" type="checkbox" value="建筑材料" />&nbsp;建筑材料</label>&nbsp;&nbsp;
+				</div>
+				<input type="button" style="margin-top: 20px;" class="primary_button" value="保 存" id="scopeSubmit" />
+			</form>
+		</div>
+	</div>
+</script>
+<script type="text/mustache" id="view_dpsz_delivery">
+	<div  >
+		<div align="center" style="padding-top: 30px;" >
+			<br/>
+				<label align="center"  style="font-size:16px ;font-weight:bold;">送货方式</label>
+				<br/>
+				<br/>
+				<input type="radio" name="deliveryType" checked="checked" value="01" /> 到店自取
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="radio" name="deliveryType" value="02" /> 送货上门
+				<br/><br/>
+			<input type="button" style="margin-top: 20px;" class="primary_button" value="保 存" id="deliverySubmit" />
+		</div>
+	</div>
+</script>
+<script type="text/mustache" id="view_order_type">
+<div>
+	<div align="center" style="padding-top: 30px;" >
+		<br/>
+		<label align="center"  style="font-size:16px ;font-weight:bold;">是否自动卷烟配货</label>
+		<br/><br/>
+		<input type="radio" name="order_type" checked="checked" value="1" /> 启用
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="radio" name="order_type" value="0" /> 关闭
+		<br/><br/>
+		<input type="button" style="margin-top: 20px;" class="primary_button" value="保 存" id="submit_order_type" />
+	</div>
+</div>
+</script>
+<script type="text/mustache" id="view_dpsz_time">
+	<div  >
+		<div align="center" style="padding-top: 30px;" >
+				<form>
+					<br/>
+					<p>
+						<span>开始时间：</span><input type="text"  id="start_time" size=22 placeholder="" data-verify="time" data-empty="false" verify-message="开始时间错误！"/>
+						<label  style="color: #9C9C9C; ">&nbsp;&nbsp;&nbsp;时间格式&nbsp;&nbsp;08:00</label>
+					</p>
+					<br/>
+					<p>
+						<span>结束时间：</span><input type="text" id="end_time" size=22   placeholder="" data-verify="time" data-empty="false" verify-message="结束时间错误！"/>
+							<label  style="color: #9C9C9C; ">&nbsp;&nbsp;&nbsp;时间格式&nbsp;&nbsp;17:30</label>
+					</p>
+					<br/>
+					<p style="margin-left:70px; border:0px solid #000;" align="left">
+							<input type="checkbox"  id="all_day" value="00:00-23:59"> 24小时营业
+					</p>
+					<p>
+						<input type="button" style="margin-top: 20px;" class="primary_button" value="保 存" id="timeSubmit" />
+					</p>
+				</form>
+		</div>
+	</div>
+</script>

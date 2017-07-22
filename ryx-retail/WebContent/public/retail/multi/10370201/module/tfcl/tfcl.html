@@ -1,0 +1,180 @@
+<script type="text/mustache" id="view_tfcl">
+<div style="height: 100%;">
+<style>
+#tabTfcl{
+	font-size:14px;
+	width:98%;
+	overflow:hidden;
+	padding-top:15px;
+	margin-left:auto;
+	margin-right:auto;
+}
+#tabTfcl li{
+	float:left;
+	text-align:center;
+	overflow:hidden;
+	cursor:pointer;
+}
+.tab_item_type_menu{
+	width:100%;
+	height:38ppx;
+	overflow:hidden;
+	background:url(../public/retail/multi/10370201/img/ling_bg.png) repeat;
+}
+.tab_item_type_menu li{
+	color:#585858;
+	width:15%;
+	height:38px;
+	line-height:28px;
+	font-weight:700px;
+	background:url(../public/retail/multi/10370201/img/ln_A_20m.png) no-repeat;
+}
+.tab_item_type_menu li.on{
+	color:#90c31f;
+	background-position:-198px 0;
+}
+.tab_area_type_menu{
+	width:100%;
+	margin-top:10px;
+}
+.tab_area_type_menu ul li{
+	width:7%;
+	padding:12px 0;
+	text-align:center;
+	color:#098ad0;
+}
+.tab_area_type_menu ul li.on{
+	border:1px #dcdcdc solid;
+	border-bottom:none;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+}
+
+#select_table th{
+	border:1px #dcdcdc solid;
+}
+</style>
+	<div style="width: 100%; height: 100%;">
+		<div id="tabTfcl">
+			<!--选项卡-->
+			<ol class="tab_item_type_menu">
+				<li id="jql" class="on">紧  销   类</li>
+				<!--<li id="sql">顺  销   类</li>-->
+				<li id="cgdl">超高端类</li>
+				<!--<li id="xpl">新  品   类</li>-->
+			</ol>
+			<div class="tab_area_type_menu" style="width:100%; overflow:hidden;">
+				
+			</div>
+			<div class="tab_content" style="width:100%;overflow:auto;">
+				
+			</div>
+		</div>
+	</div>
+</div>
+</script>
+<script type="text/mustache" id="tab_area_type_menu_ul">
+	<ul class="area_type_meun">
+		<li id="qcq" class="on">(区)城区</li>
+		<li id="scq">(市)城区</li>
+		<li id="zq">镇区</li>
+		<li id="hn">好农</li>
+		<li id="cn">差农</li>
+	</ul>
+</script>
+<script type="text/mustache" id="view_table_list">
+		<table id="select_table" data-onkey="true" class="table_view ">
+			<thead>
+				<tr>
+				<th>客户分类</th>
+				<th style="width: 2.5%;" colspan="3">大型商超</th>
+				<th style="width: 2.5%;" colspan="3">娱乐服务</th>				
+				<th style="width: 2.5%;" colspan="10">大(前20%)分9档</th>
+				<th style="width: 2.5%;" colspan="15">中(中60%)分10档</th>	
+				<th style="width: 2.5%;" colspan="5">小(后20%)分2档</th>		
+				</tr>
+				<tr>
+				<th style="width: ;">品牌</th>
+				<th style="width: 2.5%;"> 1类</th>
+				<th style="width: 2.5%;"> 2类</th>
+				<th style="width: 2.5%;"> 3类</th>
+				<th style="width: 2.5%;"> 1类</th>
+				<th style="width: 2.5%;"> 2类</th>
+				<th style="width: 2.5%;"> 3类</th>				
+				<th style="width: 2.5%;">30档</th>	
+				<th style="width: 2.5%;">29档</th>	
+				<th style="width: 2.5%;">28档</th>
+				<th style="width: 2.5%;">27档</th>
+				<th style="width: 2.5%;">26档</th>
+				<th style="width: 2.5%;">25档</th>
+				<th style="width: 2.5%;">24档</th>
+				<th style="width: 2.5%;">23档</th>
+				<th style="width: 2.5%;">22档</th>
+				<th style="width: 2.5%;">21档</th>
+				<th style="width: 2.5%;">20档</th>	
+				<th style="width: 2.5%;">19档</th>							
+				<th style="width: 2.5%;">18档</th>
+				<th style="width: 2.5%;">17档</th>
+				<th style="width: 2.5%;">16档</th>
+				<th style="width: 2.5%;">15档</th>
+				<th style="width: 2.5%;">14档</th>
+				<th style="width: 2.5%;">13档</th>
+				<th style="width: 2.5%;">12档</th>
+				<th style="width: 2.5%;">11档</th>
+				<th style="width: 2.5%;">10档</th>	
+				<th style="width: 2.5%;"> 9档</th>							
+				<th style="width: 2.5%;"> 8档</th>
+				<th style="width: 2.5%;"> 7档</th>
+				<th style="width: 2.5%;"> 6档</th>
+				<th style="width: 2.5%;"> 5档</th>
+				<th style="width: 2.5%;"> 4档</th>
+				<th style="width: 2.5%;"> 3档</th>
+				<th style="width: 2.5%;"> 2档</th>
+				<th style="width: 2.5%;"> 1档</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#list}}
+				<tr>
+					<td>{{item_name}}</td>
+					<td>{{51档}}</td>
+					<td>{{52档}}</td>
+					<td>{{53档}}</td>
+					<td>{{41档}}</td>
+					<td>{{42档}}</td>
+					<td>{{43档}}</td>
+					<td>{{30档}}</td>
+					<td>{{29档}}</td>
+					<td>{{28档}}</td>
+					<td>{{27档}}</td>
+					<td>{{26档}}</td>
+					<td>{{25档}}</td>
+					<td>{{24档}}</td>
+					<td>{{23档}}</td>
+					<td>{{22档}}</td>
+					<td>{{21档}}</td>
+					<td>{{20档}}</td>
+					<td>{{19档}}</td>
+					<td>{{18档}}</td>
+					<td>{{17档}}</td>
+					<td>{{16档}}</td>
+					<td>{{15档}}</td>
+					<td>{{14档}}</td>
+					<td>{{13档}}</td>
+					<td>{{12档}}</td>
+					<td>{{11档}}</td>
+					<td>{{10档}}</td>
+					<td>{{9档}}</td>
+					<td>{{8档}}</td>
+					<td>{{7档}}</td>
+					<td>{{6档}}</td>
+					<td>{{5档}}</td>
+					<td>{{4档}}</td>
+					<td>{{3档}}</td>
+					<td>{{2档}}</td>
+					<td>{{1档}}</td>
+				</tr>
+			{{/list}}
+		</tbody>
+	</table>
+</script>

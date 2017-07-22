@@ -1,0 +1,242 @@
+<script type="text/mustache" id="view_fyrk">
+<div style="height: 100%;">
+	<style>
+	.curitem_ul li {
+		height: 38px;
+		line-height: 30px;
+		overflow: hidden;
+	}
+	.footer_ul li {
+		float: left;
+		margin-right: 40px;
+	}
+	#left_container {
+		width: 260px;
+		height: 100%;
+		float: left;
+		position: relative;
+        background-color:#f9f9f9;
+	}
+	#right_container{
+		margin: 0 0 0 260px;
+		min-height: 100%;
+		max-height: 100%;
+		overflow-y: auto;
+		border-left: 1px solid #CCC;
+		position: relative;
+	}
+
+	#current_item_container {
+		
+	}
+
+	.itemblock {
+		/*border:1px solid #CCC;*/
+		margin: 30px 10px;
+		padding: 16px;
+		position: relative;
+	}
+	.itemblocklabel {
+		position: absolute;
+		top: -12px;
+		/*left: 20px;
+		background-color: #FFF;
+		padding: 0px 10px;
+		font-size: 15px;*/
+		color: #6d7784;
+		font-weight: bold;
+	}
+	.itemblockselect {
+		display:inline-block;
+		position:absolute;
+		width:30px;
+		height:28px;
+		top: 19px;
+		right: 11px;
+		cursor: pointer;
+	}
+	.view_footer .right{
+		float:right;
+		margin-left:20px;
+		margin-top:15px;
+	}
+	</style>
+	<div style="width: 100%; height: 100%">
+		<div id="left_container">
+
+			<div class="itemblock" style="padding-bottom:30px; border-bottom:1px dotted #ddd;">
+				<div class="itemblocklabel">选择商品</div>
+				<a class="itemblockselect pageIcon pageIcon_more" id="order_type" data-doubleclick="false" title="按类型选择商品"></a>
+				<input type="text" class="striking_input" style="width: 175px;padding-right:30px;" id="order_bar" placeholder="商品条码" data-respond="false" tabindex="1"/>
+			</div>
+			<div class="itemblock" style="padding-right:0px;">
+				<div class="itemblocklabel">当前商品</div>
+				<ul class="curitem_ul" style="list-style-type:none;">
+					<li style="white-space:nowrap;">名称： <label id="current_item_name" class="primary_label small_label"></label></li>
+					<li style="display:none;">平均采购价： <label id="current_item_cost" class="striking_label right_label" style="width: 104px;">0.00</label> 元</li>
+					<li>上次采购价： <label id="current_item_pri1" class="striking_label right_label" style="width: 104px;">0.00</label> 元</li>
+					<li>本次采购价： <label id="current_item_pri2" class="striking_label right_label" style="width: 104px;">0.00</label> 元</li>
+					<!--<li>规格：　　　 <label id="current_item_spec" class="striking_label right_label" style="width: 104px;"></label></li>-->
+					<li>库存：　　　 <label id="current_item_qty_whse" class="striking_label right_label" style="width: 104px;"></label> <label id="whse_unit" style="white-space: nowrap;"></label></li>
+					<li style="white-space:nowrap;">数量： 　　　<input id="quantity" style="width: 100px; text-align:right;" class="striking_text" data-verify="pnumber" type="text" tabindex="2" maxlength="10" value="0"/> <label id="current_item_unit" style="white-space: nowrap;"></label></li>
+					<li>金额：　　　 <input id="amount" style="width: 100px; text-align:right;" class="striking_text" tabindex="3" data-verify="pnumber" type="text" maxlength="10" value="0.00"/> 元</li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="right_container">
+			<table style="width: 100%;" data-onkey="true" class="table_view clickable">
+				<thead>
+					<tr>
+						<th style="width: 8%;">序号</th>
+						<th style="width: 18%;">商品名称</th>
+						<th style="width: 8%;">采购价</th>
+<!--
+						<th style="width: 8%;">类别</th>
+-->
+						<th style="width: 10%;">数量</th>
+						<th style="width: 10%;">金额</th>
+						<th style="width: 8%;">单位</th>
+						<th style="width: 8%;">规格</th>
+						<th style="width: 8%;">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="view_footer">
+    <div style="float:right;">
+	   <input id="cash_submit" type="button" style="margin-left:16px;" class="primary_button" tabindex="4" data-doubleclick="false" value="入 库" />
+	   <input id="clear_all" type="button" style="margin-left:16px;" tabindex="5" class="minor_button" value="清 空" />	 
+	</div>
+    <ul class="footer_ul" style="margin-left:5px;float:left;">
+		<li>数量合计：<label id="max_ord_qty" class="striking_label">0</label></li>
+		<li>金额合计：<label id="max_ord_amt" class="striking_label">0.0</label> 元</li>
+	<ul>
+	</div>
+
+</div>
+</script>
+
+<script type="text/mustache" id="view_fyrk_item_row">
+<tr data-num="{{line_num}}" data-id="{{item_id}}">
+	<td><label class="linelabel">{{line_label}}<label></td>
+	<td><label class="itemname">{{item_name}}<label></td>
+	<td><label class="pri">{{pri}}<label></td>
+	
+<!--
+	<td><label class="itemkindid">{{item_kind_id}}<label></td>
+-->
+	<td><label class="quantity">{{quantity}}<label></td>
+    <td><label class="amount">{{amount}}<label></td>
+	<td><label class="unitname">{{big_unit_name}}<label></td>
+	<td><label class="spec">{{spec}}<label></td>
+	<!-- <td><a name="delete" class="optionbtn">删除</a></td> -->
+    <td>
+     <a title="删除" name="delete" class="pageIcon pageIcon_del" style="padding:5px 10px;margin-left:40px;background-position:5px -25px;"></a>
+    </td>
+</tr>
+</script>
+
+<script type="text/mustache" id="view_fyrk_select_item_dialog">
+<div>
+<table style="width: 100%;" class="table_view">
+	<thead>
+		<tr>
+			<th style="width: 180px;">商品名称</th>
+			<th style="width: 80px;">单位</th>
+			<th style="width: 80px;">单价</th>
+			<th style="width: 80px;">数量</th>
+			<th style="width: 80px;">金额</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#list}}
+		<tr data-id="{{seq_id}}" style="cursor: pointer;">
+			<td>{{item_name}}</td>
+			<td>{{big_unit_name}}</td>
+			<td id="pri">{{pri}}</td>
+			<td id="quantity">{{quantity}}</td>
+			<td id="amount">{{amount}}</td>
+		</tr>
+		{{/list}}
+	</tbody>
+</table>
+</div>
+</script>
+
+<script type="text/mustache" id="view_fyrk_create_item_dialog">
+<div>
+<ul style="list-style: none;">
+	<li style="float: left; height: 30px; width: 40%">条码: </li><li id="big_bar" style="height: 30px;">{{big_bar}}</li>
+	<li style="height: 30px;">是否可拆分销售:&nbsp;&nbsp;已拆分 <input id="not_split" name="is_split" type="radio" value="0" checked="checked"/>&nbsp;&nbsp;可拆分 <input id="can_split" name="is_split" type="radio" value="1"/></li>
+	<li style="float: left; height: 30px; width: 40%">品名: </li><li style="height: 30px;"><input id="item_name" class="qtyord" style="width: 160px;" type="text" value="{{item_name}}" /></li>
+	<li style="float: left; height: 30px; width: 40%">参考进价: </li><li style="height: 30px;"><input id="pri1" class="qtyord" style="width: 80px;" type="text" value="{{pri1}}" /> 元</li>
+	<li style="float: left; height: 30px; width: 40%">售价: </li><li style="height: 30px;"><input id="big_pri4" class="qtyord" style="width: 80px;" type="text" value="" /> 元</li>
+	<li style="float: left; height: 30px; width: 40%">单位: </li><li style="height: 30px;"><select id="unit_box"><option value=''> 请选择 </option></select></li>
+	<li style="float: left; height: 30px; width: 40%">类别: </li><li style="height: 30px;"><input id="item_kind_id" class="qtyord" style="width: 80px;" type="text" value="{{item_kind_id}}" /></li>
+	<li style="float: left; height: 30px; width: 40%">规格: </li><li style="height: 30px;"><input id="spec" class="qtyord" style="width: 80px;" type="text" value="{{spec}}" /></li>
+	<li style="float: left; height: 30px; width: 40%">原始库存: </li><li style="height: 30px;"><input id="qty_whse" class="qtyord" style="width: 80px;" type="text" value="0" /></li>
+	<li style="height: 30px;">是否设置折扣:&nbsp;&nbsp;无折扣 <input id="no_discount" name="is_discount" type="radio" value="0" checked="checked"/>&nbsp;&nbsp;有折扣 <input id="has_discount" name="is_discount" type="radio" value="1"/></li>
+	<li style="height: 30px; text-align:center; margin-top: 20px;"><button id="create_item" class="primary_button">录入</button><button id="reset_item" class="minor_button" style="margin-left: 30px;">清空</button></li>
+</ul>
+</div>
+</script>
+
+<script type="text/mustache" id="view_fyrk_create_item_split_li">
+<li class="_split" style="float: left; height: 30px; width: 40%">小包条码: </li><li class="_split" style="height: 30px;"><input id="item_bar" class="qtyord" style="width: 160px;" type="text" value="" /></li>
+<li class="_split" style="float: left; height: 30px; width: 40%">小包单位: </li><li class="_split" style="height: 30px;"><select id="unit_id"><option value=''> 请选择 </option></select></li>
+<li class="_split" style="float: left; height: 30px; width: 40%">小包售价: </li><li class="_split" style="height: 30px;"><input id="pri4" class="qtyord" style="width: 80px;" type="text" value="" /> 元</li>
+<li class="_split" style="float: left; height: 30px; width: 40%">转换比例: </li><li class="_split" style="height: 30px;"><input id="unit_ratio" class="qtyord" style="width: 80px;" type="text" value="" /> 小包 : 1大包</li>
+</script>
+
+<script type="text/mustache" id="view_fyrk_create_item_discount_li">
+<li class="_discount" style="float: left; height: 30px; width: 40%">折扣: </li><li class="_discount" style="height: 30px;"><input id="discount" class="qtyord" style="width: 80px;" type="text" value="100" /></li>
+<li class="_discount" style="float: left; height: 30px; width: 40%">折扣开始日期: </li><li class="_discount" style="height: 30px;"><input id="start_date" class="qtyord" style="width: 80px;" type="text" value="" /></li>
+<li class="_discount" style="float: left; height: 30px; width: 40%">折扣结束日期: </li><li class="_discount" style="height: 30px;"><input id="end_date" class="qtyord" style="width: 80px;" type="text" value="" /></li>
+</script>
+
+<script type="text/mustache" id="view_fyrk_choice_item">
+<div>
+	<style>
+		#select_item_kind_ul a span {
+			font-size: 15px;
+			padding:0px 5px;
+		}
+		#select_item_kind_ul a span.button {
+			padding:0px;
+		}
+		#select_item_kind_ul a {
+			TEXT-DECORATION:none;
+		}
+		#select_item_kind_ul li {
+			line-height: 16px;
+		}
+		#select_item_kind_ul li a.curSelectedNode {
+			background-color: #D3D8DD;
+			border: 0px solid #D3D8DD;
+		}
+	</style>
+	<div style="padding-left:9px;width:160px;position:absolute;left:0;overflow:auto;height:100%;background-color:#F0F0F0;">
+		<ul id="select_item_kind_ul" class="ztree"></ul>
+	</div>
+	<div id="choice_item_container" style="margin: 0 0 0 170px;height: 100%;overflow:auto;border-left: 1px solid #CCC;background-color:#F0F0F0;">
+		<p style="text-align:center;padding-top:150px;font-size:16px;font-weight:bold;font:"Microsoft YaHei",STXihei,Arial,Helvetica,sans-serif,Simsun;">请先在左侧栏选择商品类型</p>
+	</div>
+</div>
+</script>
+
+<script type="text/mustache" id="view_fyrk_choice_item_ul">
+<ul style="list-style-type:none;">
+	{{#item_list}}
+	<li data-id="{{item_id}}" style="padding:3px 5px;float:left;"><input type="button" class="striking_button" style="height:100px; width:100px; background-color:#D3D8DD; color:#000" value="{{item_name}}"/></li>
+	{{/item_list}}
+</ul>
+</script>
+
+<script type="text/mustache" id="view_fyrk_choice_no_item">
+<p style="text-align:center;padding-top:150px;font-size:16px;font-weight:bold;font:"Microsoft YaHei",STXihei,Arial,Helvetica,sans-serif,Simsun;">所选择的类型下没有商品</p>
+</script>

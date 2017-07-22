@@ -1,0 +1,360 @@
+<script type="text/mustache" id="view_jydh">
+<div style="height: 100%;">
+	<style>
+	.footer_ul li {
+		float: left;
+		margin-right: 30px;
+	}
+	#left_container {
+		width: 280px;
+		height: 100%;
+		float: left;
+		position: relative;
+	}
+	#right_container {
+		margin: 0 0 0 280px;
+		min-height: 100%;
+		border-left: 1px solid #CCC;
+		position: relative;
+	}
+
+	#current_item_container {
+		
+	}
+	#orderby_list ul{
+		position: absolute;
+		top: 26px;
+		right: -10px;
+		width: 100px;
+		display: none;
+		background: #FFFFFF;
+		border: 1px solid #E6EAED;
+	}
+	#orderby_list li{
+		padding: 5px;
+		border-bottom: 1px solid #E6EAED;
+		cursor: pointer;
+		text-align: center;
+	}
+	#orderby_list li:HOVER{
+		background: #C5DAFF;
+	}
+	#search_labels {
+		padding-top: 6px;
+	}
+	#search_labels a{
+		padding: 2px 6px;
+	}
+	#search_labels a:HOVER {
+		background: #C5DAFF;
+	}
+
+	#search_pris {
+		padding-top: 10px;
+		diaplay: inline-block;
+		position: relative;
+	}
+	#search_slider {
+		width: 160px;
+	}
+	#search_pris_title {
+		position: absolute;
+		left: 0px;
+	}
+	#search_pris_label {
+		position: absolute;
+		right: 0px;
+		top: 4px;
+	}
+	.labelselected {
+		background: #C5DAFF;
+	}
+	.cu_text{
+		font-size:16px;
+		font-weight: bold;
+		color:#FF8500
+	}
+	</style>
+	<div style="width: 100%; height: 100%;">
+		<div id="left_container">
+			
+			<div id="tobacco_list_scroll" style="position: absolute; width: 100%; top: 92px; bottom: 0; overflow: auto; border-top: 1px solid #E6EAED;">
+				<div id="tobacco_container" style="padding: 0px; overflow-x:hidden; min-height: 360px;">
+					<img style="margin: 50px auto 10px auto;" class='window_loading' alt='' src='../public/img/loading.gif' />
+					<p style="text-align: center">正在获取卷烟列表</p>
+				</div>
+			</div>
+
+			<div style="padding: 10px;">
+				<div id="orderby_list" style="float: right; width: 56px; position: relative;">
+					<input id="search_orderby" type="button" class="primary_button small" value="排序"/>
+					<ul id="orderby_list_items" style="z-index: 100;">
+						<li data-order="index">默认</li>
+						<li data-order="ord_times">订购频次</li>
+						<li data-order="pri_wsale">价格</li>
+						<li data-order="short_name">商品名称</li>
+						<li data-order="item_id">商品条码</li>
+						<li data-order="brand_name">品牌</li>
+						<li data-order="fact_name">生产厂家</li>
+					</ul>
+				</div>
+				<input id="search_input" type="text" tabindex="1" data-enter="search_submit" class="striking_input small" style="width: 125px;" placeholder="扫码/名称/拼音/价格"/>
+				<input id="search_submit" type="button" tabindex="2" class="striking_button small" value="搜索"/>
+				<p id="search_labels">
+					<a data-value="is_all" class="labelselected" href="javascript:void(0);">全部</a>
+					<a data-value="is_new" href="javascript:void(0);">新品</a>
+					<a data-value="is_promote" href="javascript:void(0);">促销</a>
+					<a data-value="is_advise" href="javascript:void(0);">推荐</a>
+					<a data-value="is_short" href="javascript:void(0);">缺货</a>
+				</p>
+				<div id="search_pris">
+					<div id="search_slider"></div>
+					<label id="search_pris_label">￥0-￥900</label>
+				</div>
+			</div>
+		</div>
+		
+		<div id="right_container">
+			<div style="height: 100px; padding: 10px;">
+				<div style="float: left; width: 60px; height: 96px; margin-right: 20px; text-align: center; border: 1px solid #CCC; padding: 2px;">
+					<img id="current_item_img" alt="" src="" style="max-height: 96px; max-width: 60px;">
+				</div>
+					
+				<div style="float: left; width: 220px; margin-right: 10px; line-height: 24px; overflow: hidden;">
+					<p style="white-space:nowrap;">商品名称：<label id="current_item_name" style="font-weight: bold; "></label></p>
+					<p>商品条码：<label id="current_item_id" style="font-weight: bold;"></label></p>
+					<p>　批发价：<label id="current_item_pri" style="font-weight: bold;">0.0</label> 元</p>
+					<p>　需求量：<input id="current_item_qty" type="text" tabindex="3" value="0" data-verify="pint" data-enter="current_item_submit" maxlength="8" class="striking_input small" style="width: 60px;">
+					<input id="current_item_submit" type="button" tabindex="4" class="striking_button small" value="确定" /></p>
+				</div>
+				
+
+				<div style="margin: 0; height: 100%; overflow: hidden; line-height: 24px;">
+					<div id="current_item_desc" style="width: 100%; height: 100%;"></div>
+					<div id="current_item_ad" style="width: 100%; height: 100%; text-align:center; display: none;">
+						<img id="current_item_ad_img" src="" style="height: 110px;"/>
+					</div>
+					<div id="current_item_imgs" style="display:none;"></div>
+				</div>
+			</div>
+			
+			<div style="position: absolute; width: 100%; top: 120px; bottom: 0; overflow-y:auto; overflow-x: hidden;">
+			<table id="select_table" style="width: 100%;" data-onkey="true" class="table_view clickable">
+				<thead>
+					<tr>
+						<th style="width: 5%;">序号</th>
+						<!--<th style="width: 12%;">商品条码</th>-->
+						<th style="width: 16%;">商品名称</th>
+						<th style="width: 10%;">批发价</th>
+						<th style="width: 10%;">建议零售价</th>
+						<th style="width: 10%;">订购量(条)</th>
+						<th style="width: 8%;">金额</th>
+						<th style="width: 11%;">建议订量(条)</th>
+						<th style="width: 11%;">合理库存(条)</th>
+						<th style="width: 11%;">当前库存(条)</th>
+						<th style="width: 8%;">操作</th>
+					</tr>
+				</thead>
+				<tbody> 
+				</tbody>
+			</table>
+			</div>
+		</div>
+		<div id="tobacco_tip" style="display:none; position: absolute; z-index: 100; width: 95px; height: 144px; text-align: center; border: 1px solid #CCC; background: #FFF; padding: 2px;">
+			<img id="tobacco_tip_img" src="" style="max-height: 144px; max-width: 95px;" />
+		</div>
+	</div>
+	
+	<div class="view_footer">
+		<input id="clearOrder" class="minor_button right" style="margin-left: 20px;" type="button" value="清空订单" />
+		<input id="deleteOrder" class="primary_button right" style="margin-left: 20px;" type="button" value="删除订单" />
+		<input id="submitOrder" data-doubleclick="false" class="primary_button right" type="button" tabindex="6" style="margin-left: 20px;" value="提交订单" />
+		<input id="synchLimit" style="display: none;" class="primary_button right" type="button" tabindex="5" value="同步限量" data-doubleclick="false" />
+
+		<ul class="footer_ul" style="margin-left: 0px;">
+			<li>订单状态：<label id="orderStatus" class="primary_label" style="font-size: 15px;" >{{order.status_label}}</label></li>
+			<li>订购量：<label id="maxQty" class="striking_label">0</label> 条</li>
+			<li>订购金额：<label id="maxAmt" class="striking_label">0.0</label> 元</li>
+		</ul>
+	</div>
+</div>
+</script>
+
+<script type="text/mustache" id="view_jydh_tobacco_list">
+<ul class="tobaccolist list_view clickable">
+	{{#list}}
+	<li style="height: 40px; position: relative;" data-id="{{item_id}}" title="{{item_name}}">
+		<div style="position: absolute; top: 1px; right: 12px; height: 24px; text-align:center;">
+		{{#item_class}}
+		<div style="width: 24px; height: 24px; float: left; display:inline-block;">
+			<span class="{{name}}"></span>
+		</div>
+		{{/item_class}}
+		</div>
+		<div style="float: left; width: 30px; height: 40px; margin-left: 2px; margin-right: 10px; text-align: center;">
+			<img data-src="{{img_url}}" src="{{reload}}" style="max-width: 30px; max-height: 40px;">
+		</div>
+		<div style="float: left; width: 150px; overflow: hidden;">
+			<label style="font-weight: bold; white-space:nowrap;">{{item_name}}</label><br />
+			<label style="font-size: 13px;">{{item_id}}</label>
+		</div>
+		<div style="float: right; margin-top: 18px; width: 54px;">
+			<label>￥{{pri_wsale}}</label>
+		</div>
+	</li>
+	{{/list}}
+</ul>
+</script>
+
+<script type="text/mustache" id="view_jydh_tobacco_listitem">
+{{#list}}
+<tr data-id="{{item_id}}" data-pri="{{pri_wsale}}" data-lmt="{{qty_lmt}}" data-req="{{qty_req}}">
+	<td>{{num}}</td>
+	<!--<td>{{item_id}}</td>-->
+	<td data-sort="{{short_name}}"><label style="font-weight: bold;">{{item_name}}</label></td>
+	<td>{{pri_wsale}}</td>
+	<td>{{pri_drtl}}</td>
+	<td><label class="qtyord" style="color: red;">{{qty_ord}}</label></td>
+	<td><label class="amtord">{{amt_ord}}</label></td>
+	<td><label class="qtysuggest">{{qty_suggest}}</label></td>
+	<td>{{qty_whse_warn}}</td>
+	<td>{{qty_whse}}</td>
+	<!-- <td><a class="optionbtn" href="javascript:void(0);" data-option="delete" data-id="{{item_id}}">删除</a></td> -->
+    <td>
+    <a data-option="delete" data-id="{{item_id}}" title="删除" name="delete" class="pageIcon pageIcon_del" style="padding:5px 10px;margin-left:20px;display:inline-block;background-position: -0px -23px; "></a>
+    </td>
+</tr>
+{{/list}}
+</script>
+
+<script type="text/mustache" id="view_jydh_tobacco_imgs">
+	<img src="{{path}}images/tobacco/m/{{item_id}}_m_face.png" onload="$(this).css('display', 'inline-block')" onerror="$(this).css('display', 'none')" style="height: 100px;"/>
+	<img src="{{path}}images/tobacco/m/{{item_id}}_m_rear.png" onload="$(this).css('display', 'inline-block')" onerror="$(this).css('display', 'none')" style="height: 100px;"/>
+	<img src="{{path}}images/tobacco/m/{{item_id}}_m_body.png" onload="$(this).css('display', 'inline-block')" onerror="$(this).css('display', 'none')" style="height: 100px;"/>
+	<img src="{{path}}images/tobacco/m/{{item_id}}_m_left.png" onload="$(this).css('display', 'inline-block')" onerror="$(this).css('display', 'none')" style="height: 100px;"/>
+	<img src="{{path}}images/tobacco/m/{{item_id}}_m_right.png" onload="$(this).css('display', 'inline-block')" onerror="$(this).css('display', 'none')" style="height: 100px;"/>
+	<img src="{{path}}images/tobacco/m/{{item_id}}_m_cig.png" onload="$(this).css('display', 'inline-block')" onerror="$(this).css('display', 'none')" style="height: 100px;"/>
+</script>
+
+<script type="text/mustache" id="view_jydh_order_list">
+<div>
+	<div style="width: 100%; height: 100%;">
+		<table style="width: 100%;" class="table_view">
+			<thead>
+				<tr>
+					<th style="width: 20%;">商品条码</th>
+					<th style="width: 20%;">商品名称</th>
+					<th style="width: 12%;">批发价</th>
+					<th style="width: 12%;">订购量(条)</th>
+					<th style="width: 12%;">金额</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#purch_order_line}}
+				<tr>
+					<td>{{item_id}}</td>
+					<td>{{item_name}}</td>
+					<td>{{pri_wsale_n}}</td>
+					<td>{{qty_ord}}</td>
+					<td>{{amt_ord}}</td>
+				</tr>
+				{{/purch_order_line}}
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer">
+		{{#statusfn}}
+			<input id="accountBalanceBtn" class="primary_button right" style="margin-left: 15px;" type="button" value="查询余额" />
+			<input id="deleteOrder" class="primary_button right" style="margin-left: 15px;" type="button" value="删除订单" />
+			<input id="submitZhifu" class="primary_button right" style="margin-left: 15px;display:none;" type="button" data-doubleclick="false" value="支付" />
+			<input id="paySubmit" class="primary_button right" style="margin-left: 15px; display:none;" type="button" payFee="{{amt_purch_total}}"  orderID="{{order_id}}" orderDate="{{order_date}}" maxQty="{{qty_purch_total}}" data-doubleclick="false" value="支付" />		
+			<input id="editOrder" class="primary_button right" type="button" value="修改订单" />
+		{{/statusfn}}
+		<ul class="footer_ul" style="margin-left:10px;">
+			<li style="float:left;">订单编号：<label id="orderStatus" class="primary_label" style="font-size: 16px;">{{order_id}}</label></li>
+			<!--<li style="float:left;margin-left: 15px;">订单日期：<label id="orderDate" class="primary_label" style="font-size: 16px;">{{order_date}}</label></li>-->
+			<li style="float:left;margin-left:15px;">订单状态：<label id="orderStatus" class="primary_label" style="font-size: 16px;">{{status_label}}</label></li>
+			<li style="float:left;margin-left: 15px;">订购量：<label id="maxQty" class="striking_label" style="font-size: 20px;">{{qty_purch_total}}</label>条</li>
+			<li style="float:left;margin-left:15px;">订购金额：<label id="maxAmt" class="striking_label" style="font-size: 20px;">{{amt_purch_total}}</label>元</li>
+
+			{{#paystatusfn}}
+				<li style="float:left;margin-left:15px;"><label id="paystatus" class="primary_label" style="font-size: 16px;">订单已支付</label></li>
+			{{/paystatusfn}}
+		</ul>
+	</div>
+</div>
+</script>
+<script type="text/mustache" id="view_jydh_order_payType">
+<div style="width: 100%; height: 100%;">
+	<div style="padding: 12px; line-height: 24px; height: 180px;">
+		<p style="text-indent: 2em;"><span class="bold">网上结算</span>是指从您与烟草公司的协议账户中扣款，无需输入卡号和密码，请确保账户中资金充足，支持<span class="bold">建行</span>、<span class="bold">工行</span>、<span class="bold">农行</span>。</p>
+		<p style="text-indent: 2em;"><span class="bold">刷卡支付</span>是指您可以通过连接POS机刷卡的方式完成支付，目前<span class="bold">农信</span>支持刷卡支付。</p>
+		<p style="text-indent: 2em;padding-top:5px;"><span class="bold">　订购量：</span><span style="color:#ff9725;font-size:22px;font-weight:bold;">{{maxQty}}</span> 条</p>
+		<p style="text-indent: 2em;padding-top:5px;"><span class="bold">订购金额：</span><span style="color:#ff9725;font-size:22px;font-weight:bold;">{{fee}}</span> 元</p>
+	</div>
+	<div>
+	</div>
+	<div style="text-align: center;margin-top:10px;">
+		<input id="payProxy" class="primary_button" type="button" value="网上结算" />
+		<input id="payCard" class="primary_button" style="margin-left:20px" type="button" value="刷卡支付" />
+	<div>
+</div>
+</script>
+<script type="text/mustache" id="view_jydh_submit_order_dialog">
+<div style="border:0px solid #f00;">
+	<div style=' position: absolute; left:0px; top:0px; bottom: 45px; overflow-y:auto; width:100%; '>
+		<div style="border:0px solid #f00; margin: 10px 10px 0px 20px; line-height: 1.8; font-size: 14px;">
+		<p>
+			{{data.msg}}
+		</p>
+		<p>
+			您的下次订货时间为：
+		</p>
+		<p>
+			开始时间：{{data.begin_date}}
+		</p>
+		<p>
+			结束时间：{{data.end_date}}
+		</p>
+		</div>
+	</div>
+	<div class="view_footer" style="text-align:center;height:45px;line-height:45px;"> 
+		<input type="button" class="closebtn_button" id="submit_order_dialog_btn" value="确定" />
+	</div>
+
+</div>
+</script>
+
+<!-- 新商盟用户信息验证 -->
+<script type="text/mustache" id="view_jydh_login">
+<div>
+	<style>
+		#login_info li {
+    		font-size: 16px;
+    		line-height: 62px;
+		}
+		#login_info li .labeltitle{
+			display: inline-block;
+    		width: 29%;
+    		text-align: right;
+			padding-right:1px
+		}
+	</style>
+	
+	<ul id="login_info">
+		<li style="margin-top: 30px;">
+			<span class="labeltitle">用户名：</span>	
+			<input id="jydh_login_name" class="striking_input" style="width:200px;  vertical-align:middle;" type="text" data-empty="false" verify-message="请输入用户名！" placeholder="新商盟用户名"/>
+		</li>
+		<li>
+			<span class="labeltitle">密&nbsp;&nbsp;&nbsp;码：</span>
+			<input id="jydh_login_pwd" type="password" class="striking_input" style="width:200px; vertical-align:middle;" type="text" data-empty="false" verify-message="请输入密码！" placeholder="新商盟密码" />
+		</li>
+		<li style="text-align:center;margin-top:16px;">
+			<input id="loginSubmitBtn" type="button" class="primary_button" style="position:relative;" value="登录"/>
+			<input id="loginCancelBtn" type="button" class="primary_button" style="position:relative; margin-left:42px;" value="取消"/>
+		</li>
+	</ul>
+</div>
+</script>
+

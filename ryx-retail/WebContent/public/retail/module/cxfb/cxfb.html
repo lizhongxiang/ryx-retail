@@ -1,0 +1,243 @@
+<script type="text/mustache" id="view_cxfb">
+<div>
+	<div>
+		<table style="width: 100%; table-layout:fixed;" data-onkey="true"  class="table_view clickable">
+			<thead>
+				<tr>
+					<th style="width: 4%;">序号</th>
+					<th style="width: 10%;">促销标题</th>
+					<th style="width: 22%;">促销内容</th>
+					<th style="width: 13%;">开始时间</th>
+					<th style="width: 13%;">结束时间</th>
+					<th style="width: 6%;">是否有效</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr data-id="{{}}">
+					<td>{{}}</td>
+					<td style="word-wrap: break-word;word-break:break-all;" title="">{{}}</td>
+					<td style="word-wrap: break-word;word-break:break-all;">{{}}</td>
+					<td style="white-space: nowrap;">{{}}&nbsp;{{}}</td>
+					<td style="white-space: nowrap;">{{}}&nbsp;{{}}</td>
+					<td>{{}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer">
+		<input type="button" class="striking_button right" data-doubleclick="false" id="add" value=" 新增促销发布 " />
+	  	起止日期：
+		<input type="text" id="beginTime" name="beginTime" data-enter="selewares" style="width:90px;"  class="striking_input" />
+		- 
+        <input type="text" id="endTime" name="endTime" data-enter="selewares" value="" style="width:90px;"  class="striking_input" />
+		<input type="button" class="primary_button" id="query" name="query" style="margin-left:5px;" value="查 询" />
+	</div>
+</div>
+</script>
+
+<script type="text/mustache" id="view_cxfb_add">
+<div>
+<style>
+  .table_hyeditor tr{
+     height:40px;
+     text-align:center;
+}
+.input_width{
+	width:96px;
+}
+.input_time_width{
+	width:40px;
+}
+.td_right{
+	border:0px;
+	text-align: right;
+	width:110px;
+}
+.item{
+	position:relative; 
+	overflow:hidden;
+}
+.item textarea{
+	width:408px; 
+	height:60px; 
+	padding:3px 0px 5px;
+	border:1px solid #ddd; 
+	border-right:0px;
+	line-height:20px; 
+	float:left;
+}
+.item .cam_div{
+	position:relative;
+	text-align:center;
+	top:0;
+	left:0;
+	border:1px #e0dbd1 solid; 
+	width:48px;
+	height:68px;
+	overflow:hidden;
+}
+.item .cam_div a{
+	background-color:#f8f6f2;
+	position:absolute;
+	left:0;
+	top:0;
+	cursor:pointer; 
+	width:48px;
+	height:68px;
+	overflow:hidden;
+}
+.item .cam_div .icon{
+	margin-top:22px;
+	display:inline-block;
+	width:24px;
+	height:24px;
+	overflow:hidden;
+	background-position:center;
+}
+.item .cam_div .icon-pic{
+	background-image:url(/tobacco/public/retail/img/cam.png);
+	background-repeat:no-repeat;
+    background-position:0 4px;
+}
+.item .cam_div a:hover .icon-pic{
+	background-position:0 -21px;
+}
+.img-item-list li{
+	position:relative;
+	margin-top:10px;
+	float:left;
+	width:48%;
+	height:145px;
+	overflow:hidden;
+	border:1px solid #ddd;
+}
+.icon-img-remove{
+	position:absolute;
+	top:0;
+	right:0;
+	width:24px;
+	height:24px;
+	overflow:hidden;
+	background:rgba(0,0,0,.75);
+	zoom:1;
+}
+.icon-img-remove i{
+	display:block;
+	width:24px;
+	height:24px;
+	overflow:hidden;
+	line-height:99px;
+	background-image:url(/tobacco/public/retail/img/del.png);
+	background-repeat:no-repeat;
+	background-position:center;
+}
+</style>
+	<div style="width:75%; margin-left:auto; margin-right:auto;">
+		<table style="width: 100%;border:0px;margin-top:8px;" class="table_hyeditor">
+			<tr>
+				<td class="td_right">促销开始时间&nbsp;：&nbsp;</td>
+				<td colspan="2" style="border:0px;text-align: left;">
+					<input type="text" class="input_width" tabindex='108' value="{{}}" id="startdate" maxlength="10" data-verify="date" data-empty="false" verify-message="促销开始日期格式错误！"/>
+					<input type="text" class="input_time_width" tabindex='109' id="starttime" value="{{}}" placeholder="" data-verify="time" data-empty="false" verify-message="促销开始时间错误！"/>
+					<label style="color: red;">&nbsp;*</lable>
+					<label  style="color: #9C9C9C; ">&nbsp;&nbsp;时间格式&nbsp;&nbsp;08:00</label>
+				</td>
+			</tr>
+
+			<tr>
+				<td class="td_right">促销结束时间&nbsp;：&nbsp;</td>
+				<td colspan="2" style="border:0px;text-align: left;">
+					<input type="text" class="input_width" tabindex='110' value="{{}}" id="enddate" maxlength="10" data-verify="date" data-empty="false" verify-message="促销结束日期格式错误！"/>
+					<input type="text" class="input_time_width" tabindex='111' id="endtime" value="{{}}" placeholder="" data-verify="time" data-empty="false" verify-message="促销结束时间错误！"/>
+					<label style="color: red;">&nbsp;*</lable>
+                    <label  style="color: #9C9C9C; ">&nbsp;&nbsp;时间格式&nbsp;&nbsp;17:30</label>
+				</td>
+			</tr>
+			<!--
+			<tr>
+				<td class="td_right">促销活动类型&nbsp;：&nbsp;</td>
+				<td colspan="2" style="border:0px;text-align: left;">
+					<select id="promotion_type" tabindex='112' class="degree" style="width:157px;cursor:pointer;" data-empty="false" verify-message="活动类型不能为空！">
+						<option value="0" checked="checked">请选择活动类型</option>
+						<option value="10">商品折扣</option>
+						<option value="40">满减促销</option>
+					</select>
+					<label style="color: red;">*</lable>
+				</td>
+			</tr>
+			<tr>
+				<td class="td_right">活动针对群体&nbsp;：&nbsp;</td>
+				<td colspan="2" style="border:0px;text-align: left;">
+					<select id="consumer_type" tabindex='113' class="degree" style="width:157px;cursor:pointer;">
+						<option value="" id="null_promotion_checked">请选择针对群体</option>
+						<option value="all" id="promotion_checked">所有顾客</option>
+					</select>
+					<label style="color: red;">*</lable>
+				</td>
+			</tr>
+			-->
+			<tr id="vipcheckboxtr" style="display:none;">
+				<td id="vipcheckboxid" colspan="2" style="border:0px; border-image: none; text-align: left; padding-left: 140px;">
+					
+				</td>
+			</tr>
+			<tr>
+				<td class="td_right">促销活动标题&nbsp;：&nbsp;</td>
+				<td colspan="2" style="border:0px;text-align: left;">
+                    <input type="text" style="width:400px;" maxlength="100" tabindex='114' value="{{}}" id="promotion_desc" maxlength="100" data-empty="false" verify-message="促销活动标题不能为空！"/>
+                    <label style="color: red;">&nbsp;*</lable></td>
+			</tr>
+			<tr>
+				<td class="td_right">促销活动内容&nbsp;：&nbsp;</td>
+				<td style="border:0px;text-align: left; padding:10px 0;">
+					<div class="item">
+						<textarea id="promotion_content" tabindex='115' rows="" data-empty="false" verify-message="促销活动内容不能为空！">{{}}</textarea>
+						<div class="cam_div">
+							<input class="filePrew" id="fileOne" title="支持jpg、jpeg、gif、png格式，文件小于5M" value="上传" type="file" name="">
+							<a href="javascript:void(0);" title="支持jpg、jpeg、gif、png格式，文件小于5M" class="up_pic" id="up_pic">
+								<i class="icon icon-pic"></i><span class="txt" style="display:none;">上传图片</span>
+							</a>
+						</div>
+					</div>
+				</td>
+				<td><label style="color: red; text-align:left;">&nbsp;&nbsp;*</lable></td>
+			</tr>
+			<tr id="upload_pic">
+				<td class="td_right">促销活动图片&nbsp;：&nbsp;</td>
+				<td colspan="2" style="border:0px;text-align: left;">
+					<div class="t-box-con bor2">
+						<ul class="img-item-list">
+							<li class="img-item img-item-1">
+								<div>
+									<img title="拖拽排序" data-photoid="1411546895234" src="/tobacco/public/retail/img/4l60.jpg" width="100%" max-height="100%">
+								</div>
+								<a class="icon-img-remove" href="javascript:void(0)" title="删除图片">
+									<i class="hide_clip">移除</i>
+								</a>
+							</li>
+							<li class="img-item img-item-1">
+								<div>
+									<img title="拖拽排序" data-photoid="1411546895234" src="/tobacco/public/retail/img/46dd0.jpg" width="100%" height="100%">
+								</div>
+								<a class="icon-img-remove" href="javascript:void(0)" title="删除图片">
+									<i class="hide_clip">移除</i>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="td_right">活动是否有效&nbsp;：&nbsp;</td>
+				<td colspan="2" style="border:0px;text-align: left;">
+					<input type="radio" name="status" id="status1" checked="checked" value="1"/><label for="status1">有效</label>&nbsp;
+					<input type="radio" name="status" id="status0" value="0"/><label for="status0">无效</label>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="view_footer" style="text-align:right;"> 
+		<input type="button" class="primary_button" id="nextDialog" tabindex='116'  value="保存" />
+	</div>
+</div>
+</script>

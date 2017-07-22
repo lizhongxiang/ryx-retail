@@ -1,0 +1,51 @@
+<script type="text/mustache" id="view_xsbb">
+<div style="width: 100%; height: 100%;">
+<style>
+.view_footer div div{
+	margin-right:40px;
+	*width: 80px;
+}
+.primary_button{
+	*width:100%;
+}
+SELECT{
+	*margin-top:20px;
+}
+</style>
+	<div id="chartContainer" style=" width: 100%; height: 100%;"></div>
+	<div class="view_footer">
+		<div>
+			<div style="float:left;"><input data-id="halfMonth" class="primary_button right" type="button" value="最近半个月"></div>
+			<div style="float:left;"><input data-id="oneMonth" class="primary_button right" type="button" value="最近一个月"></div>
+			<div style="float:left;"><input data-id="threeMonth" class="primary_button right" type="button" value="最近三个月"></div>
+			<div style="float:left;"><input data-id="sixMonth" class="primary_button right" type="button" value="最近六个月"></div>
+			<div style="float:left;">
+				<select>
+					<option>按天查询</option>
+					<option data-id="最近5天">最近5天</option>
+					<option data-id="最近10天">最近10天</option>
+					<option data-id="最近15天">最近15天</option>
+					<option data-id="最近20天">最近20天</option>
+					<option data-id="最近30天">最近30天</option>
+				</select></div>
+			<div style="float:left;">
+				<select>
+					<option>按周查询</option>
+					<option data-id="最近5周">最近5周</option>
+					<option data-id="最近10周">最近10周</option>
+					<option data-id="最近13周">最近13周</option>
+					<option data-id="最近15周">最近15周</option>
+					<option data-id="最近20周">最近20周</option>
+				</select></div>
+			<div style="float:left;">
+				<select>
+					<option data-id="">按月查询</option>
+					<option data-id="最近6个月">最近6个月</option>
+					<option data-id="最近12个月">最近12个月</option>
+					<option data-id="最近18个月">最近18个月</option>
+					<option data-id="最近24个月">最近24个月</option>
+				</select></div>
+		</div>
+	</div>
+</div>
+</script>

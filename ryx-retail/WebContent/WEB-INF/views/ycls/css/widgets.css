@@ -1,0 +1,222 @@
+@charset "utf-8";
+
+.primary,
+.primary_button, a.primary_button,
+.table_view tr.primary
+{
+	background-color: #0F76BC;
+}
+.primary:HOVER,
+.primary_button:HOVER, a.primary_button:HOVER
+{
+	background-color: #1F97E9;
+}
+
+.minor,
+.minor_button, a.minor_button,
+.table_view tr.minor
+{
+	background-color: #56AD02;
+}
+.minor:HOVER,
+.minor_button:HOVER, a.minor_button:HOVER
+{
+	background-color: #56AD02;
+}
+
+.striking,
+.striking_button, a.striking_button,
+.table_view tr.striking
+{
+	background-color: #FF8500;
+}
+.striking:HOVER,
+.striking_button:HOVER, a.striking_button:HOVER
+{
+	background-color: #FF9725;
+}
+
+.primary_button, .minor_button, .striking_button {
+	height: 30px;
+	min-width: 74px;
+	padding: 0 3px;
+	color: #FFFFFF;
+	border-radius: 3px;
+	border: none;
+	font: 15px "Microsoft YaHei",STXihei,Arial,Helvetica,sans-serif,Simsun;
+	cursor: pointer;
+}
+.primary_button.small, .minor_button.small, .striking_button.small {
+	height: 26px;
+	min-width: 50px;
+}
+
+input.primary_input {
+	border: 1px solid #0F76BC;
+}
+input.striking_input {
+	border: 1px solid #FF9725;
+}
+input.primary_input, input.striking_input {
+	padding: 5px;
+	font-size: 16px;
+}
+input.primary_input.small, input.striking_input.small {
+	padding: 4px;
+	font-size: 14px;
+}
+
+.primary_label {
+	color: #0F76BC;
+}
+.striking_label {
+	color: #FF9725;
+}
+.primary_label, .striking_label {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.prompt_label, input.prompt_label {
+	color: #999;
+}
+
+.table_view {
+	border: 1px solid #E6EAED;
+	border-right: none;
+}
+.table_view th, .table_view td {
+	padding: 8px 0;
+}
+.table_view th {
+	font-weight: bold;
+	text-align: center;
+	/*border-bottom: 1px solid #D3D8DD;*/
+	border-right: 1px solid #D3D8DD;
+	background: #D3D8C5;
+}
+.table_view td {
+	text-align: center;
+	border-top: 1px solid #E6EAED;
+	border-right: 1px solid #E6EAED;
+}
+.table_view tbody tr:nth-of-type(odd), .table_view tbody tr.odd{
+	background: #FFFFFF;
+}
+.table_view tbody tr:nth-of-type(even), .table_view tbody tr.even{
+	background: #EFF2F5;
+}
+.table_view.clickable tbody tr {
+	cursor: pointer;
+}
+/*
+.table_view.clickable tbody tr:HOVER {
+	background: #C5DAFF;
+}*/
+.table_view tbody tr.warnRow, .table_view.clickable tbody tr.warnRow{
+	background: #F2DEDE;
+}
+.table_view tbody tr.selectRow, .table_view.clickable tbody tr.selectRow{
+	background: #81ACFF;
+}
+.table_view tbody tr.selectRow td {
+	/*border-right: 1px solid #FFFBF7;*/
+}
+
+.list_view {
+	/*border-top: 1px solid #E6EAED;*/
+}
+.list_view li{
+	border-bottom: 1px solid #E6EAED;
+	padding: 5px;
+	margin: 0px;
+}
+.list_view.clickable li {
+	cursor: pointer;
+}
+/*
+.list_view.clickable li:HOVER {
+	background: #C5DAFF;
+}
+*/
+.list_view li:nth-of-type(odd){
+	background: #FFFFFF;
+}
+.list_view li:nth-of-type(even){
+	background: #EFF2F5;
+}
+.list_view li.selectRow, .list_view.clickable li.selectRow{
+	background: #81ACFF;
+}
+
+.clearfix {
+	clear: both;
+	height: 0px;
+}
+
+.loading_view {
+	position: absolute;
+	display: none;
+	z-index: 2500;
+	top: 0;
+	left: 0;
+	min-width: 100%;
+	min-height: 100%;
+}
+.loading_view .loading_view_rect {
+	position: relative;
+	margin: 0 auto;
+	top: 160px;
+	width: 80px;
+	height: 80px;
+	background: #FFF;
+	opacity: .9;
+	filter: Alpha(Opacity=90);
+	border-radius: 4px;
+}
+.loading_view .window_loading {
+	display: block;
+	margin: 0 auto;
+	position: relative;
+	top: 20px;
+}
+
+.alert_view {
+	position: absolute;
+	display: none;
+	z-index: 3000;
+	min-width: 200px;
+	max-width: 320px;
+	min-height: 30px;
+	max-height: 100px;
+	line-height: 24px;
+	overflow:hidden;
+	padding: 0 10px;
+	text-align: center;
+	background: #000000;
+	color: #FFFFFF;
+	opacity: .7;
+	filter: Alpha(Opacity=70);
+	border-radius: 4px;
+}
+
+.confirm_view {
+	position: absolute;
+	display: none;
+	z-index: 3000;
+	min-width: 200px;
+	max-width: 320px;
+	min-height: 50px;
+	max-height: 100px;
+	line-height: 24px;
+	overflow:hidden;
+	padding: 0 10px;
+	text-align: center;
+	background: #000000;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+.redstar, span.redstar {
+	color: red;
+}

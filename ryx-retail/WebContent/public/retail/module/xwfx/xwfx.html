@@ -1,0 +1,197 @@
+<script type="text/mustache" id="view_xwfx">
+<div>
+		<div>
+		<table style="width:100%; " data-onkey="true" class="table_view clickable" id="all_list">
+			<thead>
+				<tr>
+					<th style="width: 5%;">序号 </th>					
+					<th style="width: 10%;">会员名称</th>
+					<th style="width: 10%;">会员卡号</th>
+					<th style="width: 10%;">会员手机</th>
+<!--
+					<th style="width: 10%;">消费次数</th>
+-->
+					<th style="width: 10%;">销售数量</th>
+					<th style="width: 10%;">销售金额</th>
+					<th style="width: 10%;">毛利</th>
+					<th style="width: 10%;">毛利率</th>
+					
+				</tr>
+			</thead>
+
+			<tbody>
+				{{#list}}
+					<tr data-consumer-id={{consumer_id}}>
+						<td>{{index}}</td>
+						<td>{{consumer_name}}</td>
+						<td>{{card_id}}</td>
+						<td>{{telephone}}</td>
+<!--
+						<td>{{count}}</td>
+-->
+						<td>{{sum_qty_ord_total}}</td>
+						<td>{{sum_amtys_ord_total}}</td>
+						<td>{{amt_ord_profit}}</td>
+						<td>{{gross_margin}}</td>
+					</tr>
+				{{/list}}
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer" style="text-align:left;"> 
+		起止日期：
+		<input type="text" id="begin_date" name="begin_date" data-enter="selewares" style="width:90px;"  class="striking_input" />
+		<input type="text" style="width:60px;margin-left:-3px;" id="begin_time" class="striking_input" value="00:00" />
+		-
+		<input type="text" id="end_date" name="end_date" data-enter="selewares" value="" style="width:90px;"  class="striking_input" />
+		<input type="text" style="width:60px;margin-left:-3px;" id="end_time" class="striking_input" value="23:59" />
+		<input style="margin-left:5px;" type="button" class="primary_button" tabindex="2" id="query" value="查 询"/>
+	</div> 
+</div>
+</script>
+
+<script type="text/mustache" id="view_xwfx_detail">
+<div>
+<style>
+.total_content{
+line-height:30px;
+margin-left:10px;
+}
+.total_data{
+color:#FF9725;
+font-weight:bold;
+}
+</style>
+<div id="view_xwfx_detail_table" style="position: absolute; left:0px; top:0px; bottom: 80px; overflow-y:auto; width:100%; ">
+{{#result}}
+ <div>
+        <div class="total_content">
+			销售单号：<span class="total_data">{{order_id}}</span>
+			 &nbsp;&nbsp;&nbsp;&nbsp;销售时间：<span>{{data_time}}	</span>
+<!--
+         &nbsp;&nbsp;&nbsp;&nbsp;总数量：<span class="total_data">{{qty_ord_total}}</span>
+         &nbsp;&nbsp;&nbsp;&nbsp;总金额：<span class="total_data">{{amtys_ord_total}}</span> 元
+-->
+        </div>
+       <table style="width: 100%;margin-bottom:15px;" class="table_view" >
+			<thead>
+				<tr>
+					<th style="width: 15%">商品名称</th>
+					<th style="width: 15%">商品条码 </th> 
+					<th style="width: 8%">单位 </th> 
+					<th style="width: 8%">售价 </th>
+					<th style="width: 8%">数量 </th>
+					<th style="width: 8%">金额 </th>
+					<th style="width: 8%">利润 </th>
+<!--
+					<th style="width: 8%">优惠额</th>
+-->
+				</tr>
+			</thead>
+			<tbody>
+					{{#line}}
+					<tr>
+						<td>{{item_name}}</td>
+						<td>{{big_bar}}</td>
+	     				<td>{{big_unit_name}}</td>
+						<td>{{big_pri3}}</td>
+						<td>{{qty_ord}}</td>
+						<td>{{amt_ord}}</td>
+						<td>{{profit}}</td>
+<!--
+						<td>{{adjusted_amount}}</td>
+-->
+					</tr>
+					{{/line}}
+			</tbody>
+		</table>
+</div>
+{{/result}}
+</div>
+	<div class="view_footer" style="height: 80px; line-height: 40px;margin-left: 0px;text-align:left;" class="view_footer">
+<!--		会员名称：
+		<label  class="primary_label" style="font-size: 13px;"> {{operate_result.consumer_name}}</label>
+		&nbsp;
+
+		会员卡号：
+		<label  class="primary_label" style="font-size: 13px;">{{operate_result.card_id}}</label>
+		&nbsp;
+
+		会员手机号：
+		<label  class="primary_label" style="font-size: 13px;">{{operate_result.telephone}}</label>
+		&nbsp;
+-->
+ <div style="line-height:35px;font-weight:bold;">
+		总数量：
+		<label id="qty_ord_total" class="striking_label" style="font-size: 13px;">{{operate_result.sum_qty_ord_total}}</label>
+		&nbsp;&nbsp;
+		总金额：
+		<label id="amt_ord_total" class="striking_label" style="font-size: 13px;">{{operate_result.sum_amtys_ord_total}}</label>
+		&nbsp;&nbsp;
+		总利润：
+		<label id="amt_profit_total" class="striking_label" style="font-size: 13px;">{{operate_result.amt_ord_profit}}</label>
+</div>
+		时段：
+			<input type="text" id="diabegin_date" data-enter="selewares" style="width:90px;"  class="striking_input" />
+			<input type="text" style="width:60px;margin-left:-3px;" id="diabegin_time" class="striking_input" value="00:00" />
+			-
+			<input type="text" id="diaend_date" data-enter="selewares" style="width:90px;"  class="striking_input" />
+			<input type="text" style="width:60px;margin-left:-3px;" id="diaend_time" class="striking_input" value="23:59" />
+		<select name="item_kind" id="item_kind" style="height:30px; margin-left:10px;">
+			<option value="">全部商品</option>
+			{{#item_kind_list}}
+			<option value="{{id}}">{{name}}</option>
+			{{/item_kind_list}}
+		</select>
+		<input style="margin-left:5px;" type="button" class="primary_button" tabindex="2" id="consumerFilter" data-consumer-id="{{operate_result.consumer_id}}" value="查 询"/>
+		
+	</div>
+</div>
+</script>
+
+
+<script type="text/mustache" id="view_xwfx_detail_table">
+<div id="view_xwfx_detail_table" style="position: absolute; left:0px; top:0px; bottom: 60px; overflow-y:auto; width:100%; ">
+{{#result}}
+ <div>
+        <div class="total_content">
+			销售单号：<span class="total_data">{{order_id}}</span>
+			 &nbsp;&nbsp;&nbsp;&nbsp;销售时间：<span>{{data_time}}	</span>
+        </div>
+       <table style="width: 100%;margin-bottom:15px;" class="table_view" >
+			<thead>
+				<tr>
+					<th style="width: 15%">商品名称</th>
+					<th style="width: 15%">商品条码 </th> 
+					<th style="width: 8%">单位 </th> 
+					<th style="width: 8%">售价 </th>
+					<th style="width: 8%">数量 </th>
+					<th style="width: 8%">金额 </th>
+					<th style="width: 8%">利润 </th>
+<!--
+					<th style="width: 8%">优惠额</th>
+-->
+				</tr>
+			</thead>
+			<tbody>
+					{{#line}}
+					<tr>
+						<td>{{item_name}}</td>
+						<td>{{big_bar}}</td>
+	     				<td>{{big_unit_name}}</td>
+						<td>{{big_pri3}}</td>
+						<td>{{qty_ord}}</td>
+						<td>{{amt_ord}}</td>
+						<td>{{profit}}</td>
+<!--
+						<td>{{adjusted_amount}}</td>
+-->	
+					</tr>
+					{{/line}}
+			</tbody>
+		</table>
+</div>
+{{/result}}
+</div>
+</script>
+

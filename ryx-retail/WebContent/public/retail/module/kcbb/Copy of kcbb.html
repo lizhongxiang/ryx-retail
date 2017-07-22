@@ -1,0 +1,87 @@
+<script type="text/mustache" id="view_kcbb">
+	<style type="text/css">
+	.mytable
+	{
+		border:1px solid black;
+		text-align:center;
+		line-height:33px;
+	}
+	th{
+		text-align:center;
+		font-weight:bold;
+	}
+	td{
+		font-size:14px;
+	}
+	.tfootColor {
+		color: #FF9725;
+	}
+	</style>
+	<div>
+		<div>
+           
+			<table style="width:100%; " class="table_view">
+            	<thead>
+                  <tr>
+                    <th style="width: 10%;">商品名称</th>
+                    <th style="width: 10%;">商品条码</th>
+                    <th style="width: 10%;">商品单位</th>
+                    <th style="width: 10%;">期初库存量</th>
+                    <th style="width: 10%;">期初库存额</th>
+					<th style="width: 10%;">期末库存量</th>
+                    <th style="width: 10%;">期末库存额</th>
+                    <th style="width: 10%;">库存量差</th>
+                    <!--th style="width: 10%;">存销比</th-->
+                  </tr>
+               </thead>
+               <tbody>
+				{{#result.whse_list}}
+                  <tr>
+                    <td  align="center">{{item_name}}</td>
+                    <td align="center">{{bar_code}}</td>
+                    <td align="center">{{unit_name}}</td>
+                    <td align="center">{{begining_whse_quantity}}</td>
+					<td align="center">{{begining_whse_amount}}</td>
+                    <td align="center">{{ending_whse_quantity}}</td>
+                    <td align="center">{{ending_whse_amount}}</td>
+                    <td align="center">{{dispersion}}</td>
+                    <!--td align="center">{{whse_sale_ratio}}</td-->
+                  </tr>	
+				{{/result.whse_list}}
+			</tbody> 
+
+			<tfoot class="tfoot">
+				<tr>
+				<td>合计/平均：</td>
+				<td></td>
+				<td></td>
+				<td><label class="tfootColor" style="font-size: 13px;">{{result.total_begining_whse_quantity}}</label></td>
+				<td><label class="tfootColor" style="font-size: 13px;">{{result.total_begining_whse_amount}}</label></td>
+				<td><label class="tfootColor" style="font-size: 13px;">{{result.total_ending_whse_quantity}}</label></td>
+				<td><label class="tfootColor" style="font-size: 13px;">{{result.total_ending_whse_amount}}</label></td>
+				<td><label class="tfootColor" style="font-size: 13px;">{{result.total_dispersion}}</label></td>
+				<!--td><label class="tfootColor" style="font-size: 13px;">{{result.total_whse_sale_ratio}}</label></td-->
+				</tr>
+			</tfoot>
+
+		</table>
+		</div>
+		<div class="view_footer"  > 
+<div class="view_adSearch">
+			条码/品名：<input  type="text" id="keyword" data-enter="selewares" placeholder=""  style="width:160px;"  class="striking_input"/>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+</div>
+				起止日期：<input type="text" id="beginTime" name="beginTime" data-enter="selewares" style="width:90px;"  class="striking_input" />
+				 - 
+                <input type="text" id="endTime" name="endTime" data-enter="selewares" value="" style="width:90px;"  class="striking_input" />
+				&nbsp;<select name="item_kind" id="item_kind" style="height:30px;">
+				<option value="00" >全部商品</option>
+				{{#item_kind_list}}
+				<option value="{{id}}">{{name}}</option>
+				{{/item_kind_list}}
+			    </select>
+				<input type="button" class="primary_button" id="selewares" name="selewares" style="margin-left:5px;" value="查 询" />
+				
+		</div>
+</div>
+</script>

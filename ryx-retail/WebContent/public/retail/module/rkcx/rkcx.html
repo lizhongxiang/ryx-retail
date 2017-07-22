@@ -1,0 +1,78 @@
+<script type="text/mustache" id="view_rkcx">
+<div>
+	<div>
+		<table style="width:100%; " data-onkey="true" class="table_view clickable">
+			<thead>
+				<tr>
+					<th style="width: 7%;">序号</th>
+					<th style="width: 12%;">采购单号</th>
+					<th style="width: 11%;">入库日期</th>
+					<th style="width: 8%;">订购量合计</th>
+					<th style="width: 8%;">金额合计</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				{{#list}}
+					<tr class="xiangxi" data-id="{{order_id}}">
+						<td>{{index}}</td>
+						<td>{{order_id}}</td>
+						<td>{{voucher_date}}</td>
+						<td>{{qty_purch_total}}</td>
+						<td>{{amt_purch_total}}</td>
+					</tr>
+				{{/list}}
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer">
+		起止日期：<input type="text" id="beginTime" name="beginTime" class="striking_input" style="width:100px;" />
+		 - 
+		<input type="text" id="endTime" data-enter="selewares" name="endTime" value=""  class="striking_input" style="width:100px;" />	
+		<input type="button" class="primary_button" id="selewares" name="selewares" style="margin-left:10px;" value="查 询" />
+	</div>
+</div>
+</script>
+
+<script type="text/mustache" id="view_rkcx_detail">
+<div>
+	<div style="position: absolute; left:0px; top:0px; bottom: 60px; overflow-y:auto; width:100%; ">
+		<table style="width: 100%" class="table_view" >
+			<thead>
+				<tr>
+					<th style="width: 5%">序号</th>
+					<th style="width: 13%">商品条码 </th> 
+					<th style="width: 13%">商品名称 </th> 
+					<th style="width: 12%">采购价 </th>
+					<th style="width: 10%">订购量 </th>
+					<th style="width: 10%">单位 </th>
+					<th style="width: 10%">金额 </th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#list}}
+					<tr>
+						<td>{{index}}</td>
+						<td>{{big_bar}}</td>
+	     				<td>{{item_name}}</td>
+						<td>{{big_pri}}</td>
+						<td>{{qty_ord}}</td>
+						<td>{{big_unit_name}}</td>
+						<td>{{amt_ord}}</td>
+					</tr>
+				{{/list}}
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer" style="height: 60px; line-height: 50px;margin-left: 0px;font-weight:bold;text-align:left;" class="view_footer">
+		入库单号：
+		<label  class="primary_label" style="font-size: 16px;"> {{orderid}}</label>
+		&nbsp; &nbsp;&nbsp;
+		总金额：
+		<label  class="striking_label" style="font-size: 16px;">{{sumamt}}</label>
+		&nbsp;&nbsp;&nbsp;
+		总数量：
+		<label  class="striking_label" style="font-size: 16px;">{{sumqty}}</label>
+	</div>
+</div>
+</script>

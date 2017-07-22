@@ -1,0 +1,313 @@
+<script type="text/mustache" id="view_dzfw">
+<div style="width: 100%; height: 100%;">
+	<style>
+	#left_container {
+		width: 220px;
+		height: 100%;
+		float: left;
+		position: relative;
+		background :#f9f9f9;
+	}
+	#right_container {
+		margin: 0 0 0 219px;
+		min-height: 100%;
+		border-left: 1px solid #CCC;
+		position: relative;
+		overflow-y:hidden;
+		background: #fff;
+	}
+	#left_view{
+		height: 100%;
+		background-color: #f9f9f9;
+	}
+
+	.left_table_view {
+		border: 1px solid #E6EAED;
+		border-right: none;
+		border-style: solid none solid solid;
+	    border-width: 0 medium 1px 0;
+	}
+	.left_table_view ul, .left_table_view li {
+		padding: 8px 0;
+	}
+	.left_table_view ul {
+		font-weight: bold;
+		/*border-bottom: 1px solid #D3D8DD;*/
+		border-right: 1px solid #D3D8DD;
+		background: #D3D8DD;
+	}
+	.left_table_view li {
+		border-top: 1px solid #f0f0f0;
+		/*border-right: 1px solid #E6EAED;*/
+		cursor: pointer;
+		height: 50px;
+		*line-height:30px;
+	    font-size: 16px;
+	}
+	.left_table_view li span {
+		margin-left: 40px;
+		margin-top:  10px;
+		*margin-top: 12px;
+	}
+	.left_table_view li p {
+		margin-left: 60px;
+	    margin-top: -27px;
+		text-align:center;
+	}
+	
+	.left_table_view li:HOVER {
+		background: #f0f0f0;
+	}
+	.liselected{
+		/*background: #C5DAFF;*/
+        background: #f9f9f9;
+	}
+	.left_table_view li.selected{
+		/*color: #3399CC;*/
+        background:#f0f0f0;
+	}
+	.right_container .yxdsjf input{
+		margin: 18px 0 0 18px;
+	}
+	.itemblocklabel {
+		position: absolute;
+		top: -12px;
+		left: 20px;
+		background-color: #F5F5F5;
+		padding: 0px 10px;
+		color: #999;
+		font-size: 15px;
+		font-weight: bold;
+	}
+	.curitem_ul li {
+		height: 40px;
+		line-height: 30px;
+		overflow: hidden;
+	}
+	.itemblock {
+		border:1px solid #CCC;
+		margin: 30px 16px;
+		padding: 16px;
+		position: relative;
+	}
+	#left_container_ {
+		width: 47%;
+		height: 100%;
+		float: left;
+		padding-left:20px;
+		position: relative;
+	}
+	#right_container_ {
+		width: 47%;
+		height: 100%;
+		float: right;
+		padding-right:20px;
+		position: relative;
+	}
+	.pay_info li{
+		margin: 42px 0 0 0;
+	}
+	.yd_search_ul li{
+		margin: 4px 0 0 0;
+	}
+	.right_container .yxds_pay_callback li{
+		margin: 8px 0 0 12px;
+	}
+	#payMsg_ul li{
+		margin: 12px 0 0 14px;
+	}
+	.view_footer_money_count{
+		position:absolute;
+		width:100%;
+		background:#F0F0F0;
+		border-top:1px solid #CCC;
+		border-bottom-left-radius:4px;
+		border-bottom-right-radius:4px;
+		bottom:60px; width:100%; 
+		height:45px; 
+		line-height:45px; 
+		text-align:right;
+	}
+	</style>
+	<div style="height:100%; width:100%; background-color: #D4D9D9;">
+		<div id="left_container">
+			<div id="left_view">
+				<ul class="left_table_view" >								   
+					<li id="search_dhcx" class="selected liselected"><span class="leftIcon leftIcon_sjcz"></span><p><b>手机充值查询</b></p></li>
+					<li id="search_xfcx" ><span class="leftIcon leftIcon_skxfcx"></span><p><b>刷卡消费查询</b></p></li>
+					<li id="search_gjfchx" ><span class="leftIcon leftIcon_gjfcx"></span><p><b>公缴费查询</b></p></li>
+				</ul>
+			</div>
+		</div>
+		<div id="right_container">
+			<div id="container" style="position: absolute; width: 100%; top: 0px; bottom: 0; overflow-y:auto; overflow-x: hidden;">
+						
+			</div>
+		</div>
+		<div class="view_footer" id="view_footer">
+			
+		</div>
+	</div>
+</div>
+</script>
+<script type="text/mustache" id="view_dzfw_boot">
+<div>
+	起止日期：<input type="text" class="striking_input search" id="consumeDateStart" name="consumeDate"  value="{{start}}" placeholder="开始日期" style="width:120px;"/>-
+	<input type="text" class="striking_input search" id="consumeDateEnd" name="consumeDate" value="{{end}}" placeholder="结束日期" style="width:120px;"/>
+	<input type="text" class="striking_input search" id="consumePhone" name="consumePhone" data-enter="checkBillSearchButton" value="" placeholder="手机号"/>
+	<input type="text" class="striking_input search" id="consumeCardNum" name="consumeCardNum" data-enter="checkBillSearchButton" value="" maxlength="20" placeholder="银行卡号"/>
+ 	<select id="feeStatus" style="width:120px;height:30px;" class="search">
+		<option value="ALL" selected>查询全部</option>
+		<option value="1">成功</option>
+		<option value="2">失败</option>
+		<option value="0">充值中</option>
+		<option value="10">无效订单</option>
+	</select>
+	<input style="margin-left:10px;" type="button" class="primary_button" id="checkBillSearchButton" name="" value="查 询" />
+</div>
+</script>
+
+<!-- 手机充值 -->
+<script type="text/mustache" id="view_dzfw_phone">
+<div>
+	<div style="overflow-y: auto; position: absolute; top: 0px; left: 0px; bottom: 100px; width:100%;">
+		<table id="phoneContent" style="width: 100%;" class="table_view">
+			<thead>
+				<tr>
+					<th style="width: 5%;">序号</th>
+					<th style="width: 14%;">订单号</th>
+					<th style="width: 14%;">流水号</th>
+					<th style="width: 14%;">手机号</th>
+					<th style="width: 8%;">金额</th>
+					<th style="width: 20%;">银行卡号</th>
+					<th style="width: 20%;">时间</th>
+					<!--<th style="width: 9%;">时间</th>	-->
+					<th style="width: 5%;">状态</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#list}}
+					<tr>
+						<td>{{myseq}}</td>
+						<td>{{bill_num}}</td>
+						<td>{{tr_tran_serial}}</td>
+						<td>{{user_id}}</td>
+						<td>{{tran_amt}}</td>
+						<td>{{card_no}}</td>
+						<td>{{tran_date}}</td> 
+						<!--<td>{{tran_time}}</td>-->
+						<td>
+							{{pay_tran_status}}
+						</td>
+					</tr>
+				{{/list}}
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer_money_count">
+		<span style="margin-right:20px;">本页合计：<label id="max_ord_amt" class="striking_label"  >{{pageAmount}}</label> 元</span>
+		<span style="margin-right:30px;">金额合计：<label id="max_ord_amt" class="striking_label"  >{{amount}}</label> 元</span>&nbsp;&nbsp;&nbsp;
+	</div>
+</div>
+</script>
+
+<!-- 刷卡 -->
+<script type="text/mustache" id="view_dzfw_consume">
+<div>
+	<div style="overflow-y: auto; position: absolute; top: 0px; left: 0px; bottom: 100px; width:100%;">
+		<table style="width: 100%;" class="table_view" id="consumeContent">
+			<thead>
+				<tr>
+					<th style="width: 10%;">序号</th>
+					<th style="width: 15%;">订单号</th> 
+					<th style="width: 15%;">商户号</th>
+					<th style="width: 15%;">金额</th>
+					<th style="width: 15%;">银行卡号</th>
+					<th style="width: 15%;">时间</th>
+					<th style="width: 15%;">状态</th>
+					<!--<th style="width: 12%;">时间</th>-->
+				</tr>
+			</thead>
+			<tbody>
+				{{#list}}
+					<tr>
+						<td>{{myseq}}</td>
+						<td>{{refer_no}}</td>
+						<td>{{merch_id}}</td>
+						<td>{{tran_amt}}</td>
+						<td>{{card_no}}</td>
+						<td>{{tran_date}}</td>
+						<td>{{resp_msg}}</td>
+						<!--<td>{{tran_time}}</td> -->
+					</tr>
+				{{/list}}
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer_money_count">
+		<span style="margin-right:20px;">本页合计：<label id="max_ord_amt" class="striking_label"  >{{pageAmount}}</label> 元</span>
+		<span style="margin-right:30px;">金额合计：<label id="max_ord_amt" class="striking_label"  >{{amount}}</label> 元</span>&nbsp;&nbsp;&nbsp;
+	</div>
+</div>
+</script>
+
+<!-- 终端 -->
+<script type="text/mustache" id="view_dzfw_gjf">
+<div>
+	<div style="overflow-y: auto; position: absolute; top: 0px; left: 0px; bottom: 100px; width:100%;">
+		<table id="gjfContent" style="width: 100%;" class="table_view">
+			<thead>
+				<tr>
+					<th style="width: 5%;">序号</th>
+					<th style="width: 10%;">流水号</th>
+					<th style="width: 10%;">终端编号</th>
+					<th style="width: 6%;">金额</th>
+					<th style="width: 8%;">用户名</th>
+					<th style="width: 16%;">银行卡号</th>
+					<th style="width: 21%;">时间</th>
+					<th style="width:13%;">缴费类型</th>
+					<th style="width: 10%;">状态</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#list}}
+					<tr>
+						<td>{{myseq}}</td>
+						<td>{{plat_seq_no}}</td>
+						<td>{{dev_no}}</td>
+						<td>{{act_pay_amt}}</td>
+						<td>{{user_name}}</td>
+						<td>{{acct_no}}</td>
+						<td>{{tran_date}}</td> 
+						<td>{{prd_uid}}</td>
+						<td>{{ret_msg}}</td>
+					</tr>
+				{{/list}}
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer_money_count">
+		<span style="margin-right:20px;">本页合计：<label id="max_ord_amt" class="striking_label"  >{{pageAmount}}</label> 元</span>
+		<span style="margin-right:30px;">金额合计：<label id="max_ord_amt" class="striking_label"  >{{amount}}</label> 元</span>&nbsp;&nbsp;&nbsp;
+	</div>
+</div>
+</script>
+<script type="text/mustache" id="view_dzfw_gjf_footer">
+<div>
+	起止日期：<input type="text" class="striking_input search" id="consumeDateStart" name="consumeDate"  value="{{start}}" placeholder="开始日期" style="width:120px;"/>-
+	<input type="text" class="striking_input search" id="consumeDateEnd" name="consumeDate" value="{{end}}" placeholder="结束日期" style="width:120px;"/>
+	<input type="text" class="striking_input search" id="consumeCardNum" name="consumeCardNum" data-enter="checkBillSearchButton" value="" maxlength="20" placeholder="银行卡号"/>
+ 	<select id="feeType" style="width:120px;height:30px;" class="search">
+		<option value="" selected>查询全部</option>
+		<option value="D111">电话缴费</option>
+		<option value="D113">电费缴费</option>
+		<option value="D114">燃气缴费</option>
+		<option value="D118">有线缴费</option>
+	</select>
+ 	<!--<ul class="footer_ul" style="margin-left:200px;float:left;">
+		<li>金额合计：<label id="max_ord_amt" class="striking_label">0.0</label> 元</li>
+	<ul>-->
+		<input style="margin-left:10px;" type="button" class="primary_button" id="checkBillSearchSJF" name="" value="查 询" />
+	
+</div>
+</script>

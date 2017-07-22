@@ -1,0 +1,218 @@
+<script type="text/mustache" id="view_yxhd_jyzd">
+<div style="padding-top: 12px;padding-bottom:20px;">
+<style type="text/css">
+.rank_table{
+border:1px solid #f5f5f5;
+background-color:#fafafa;
+text-align:center;
+margin-bottom:12px;
+}
+.rank_table tr{
+height:30px;
+border:1px solid #eee;
+}
+.rank_table tr td{
+padding:5px;
+}
+.rank_table th{
+text-align:center;
+font-weight:bold;
+}
+.total_header{
+color:#fff;
+background-color:#fac23b;
+}
+.sale_header{
+color:#fff;
+background-color:#aed467;
+}
+.profit_header{
+color:#fff;
+background-color:#4dc9be;
+}
+.single_header{
+color:#fff;
+background-color:#f17b71;
+}
+.selfRank{
+color:#ff0000;
+}
+.selfData{
+font-weight:bold;
+}
+.suggest_content{
+margin: 0 auto; 
+width: 880px;
+padding-top:20px;
+}
+.suggest_line{
+width:100%;
+height:1px;
+border-top:1px solid #eee;
+}
+.suggest_title{
+float:left;
+margin-top:-13px;
+width:100%;
+text-align:center;
+}
+.suggest_titleText{
+padding:5px 10px;
+background-color:#ffffff;
+font-weight:bold;
+font-size:16px;
+}
+.suggest_list{
+margin-top:20px;
+line-height:2;
+}
+</style>
+		<div class="suggest_content">
+           <div class="suggest_line"></div>
+           <div class="suggest_title">
+               <span class="suggest_titleText">商圈零售户总计为：{{my_gather.sum_num}}</span>
+           </div>
+           <br/>
+        </div>
+    	<table align="center" cellpadding="0" cellspacing="0" style="margin: 0 auto; width: 880px;">
+        	<tr>
+            	<td style="padding-right:15px;width:50%;">
+                	<table class="rank_table">
+                      <thead>
+                        <tr class="total_header">
+                           <th colspan="4">购进量排名</th>
+                        </tr>
+                        <tr>
+                           <th style="width:20%;">排位</th>
+                           <th style="width:20%;">名称</th>
+                           <th style="width:40%;">购进量</th>
+                           <th style="width:20%;">排名变化</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+						{{#gj_gather}}
+                        <tr>
+                          <td>{{pm}}</td>
+                          <td>{{merch_name}}</td>
+                          <td>{{qty}}</td>
+                          <td>{{pm_text}}</td>
+                        </tr>
+						{{/gj_gather}}
+                        <tr>
+                          <td colspan="2">我的排名：<span class="selfRank selfData">{{my_gather.qty_pm}}</span> 位</td>
+                          <td class="selfData">{{my_gather.qty_ord}}</td>
+                          <td class="selfRank">{{my_gather.gj_pm_text}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </td>
+                <td style="padding-left:15px;width:50%;">
+                	<table class="rank_table">
+                      <thead>
+                        <tr class="sale_header">
+                           <th colspan="4">销量排名</th>
+                        </tr>
+                        <tr>
+                           <th style="width:20%;">排位</th>
+                           <th style="width:20%;">名称</th>
+                           <th style="width:40%;">销售量</th>
+                           <th style="width:20%;">排名变化</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {{#xs_gather}}
+                        <tr>
+                          <td>{{pm}}</td>
+                          <td>{{merch_name}}</td>
+                          <td>{{qty}}</td>
+                          <td>{{pm_text}}</td>
+                        </tr>
+						{{/xs_gather}}
+                        <tr>
+                          <td colspan="2">我的排名：<span class="selfRank selfData">{{my_gather.sale_pm}}</span> 位</td>
+                          <td class="selfData">{{my_gather.qty_sale}}</td>
+                          <td class="selfRank">{{my_gather.xs_pm_text}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+            	<td style="padding-right:15px;width:50%;">
+                	<table class="rank_table">
+                      <thead>
+                        <tr class="profit_header">
+                           <th colspan="4">毛利排名</th>
+                        </tr>
+                        <tr>
+                           <th style="width:20%;">排位</th>
+                           <th style="width:20%;">名称</th>
+                           <th style="width:40%;">毛利</th>
+                           <th style="width:20%;">排名变化</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {{#yl_gather}}
+                        <tr>
+                          <td>{{pm}}</td>
+                          <td>{{merch_name}}</td>
+                          <td>{{qty}}</td>
+                          <td>{{pm_text}}</td>
+                        </tr>
+						{{/yl_gather}}
+                        <tr>
+                          <td colspan="2">我的排名：<span class="selfRank selfData">{{my_gather.profit_pm}}</span> 位</td>
+                          <td class="selfData">{{my_gather.profit}}</td>
+                          <td class="selfRank">{{my_gather.yl_pm_text}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </td>
+                <td style="padding-left:15px;width:50%;">
+                	<table class="rank_table">
+                      <thead>
+                        <tr class="single_header">
+                           <th colspan="4">单条值排名</th>
+                        </tr>
+                        <tr>
+                           <th style="width:20%;">排位</th>
+                           <th style="width:20%;">名称</th>
+                           <th style="width:40%;">单条值</th>
+                           <th style="width:20%;">排名变化</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {{#dt_gather}}
+                        <tr>
+                          <td>{{pm}}</td>
+                          <td>{{merch_name}}</td>
+                          <td>{{qty}}</td>
+                          <td>{{pm_text}}</td>
+                        </tr>
+						{{/dt_gather}}
+                        <tr>
+                          <td colspan="2">我的排名：<span class="selfRank selfData">{{my_gather.avg_pri_pm}}</span> 位</td>
+                          <td class="selfData">{{my_gather.avg_pri}}</td>
+                          <td class="selfRank">{{my_gather.dt_pm_text}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+              </td>
+            </tr>
+        </table>
+        
+		<div class="suggest_content" {{^guide_information}}style="display:none;"{{/guide_information}}>
+           <div class="suggest_line"></div>
+           <div class="suggest_title">
+               <span class="suggest_titleText">指导建议</span>
+           </div>
+           <div class="suggest_list">
+				{{#guide_information}}
+               		<div>{{item_name}}： {{index_desc}}，{{rst_desc}}。</div>
+				{{/guide_information}}
+               
+           </div>
+			<br/>
+        </div>
+</div>
+</script>

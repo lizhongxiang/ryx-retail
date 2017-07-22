@@ -1,0 +1,41 @@
+<!-- 设置积分规则 -->
+<script type="text/mustache" id="view_jfgz">
+<div>
+
+<style>
+strong{font-size:21px; font-weight:bold; color:#ff9725;}
+.jfgzCont{
+	width:100%;
+}
+.jfgzCont p{text-align:left; margin:auto; line-height:30px;}
+
+</style>
+	
+	<div class="jfgzCont" style="width:500px; margin: 0 auto; padding-top: 50px; ">
+		<p style="text-indent: 2em;">
+		积分规则是指您在销售时，根据销售额来给会员积分，您可以设置多少金额可以积1分；消费者达到指定金额时会自动积分，积分不保留小数。
+		如果您不打算给消费者积分，可以将这个金额设为0。
+		积分规则设置后，不建议频繁修改积分规则。
+		</p>
+	</div>
+	<div style="text-align:center;  align:0 auto 0; padding-top: 20px;"  >
+		每销售
+		<input type="text" id="amount_per_point_text" name="" value="{{amount_per_point}}" style="width:80px; font-size: 18px;" data-empty="false" data-verify="pnumber" verify-message="请输入金额数！"/>
+		元，赠送会员 <span class="striking_label">1</span> 积分
+	</div>
+	<div class="jfgzCont" style="width:500px; margin: 0 auto; padding-top: 20px; ">
+		<p style="text-indent: 2em;">
+		积分可以干什么：
+		</p>
+		<ul style="text-indent: 2em; line-height: 24px;">
+			<li>1、会员提升级别的主要途径；</li>
+			<li>2、可以参与积分兑换活动，兑换礼品；</li>
+			<li>3、可以了解会员对店铺的贡献度；</li>
+		</ul>
+	</div>
+	<div class="view_footer" style="text-align:right;">
+		<input type="button" class="primary_button" id="scale_submit_button" value="保 存" />
+		<!--<input type="button" class="closebtn_button" id="scale_close_button" value="取消" />-->
+	</div>
+ </div>
+</script>

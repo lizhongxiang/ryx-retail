@@ -1,0 +1,140 @@
+<script type="text/mustache" id="view_jrtj">
+<div style="padding-top: 20px;">
+<style type="text/css">
+	.widgetDiv{
+		position:relative;
+		margin:30px;
+		width:360px;
+		height:172px;
+		border:1px solid #E0E0E0;
+	}
+	.widgetDiv .widgetImg{
+		position:absolute;
+		left:-30px;
+		top:-30px;
+	}
+
+	.bottomDiv{
+		background-color:#E8E8E8;
+		padding-top: 2px;
+		height:50px;
+		width:100%;
+		line-height:24px;
+	}
+	.topDiv{
+		background-color:#F2F2F2; 
+		height:120px;
+		width:100%;
+	}
+	.curTitle{
+		width:140px;
+		height:32px;
+		line-height:40px;
+		white-space:nowrap;
+		text-align:left;
+		font-weight:bold;
+		color: #999999;
+	}
+	.curData{
+		width:180px;
+		text-align:left; 
+		line-height:80px;
+		white-space:nowrap;
+		color: #8C4F79;
+		font-size: 48px;
+	}
+	.bottomDiv ul li{
+		float: left;
+		text-align:center;
+		width: 50%;
+	}
+	.bottomLabel {
+		color: #999999;
+		font-weight: bold;
+	}
+	.bottomValue {
+		color: #8C4F79;
+		font-size: 16px;
+	}
+
+</style>
+    	<table align="center" cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto; width: 880px;">
+			{{#currentDailyCountList}}
+        	<tr>
+            	<td align="center">
+                	<div class="widgetDiv" id="profitDiv">
+						<span class="widgetImg pageIcon pageIcon_li"></span>
+                    	<div class="topDiv">
+                    	  <div class="curTitle" >今日(元)</div>
+                    	  <div class="curData" >{{profit_today}}</div>
+							<div style = "height:18px; border:0px solid #000; text-align:right; margin-right:12px; margin-top:-12px; ">
+								<lable class="bottomLabel">让利(元)：</lable>
+								<lable class="bottomValue">{{sum_adjusted_amount}}</lable>
+							</div>
+                        </div>
+                        <div class="bottomDiv" id="bottomDiv" >
+                        	<ul>
+								<li style='width:33%'><p class="bottomLabel">卷烟(元)</p><p class="bottomValue">{{profit_tobacco}}</p></li>
+								<li style='width:33%'><p class="bottomLabel">雪茄(元)</p><p class="bottomValue">{{profit_cigar}}</p></li>
+								<li style='width:33%'><p class="bottomLabel">非烟(元)</p><p class="bottomValue">{{profit_other}}</p><li>
+							</ul>
+                        </div>
+                    </div>
+                </td>
+                <td align="center">
+                	<div class="widgetDiv">
+						<span class="widgetImg pageIcon pageIcon_xiao"></span>
+                    	<div class="topDiv" >
+                    	  <div class="curTitle">今日(元)<!--<label style="margin-left: 80px; color: #8C4F79; font-size: 16px; font-weight: normal;">{{sale_count_today}}笔</label>--></div>
+                    	  <div class="curData">{{sale_today}}</div>
+							<div style = "height:18px; border:0px solid #000; text-align:right; margin-right:12px; margin-top:-12px; ">
+								<lable class="bottomLabel">退货(元)：</lable>
+								<lable class="bottomValue">{{return_amount}}</lable>
+							</div>
+                        </div>
+                        <div  class="bottomDiv" id="bottomDiv" >
+                        	<ul>
+								<li><p class="bottomLabel">网店(元)</p><p class="bottomValue">{{sale_online}}/{{sale_count_online}}笔</p></li>
+								<li><p class="bottomLabel">柜台(元)</p><p class="bottomValue">{{sale_offline}}/{{sale_count_offline}}笔</p><li>
+							</ul>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+            	<td align="center">
+                	<div class="widgetDiv">
+						<span class="widgetImg pageIcon pageIcon_jin"></span>
+                    	<div class="topDiv">
+                    	  <div class="curTitle">今日(元)</div>
+                    	  <div class="curData">{{purch_today}} </div>
+                        </div>
+                        <div class="bottomDiv" id="bottomDiv" >
+                        	<ul>
+								<li><p class="bottomLabel">笔数(笔)</p><p class="bottomValue">{{purch_count_today}}</p></li>
+								<li><p class="bottomLabel">品种(种)</p><p class="bottomValue">{{purch_item_count}}</p><li>
+							</ul>
+                        </div>
+                    	</div>
+                </td>
+                <td align="center">
+                	<div class="widgetDiv">
+						<span class="widgetImg pageIcon pageIcon_cun"></span>
+                    	<div class="topDiv">
+                    	  <div class="curTitle">总库存(元/成本价)</div>
+                    	  <div class="curData">{{whse_today}}</div>
+                        </div>
+                        <div class="bottomDiv" id="bottomDiv">
+                        	<ul>
+								<li style='width:33%'><p class="bottomLabel">卷烟(元)</p><p class="bottomValue">{{whse_tobacco}}</p></li>
+								<li style='width:33%'><p class="bottomLabel">雪茄(元)</p><p class="bottomValue">{{whse_cigar}}</p></li>
+								<li style='width:33%'><p class="bottomLabel">非烟(元)</p><p class="bottomValue">{{whse_other}}</p><li>
+							</ul>
+                        </div>
+                	</div>
+              </td>
+            </tr>
+			{{/currentDailyCountList}}
+        </table>
+    </div>
+</script>

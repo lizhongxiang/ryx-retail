@@ -1,0 +1,41 @@
+<!-- 设置积分规则 -->
+<script type="text/mustache" id="view_dhls">
+<div>
+	<div>
+		<table id="myconsumer_list" style="width: 100%; table-layout:fixed;" data-onkey="true" class="table_view">
+			<thead>
+				<tr>
+					<th style="width: 5%;">序号</th>
+					<th style="width: 10%;">商品名称</th>
+					<th style="width: 10%;">会员手机</th>
+					<th style="width: 10%;">会员昵称</th>
+					<th style="width: 10%;">会员卡号</th>
+					<th style="width: 5%;">兑换积分</th>
+					<th style="width: 10%;">兑换时间</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#list}}
+				<tr>
+					<td>{{index}}</td>
+					<td>{{prize_name}}</td>
+					<td>{{telephone}}</td>
+					<td>{{consumer_name}}</td>
+					<td>{{card_id}}</td>
+					<td>{{score}}</td>
+					<td>{{data_time}}</td>
+				</tr>
+				{{/list}}
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer">
+		起止日期：
+		<input type="text" id="beginTime" name="beginTime" class="striking_input" style="width:90px;" data-verify="date" data-empty="false" verify-message="开始时间格式错误"/>
+		 - 
+		<input type="text" id="endTime"   name="endTime"   class="striking_input" style="width:90px;" data-verify="date" data-empty="false" verify-message="结束时间格式错误"/>
+		<input type="text" class="striking_input" style='float:left; margin-top:15px; margin-right:12px;' id="prize_name" data-enter="query" placeholder="请输入商品名称"/>
+		<input type="button" class="primary_button" style='margin-right:20px;' id="query" value="查 询" />
+	</div>
+</div>
+</script>

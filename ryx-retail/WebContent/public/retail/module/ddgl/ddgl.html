@@ -1,0 +1,132 @@
+<script type="text/mustache" id="view_ddgl">
+<div>
+	<div >
+		<table style="width: 100%;" data-onkey="true" class="table_view clickable">
+			<thead>
+				<tr>
+					<th style="width: 5%;">序号</th>
+					<th style="width: 12%;">订单编号</th>
+					<th style="width: 12%;">供应商</th>
+					<th style="width: 12%;">下单日期</th>
+					<th style="width: 10%;">收货人</th>
+					<th style="width: 10%;">订购数量</th>
+					<th style="width: 10%;">订单金额</th>
+					<th style="width: 10%;">订单状态</th>
+					<th style="width: 9%;">操作</th>
+				</tr>
+			</thead>
+			<tbody id="orderListHis">
+				
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer">
+		<input type="text" data-enter="query" tabindex="1" class="striking_input" id="searchParam" name="item_bar" value="" placeholder="请输入条码/品名/拼音"/>&nbsp;
+		<span style="margin-left:20px;">
+			起止日期：
+			<input tabindex="1" type="text" id="beginTime" name="beginTime" class="striking_input" style="width:100px;" value="{{start}}"/>
+			 -
+			<input tabindex="2" type="text" id="endTime"  name="endTime" data-enter="selewares" class="striking_input" value="{{end}}"style="width:100px;" />
+		<span>
+		<input style="margin-left:5px;" type="button" class="primary_button" tabindex="2" id="orderQuery" value="查 询"/>
+	</div>
+</div>
+</script>
+<script type="text/mustache" id="view_ddgl_list">
+{{#list}}
+<tr orderID="{{id}}" supplierID="{{supplier_id}}">
+	<td>{{index}}</td>
+	<td>{{id}}</td>
+	<td>{{supplier_name}}</td>
+	<td>{{create_date}}</td>
+	<td>{{}}</td>
+	<td>{{num}}</td>
+	<td>{{prise_total}}</td>
+	<td>{{order_status}}</td>
+	<td>{{action}}</td>
+</tr>
+{{/list}}
+</script>
+<script type="text/mustache" id="view_ddgl_info">
+<div>
+	<style>
+	 body{line-height:25px;}
+	.order{padding:10px 10px 10px 20px; overflow:hidden; border-bottom:1px solid #ebebeb;}
+	.order ul{overflow:hidden; margin-left:70px;}
+	.order ul li{float:left; width:45%;}
+	.order ul li lable{display:inline-block; width:85px; text-align:right;}
+	.table_view{width:99.5%; border:1px solid #ebebeb;}
+	#view_ddgl_info .table_view td{padding:10px 0; border-bottom:1px solid #ebebeb;border-right:1px solid #ebebeb; background:#ffffff;}
+	.table_view td .item_pic{width:54px; height:72px; line-height:72px; text-align:center; overflow:hidden; border:1px solid #ebebeb; margin-left:15px; margin-right:15px;}
+	.table_view td .item_pic img{max-width:54px; max-height:72px; vertical-align:middle;}
+	.table_view td .item_basic_info{width:68%;}
+	</style>
+	<div style="position: absolute; left:0px; top:0px; bottom: 60px; overflow-y:auto; width:100%; ">
+		<div class="order_state order">
+			<label>当前订单状态：<span>{{list.order_status}}</span></label>
+		</div>
+		<div class="order_num order">
+			<label>订单编号：{{list.id}}</label>
+		</div>
+		<div class="order_mess order">
+			<lable>收货地址：</label>{{addressinfo.manager}}-{{addressinfo.telephone}} ，{{addressinfo.address}}{{addressinfo.merch_name}}
+		</div>
+		<div class="order ghs_info">
+			<strong>供货商信息</strong>
+            <ul>
+                <li><label>供货商：</label> &nbsp;&nbsp;<span>{{list.supplier_name}}</span></li>
+				<li><label>联系人：</label><span>&nbsp;&nbsp{{list.manager}}</span></li>
+				<li><label>联系电话：</label><span>&nbsp;&nbsp;{{list.phone}}</span></li>
+            </ul>
+		</div>
+		<div class="order order_info">
+			<strong>订单信息</strong>
+            <ul>
+                <li><label>提交时间：</label>&nbsp;&nbsp;{{list.create_date}}</li>
+				<li><label>付款时间：</label>&nbsp;&nbsp;{{list.pay_date}}</li>
+				<li><label>发货时间：</label>&nbsp;&nbsp;{{list.delivery_date}}</li>
+				<li><label>收货时间：</label>&nbsp;&nbsp;{{list.accept_date}}</li>
+            </ul>
+		</div>
+		<table data-onkey="true" class="table_view">
+			<thead>
+				<tr>
+					<th style="width:40%">商品名称</th>
+					<th style="width:15%;">订单状态</th>
+					<th style="width:15%;">单价</th>
+					<th style="width:15%;">订购数量</th>
+					<th style="width:14%;">订单金额</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#list.orders}}
+				<tr>
+					<td style="width:40%; text-align:left;">
+						<div class="td_inner">
+                             <div class="item_pic left">
+                                  <a href="#">
+                                      <img src="http://www.ruishangtong.com:8889/resource/images/item/s/{{item_bar}}_s_face.png" class="item_img"/>
+                                  </a>
+                             </div>
+                             <div class="item_basic_info left">
+								{{item_name}}
+                             </div>												
+                         </div>
+					</td>
+					<td style="width:15%;"><div class="td_inner">{{status}}</div></td>
+					<td style="width:15%;"><div class="td_inner">{{whole_prise}}</div></td>
+					<td style="width:15%;"><div class="td_inner">{{num}}</div></td>
+					<td style="width:15%;"><div class="td_inner">{{whole_prise * num}}</div></td>
+				</tr> 
+				{{/list.orders}}
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer" style="text-align:right;">
+		<span style="margin-right:20px;">
+        	合计：<strong>{{list.prise_total}}</strong>元
+        </span>
+		<input style="margin-left:5px;" type="button" class="primary_button" tabindex="2" id="query" value="支付"/>
+	</div>
+</div>
+</script>

@@ -1,0 +1,494 @@
+<script type="text/mustache" id="view_spxs">
+<div style="height: 100%;">
+	<style>
+	.curitem_ul li {
+		height: 40px;
+		line-height: 30px;
+		overflow: hidden;
+	}
+	.footer_ul li {
+		float: left;
+		margin-right: 20px;
+	}
+	#left_container {
+		width: 260px;
+		height: 100%;
+		float: left;
+		position: relative;
+        background-color:#f9f9f9;
+	}
+	#right_container {
+		margin: 0 0 0 260px;
+		min-height: 100%;
+		max-height: 100%;
+		overflow-y: auto;
+		border-left: 1px solid #CCC;
+		position: relative;
+	}
+
+	.itemblock {
+		/*border:1px solid #CCC;*/
+		margin: 30px 10px;
+		padding: 15px 10px 15px 15px;
+		position: relative;
+	}
+	.itemblocklabel {
+		position: absolute;
+		top: -12px;
+		/*left: 20px;
+		background-color: #FFF;
+		padding: 0px 10px;
+		font-size: 15px;*/
+		color: #6d7784;
+		font-weight: bold;
+	}
+	.itemblockselect {
+		display:inline-block;
+		position:absolute;
+		width:30px;
+		height:28px;
+		top: 19px;
+		right: 11px;
+		cursor: pointer;
+	}
+    .imgTips{
+       position:absolute;
+       /*left:280px;
+       top:120px;*/
+       min-width:100px;
+       min-height:30px;
+       max-width:260px;
+       max-height:150px;
+       background-color:#f9f9f9;
+       border:1px solid #ddd;
+       box-shadow:0px 0px 1px #ddd;
+       border-radius:3px;
+       text-align:left;
+       padding:5px 10px;
+       line-height:1.8;
+       display:none;
+       z-index:99;
+    }
+	.view_footer .right{
+		float:right;
+		margin-top:15px;
+		margin-left:20px;
+	}
+	</style>
+	<div style="width: 100%; height: 100%;">
+		<div id="left_container">
+			<div class="itemblock">
+				<div class="itemblocklabel">选择会员</div>
+				<div id="consumer_container" style="height: 30px;"></div>
+			</div>
+			<div class="itemblock" style="margin-top:-15px;padding-bottom:30px;border-bottom:1px dotted #ddd;">
+				<div class="itemblocklabel">选择商品</div>
+				<a class="itemblockselect pageIcon pageIcon_more" id="choice_item" data-doubleclick="false" title="按类型选择商品"></a>
+				<input type="text" class="striking_input" style="width: 175px;padding-right:30px;" id="input_item_bar" placeholder="商品条码" data-respond="false" tabindex="2"/>
+			</div>
+			<div class="itemblock">
+				<div class="itemblocklabel">当前商品</div>
+				<ul class="curitem_ul" style="list-style-type:none;">
+					<!--<li style="white-space:nowrap;">名称： <label id="current_item_name" class="primary_label small_label"></label></li>-->
+					<li style="height:100px;">
+                        <div style="float:left;width:62px;height:92px;text-align:center;border:1px solid #ccc;margin-right:8px;"><img id="currentImg" style="max-width:60px;max-height:90px;margin-top:1px;" alt="" src="" /></div>
+                        <div style="float:left;width:143px;">
+                            <div style="max-height:65px;min-height:30px;margin-bottom:3px;"><label id="current_item_name" style="word-wrap:break-word;font-weight:normal;font-size:16px;" class="primary_label small_label">暂无信息</label></div>
+                            <div>原价：<label id="current_item_pri" style="vertical-align:middle;font-size:17px;color:#5a5a5a;" >0.00</label> <lable id="current_unitPrice">元</lable></div>
+                        </div>
+                    </li>
+                    <li style="white-space:nowrap;margin-top:7px;"><div>售价：<label id="current_item_salepri" class="striking_label right_label" style="vertical-align:middle;width: 135px;font-size:21px;" >0.00</label> <lable id="current_unitSalePrice">元</lable></div></li>
+					<li style="white-space:nowrap;">数量：　&nbsp;<input id="current_item_quantity" style="width: 110px; text-align:right;" class="striking_text" data-verify="pnumber" type="text" tabindex="3" maxlength="7" value="0"/> <label id="current_item_unit" style="white-space: nowrap;"></label></li>
+					<li>金额：　&nbsp;<input id="current_item_amtord" style="width: 110px; text-align:right;" class="striking_text" tabindex="4" data-verify="pnumber" type="text" maxlength="10" value="0.00"/> 元</li>
+				</ul>
+			</div>
+		</div>
+		<div id="right_container">
+			<table id="item_list_table" style="width: 100%;" class="table_view clickable" data-onkey="true">
+				<thead>
+					<tr>
+						<th style="width: 5%;">序号</th>
+						<th style="width: 23%;">商品名称</th>
+						<th style="width: 8%;">售价</th>
+						<th style="width: 8%;">单位</th>
+						<th style="width: 8%;">数量</th>
+						<!--<th style="width: 8%;">折扣</th>-->
+						<th style="width: 8%;">金额</th>
+						<th style="width: 8%;">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="view_footer">
+     <div style="float:right;text-align: right; width: 305px;">
+	   <input id="order_submit" type="button" style="margin-left:16px;" class="primary_button" tabindex="5" data-doubleclick="false" value="结 算" />
+	   <input id="clear_all" type="button" style="margin-left:16px;" tabindex="6" class="minor_button" value="清 空" />
+	   <input id="all_order_submit" type="button" style="margin-left:16px;" tabindex="7" class="primary_button" value="交 班" />
+	   <!--<input id="onlottery" type="button" class="primary_button right" tabindex="5" value="抽奖" />-->
+     </div>
+	<ul class="footer_ul" style="margin-left:5px;float:left;">
+		<li>数量合计：<label id="max_ord_qty" class="striking_label">0</label></li>
+		<li>金额合计：<label id="max_ord_amt" class="striking_label"  >0.00</label> 元</li>
+		<li>优惠金额： <label id="max_ord_discount" class="striking_label" style="color:#56ad02;">0.00</label> 元</li>
+        <li style="margin-right:5px;">
+			<span class="salepro_img vip_img pageIcon pageIcon_vip" alt="vip" style="display:none;vertical-align:middle;cursor:pointer;"></span>
+			<span class="salepro_img jian_img pageIcon pageIcon_manjian" alt="jian" style="display:none;vertical-align:middle;cursor:pointer;"></span>
+          <!--<img class="salepro_img vip_img" alt="vip" src="../public/retail/img/vip_icon.png" style="display:none;vertical-align:middle;cursor:pointer;">
+          &nbsp;<img class="salepro_img jian_img" alt="jian" src="../public/retail/img/jian_icon.png" style="display:none;vertical-align:middle;cursor:pointer;">-->
+          <div class="salepro_text imgTips vip"><b>折扣：</b><lable></lable></div>
+          <div class="salepro_text imgTips jian"><b>促销：</b><lable></lable></div>
+        </li>
+	</div>
+</div>
+</script>
+
+<script type="text/mustache" id="view_spxs_allOrderSubmit">
+<div>
+<style>
+.table_hyeditor tr{
+   height:35px;
+   text-align:center;
+}
+.table_hyeditor{
+   text-align:center;
+}
+</style>
+<style>
+.allOrderSubmitRightTd{
+	display: inline-block;
+    width: 25%;
+    text-align: right;
+	font-size: 20px;
+    line-height: 40px;
+	border:0px;
+}
+.allOrderSubmitLeftTd{
+	display: inline-block;
+    width: 40%;
+    text-align: left;
+	font-size: 20px;
+    line-height: 40px;
+	border:0px;
+	padding-left:5px;
+	white-space: nowrap;
+}
+</style>
+	<div>
+		<table style="width: 100%;border:0px;margin-top:10px;" class="table_hyeditor">
+			<tr>
+				<td class="allOrderSubmitRightTd">操作人：</td>
+				<td class="allOrderSubmitLeftTd">{{result.user_code}}</td>
+			</tr>
+			<tr>
+				<td class="allOrderSubmitRightTd">刷卡销售：</td>
+				<td class="allOrderSubmitLeftTd"><span class="striking_label">{{result.amt_sale_card}}</span> 元</td>
+			</tr>
+			<tr>
+				<td class="allOrderSubmitRightTd">现金销售：</td>
+				<td class="allOrderSubmitLeftTd"><span class="striking_label">{{result.amt_sale_cash}}</span> 元</td>
+			</tr>
+			<tr>
+				<td class="allOrderSubmitRightTd">退货额：</td>
+				<td class="allOrderSubmitLeftTd"><span class="striking_label">{{result.amt_return}}</span> 元</td>
+			</tr>
+			<tr>
+				<td class="allOrderSubmitRightTd">开始日期：</td>
+				<td class="allOrderSubmitLeftTd">{{result.last_shift_date}}</td>
+			</tr>
+			<tr>
+				<td class="allOrderSubmitRightTd">截止日期：</td>
+				<td class="allOrderSubmitLeftTd">{{result.shift_date}}</td>
+			</tr>
+
+<!--
+			<tr>
+				<td class="allOrderSubmitRightTd">利润额：</td>
+				<td class="allOrderSubmitLeftTd">{{result.amt_loss}}</td>
+			</tr>
+-->
+		</table>		
+	</div>
+	<div class="view_footer" style="text-align:center;"> 
+		<input type="button" class="primary_button" style="margin-right:20px;" id="closeallordersubmit" tabindex='117' value=" 确认并退出 " />
+		<input type="button" class="closebtn_button" id="backordersubmit" tabindex='117' value=" 取 消 " />
+	</div>
+</div>
+</script>
+
+<script type="text/mustache" id="view_spxs_consumer_input2">
+
+
+<style>
+#clean_consumer_a{
+	display:inline-block;
+	width:31px;
+	height:30px;
+	font-size:20px;
+	text-align:center;
+	cursor:pointer;
+	color:#888;
+	display:none;
+}
+#clean_consumer_a:hover{
+    background-color:#eee;
+    color:#FE8C00;
+}
+#input_consumere_div{
+	float:left; 
+	/*border:1px solid black;*/
+}
+#clean_consumer_div{
+	/*border:1px solid #eee333;*/
+	float:right;
+	margin:-30px 0px 0px 0px;
+}
+</style>
+
+
+<div >
+	<div id="input_consumere_div" >
+		<input type="text" class="striking_input" tabindex="1" style="width: 200px; " placeholder="会员卡号或手机号" id="input_consumer"/>
+	</div>
+	<div id="clean_consumer_div" >
+		<a id="clean_consumer_a" title="取消该会员">×</a>
+	</div>
+</div>
+</script>
+
+<script type="text/mustache" id="view_spxs_item_row">
+<tr data-num="{{line_num}}" data-id="{{item_id}}" data-unit="{{unit_id}}">
+	<td><label class="linelabel">{{line_num}}</label></td>
+	<td><label class="itemname" style="font-weight:bold;">{{item_name}}</label></td>
+	<td><label class="pri">{{pri}}</label></td>
+	<td><label class="unitname">{{big_unit_name}}</label></td>
+	<td><label class="qtyord">{{qty_ord}}</label></td>
+	<td><label class="amtord">{{amt_ord}}</label></td>
+	<td>
+     <a title="删除" class="pageIcon pageIcon_del" name="delete" style="padding:5px 10px;margin-left:20px;display:inline-block;background-position:-0px -25px;"></a>
+    </td>
+</tr>
+</script>
+
+<script type="text/mustache" id="view_spxs_choice_item">
+<div>
+	<style>
+		#select_item_kind_ul a span {
+			font-size: 15px;
+			padding:0px 5px;
+		}
+		#select_item_kind_ul a span.button {
+			padding:0px;
+		}
+		#select_item_kind_ul a {
+			TEXT-DECORATION:none;
+		}
+		#select_item_kind_ul li {
+			line-height: 16px;
+		}
+		#select_item_kind_ul li a.curSelectedNode {
+			background-color: #D3D8DD;
+			border: 0px solid #D3D8DD;
+		}
+	</style>
+	<div style="padding-left:9px;width:160px;position:absolute;left:0;overflow:auto;height:100%;background-color:#F0F0F0;">
+		<ul id="select_item_kind_ul" class="ztree"></ul>
+	</div>
+	<div id="choice_item_container" style="margin: 0 0 0 170px;height: 100%;overflow:auto;border-left: 1px solid #CCC;background-color:#F0F0F0;">
+		<p style="text-align:center;padding-top:150px;font-size:16px;font-weight:bold;">请先在左侧栏选择商品类型</p>
+	</div>
+</div>
+</script>
+
+<script type="text/mustache" id="view_spxs_cash_submit_dialog">
+<div>
+	<style>
+		#submit_info li {
+    		font-size: 16px;
+    		line-height: 46px;
+		}
+		#submit_info li .labeltitle{
+			display: inline-block;
+    		width: 42%;
+    		text-align: right;
+			padding-right:10px
+		}
+        #submit_info li .submitDialog_label{
+            text-align: left; 
+            width: 208px; 
+            overflow:hidden; 
+            display:inline-block; 
+            white-space:nowrap; 
+            font-size:20px;
+            font-weight:normal;
+            vertical-align:middle;
+            color:#686868;
+        }
+	</style>
+	<ul id="submit_info">
+		<li style="margin-top: 20px;">
+			<span class="labeltitle">应收金额(元)：</span>
+				
+				<input id="receivable_input" class="striking_text" style="width: 185px; font-size:32px;vertical-align:middle;" 
+				data-verify="pnumber" type="text" maxlength="10" value="{{receivable}}"/>
+				
+				<!--
+				<span class="striking_label" style="text-align: left; width: 208px; overflow:hidden; display:inline-block; 
+				white-space:nowrap; font-size:30px;vertical-align:middle;" id="receivable_input">{{receivable}}</span>
+				-->
+		</li>
+		<li>
+			<span class="labeltitle">实收金额(元)：</span>
+			<input id="actual_input" class="striking_text" style="width: 185px; font-size:32px;vertical-align:middle;" 
+				data-verify="pnumber" type="text" maxlength="10" value="{{receivable}}"/>
+		</li>
+		<li style="margin-bottom: 0px;">
+			<span class="labeltitle">找零(元)：</span>
+			<span class="striking_label" style="text-align: left; width:208px; display:inline-block; 
+			white-space:nowrap;overflow:hidden;font-size:30px;vertical-align:middle;" id="change">{{change}}</span>
+		</li>
+<!--
+		<li style="margin-bottom: 10px;">
+			<span class="labeltitle">抹零(元)：</span>
+			<span class="striking_label" style="text-align: left; width:208px; display:inline-block; 
+			white-space:nowrap;overflow:hidden;font-size:30px;vertical-align:middle;" id="moLingAmt">{{change}}</span>
+		</li>
+-->
+        <li><div style="border-top:1px dashed #ddd;height:1px;width:90%;margin-left:20px;"><div></li>
+        <li>
+          <table style="margin-left:35px;width:90%;line-height:30px;margin-top:12px;">
+            <tbody>
+              <tr style="height:30px;">
+                 <td>
+                  <span style="font-size:14px;text-align:right;">总金额(元)：</span><span id="totalAmount">{{totalAmount}}</span>
+                 </td>
+                 <td>
+                    <span style="font-size:14px;text-align:right;">店铺优惠(元)：</span><span id="discountVal">{{discountVal}}</span>
+                 </td>
+              </tr>
+              <tr style="height:30px;">
+                 <td>
+                    <div {{^consumer_id}}style="display:none;"{{/consumer_id}}><span style="font-size:14px;text-align:right;display:inline-block;width:79px;">会员积分：</span><span id="consumer_point" style="font-size:16px;">{{consumer_point}}</span></div>
+                 </td>
+                 <td>
+                    <div {{^consumer_id}}style="display:none;"{{/consumer_id}}><span style="font-size:14px;text-align:right;display:inline-block;width:93px;">会员折扣：</span><span id="consumer_grade_discount">{{consumer_grade_discount}}</span></div>
+                 </td>
+              </tr>
+            </tbody>
+			</table>
+        </li>
+<!-- <li><span class="labeltitle" style="font-size:14px;">总金额(元)：</span><span class="submitDialog_label" id="totalAmount">{{totalAmount}}</span></li>
+		<li><span class="labeltitle" style="font-size:14px;">店铺优惠(元)：</span><span class="submitDialog_label" id="discountVal"><b>-</b>{{discountVal}}</span></li>
+		<li {{^consumer_point}}style="display:none;"{{/consumer_point}}><span class="labeltitle" style="font-size:14px;">会员积分：</span><span class="submitDialog_label" id="consumer_point">{{consumer_point}}</span></li>
+		<li {{^consumer_point}}style="display:none;"{{/consumer_point}}><span class="labeltitle" style="font-size:14px;">会员折扣：</span><span class="submitDialog_label" id="consumer_grade_discount">{{consumer_grade_discount}} ( -{{consumer_grade_dismoney}} )</span></li>
+-->
+		<li style="text-align:center;margin-top:15px;">
+		<input id="cash_submit_button" type="button" class="primary_button" data-doubleclick="false" style="position:relative;margin-right:20px;width:100px; height:35px; font-size:18px;" value="现金支付"/>
+		<input id="card_submit_button" type="button" class="primary_button" data-doubleclick="false" style="position:relative;width:100px; height:35px;font-size:18px;" value="刷卡"/>
+		<!--<input id="hanging_submit_button" type="button" class="primary_button" data-doubleclick="false" style="position:relative;width:100px; height:35px; font-size:18px;" value="挂账"/></li>-->
+	</ul>
+</div>
+</script>
+
+<script type="text/mustache" id="view_spxs_cash_confirm_dialog">
+<div>
+	<style>
+		#order_info li {
+    		font-size: 16px;
+    		line-height: 38px;
+		}
+		#order_info .labeltitle {
+			width: 42%;
+			padding-right: 10px;
+			display: inline-block;
+			text-align: right;
+		}
+	</style>
+	<ul id="order_info" style="margin-top: 10px;">
+		{{#order}}
+		<li style="margin-top:20px;"><span class="labeltitle">金额合计(元)：</span><span class="striking_label" style="font-size:30px;vertical-align:middle;">{{amtys_ord_total}}</span> </li>
+		<li><span class="labeltitle">实收合计(元)：</span><span class="striking_label" style="font-size:30px;vertical-align:middle;">{{amt_ord_total}}</span> </li>
+		<li style="margin-bottom:10px;"><span class="labeltitle">找零(元)：</span><span class="primary_label" style="font-size:30px;vertical-align:middle;">{{change}}</span> </li>
+		<li><div style="border-top:1px dashed #ddd;height:1px;width:90%;margin-left:20px;"><div></li>				
+        <li style="margin-top:5px;line-height: 30px;font-size: 14px;"><span class="labeltitle">销售单号：</span><span>{{order_id}}</span></li>
+		<li style="line-height: 30px;font-size: 14px;"><span class="labeltitle">销售时间：</span><span>{{order_date_label}}</span></li>
+		<li style="line-height: 30px;font-size: 14px;"><span class="labeltitle">数量合计：</span><span>{{qty_ord_total}}</span></li>
+		<li style="line-height: 30px;font-size: 14px;"><span class="labeltitle">会员卡号：</span><span>{{card_id}}</span></li>
+		{{/order}}
+		<li style="text-align:center;"><span id="printing">正在打印小票...</span></li>
+	</ul>
+</div>
+</script>
+
+<script type="text/mustache" id="view_spxs_card_confirm_dialog">
+<div>
+	<style>
+		#order_info li {
+    		font-size: 16px;
+    		line-height: 38px;
+		}
+		#order_info .labeltitle {
+			width: 42%;
+			padding-right: 10px;
+			display: inline-block;
+			text-align: right;
+		}
+	</style>
+	<ul id="order_info" style="margin-top: 10px;">
+		{{#order}}			
+		<!--<li><span class="labeltitle">刷卡结果：</span><span>支付成功</span></li>-->
+		<li style="margin-top:20px;"><span class="labeltitle">金额合计(元)：</span><span class="striking_label" style="font-size:30px;vertical-align:middle;">{{amtys_ord_total}}</span></li>
+		<li><span class="labeltitle">实收合计(元)：</span><span class="striking_label" style="font-size:30px;vertical-align:middle;">{{amt_ord_total}}</span></li>
+		<li style="margin-bottom:10px;"><span class="labeltitle">找零(元)：</span><span class="primary_label" style="font-size:30px;vertical-align:middle;">{{change}}</span></li>
+		<li><div style="border-top:1px dashed #ddd;height:1px;width:90%;margin-left:20px;"><div></li>
+		<li style="margin-top:5px;line-height: 30px;font-size: 14px;"><span class="labeltitle">销售单号：</span><span>{{order_id}}</span></li>
+		<li style="line-height: 30px;font-size: 14px;"><span class="labeltitle">销售时间：</span><span>{{order_date_label}}</span></li>
+		<li style="line-height: 30px;font-size: 14px;"><span class="labeltitle">数量合计：</span><span>{{qty_ord_total}}</span></li>
+		<li style="line-height: 30px;font-size: 14px;"><span class="labeltitle">会员卡号：</span><span>{{card_id}}</span></li>
+		{{/order}}
+		<li style="text-align:center;"><span id="printing">正在打印小票...</span></li>
+	</ul>
+</div>
+</script>
+
+<script type="text/mustache" id="view_spxs_select_item_dialog">
+<div>
+<table style="width: 100%;" class="table_view clickable">
+	<thead>
+		<tr>
+			<th style="width: 20%;">商品条码</th>
+			<th style="width: 20%;">商品名称</th>
+			<th style="width: 10%;">单位</th>
+			<!--th style="width: 15%;">单价</th>
+			<th style="width: 10%;">数量</th>
+			<th style="width: 10%;">折扣</th-->
+			<th style="width: 15%;">金额</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#list}}
+		<tr data-id="{{seq_id}}">
+			<td>{{big_bar}}</td>
+			<td>{{item_name}}</td>
+			<td>{{big_unit_name}}</td>
+			
+			<!--td id="pri">{{pri}}</td>
+			<td id="qtyord">{{qty_ord}}</td>
+			
+			<td id="discount">{{discount}}</td-->
+			<td id="amtord">{{big_pri4}}</td>
+		</tr>
+		{{/list}}
+	</tbody>
+</table>
+</div>
+</script>
+
+<script type="text/mustache" id="view_spxs_lottery">
+<div style="text-align: center; padding: 16px 10px;">
+	<p style="margin-top: 20px;"><input id="lottery_url" type="text" style="width: 260px;" maxlength="300"></p>
+	<p style="margin-top: 20px;"><input id="lottery_submit" type="button" class="primary_button" value="开始抽奖" /></p>
+</div>
+</script>

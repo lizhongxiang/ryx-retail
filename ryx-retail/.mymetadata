@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="tobacco"
+  id="myeclipse.1393040291410"
+  context-root="/tobacco"
+  j2ee-spec="1.4"
+  archive="tobacco.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebContent" />
+  </attributes>
+</project-module>
+

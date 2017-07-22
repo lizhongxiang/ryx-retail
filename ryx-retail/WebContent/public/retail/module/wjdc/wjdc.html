@@ -1,0 +1,60 @@
+<script type="text/mustache" id="view_yxhd_wjdc">
+<div>
+	<div>
+		<table style="width: 100%;" class="table_view clickable">
+			<thead>
+				<tr>
+					<th style="width: 10%;">序号</th>
+					<th style="width: 70%;">调查标题</th>
+					<th style="width: 20%;">起止日期</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#list}}
+				<tr data-id="{{act_id}}">
+					<td>{{index}}</td>
+					<td>{{act_title}}</td>
+					<td>{{start_time}} - {{end_time}}</td>			
+				</tr>
+				{{/list}}
+			</tbody>
+		</table>
+	</div>
+</div>
+</script>
+
+
+<script type="text/mustache" id="view_yxhd_wjdc_detail">
+<div>
+	<div style="text-align: center;">
+		<h3 style="font-size: 16px; margin: 10px auto; font-weight: bold;">{{act.act_title}}</h3>
+	</div>
+	<p style="text-align:left; line-height: 30px;">起止日期：{{act.start_time}} - {{act.end_time}}<p>
+	<div style="text-align:left; line-height: 24px; text-indent: 2em;">{{{act.act_desc}}}</div>
+	<div style="margin-left: 20px;">
+	{{#list}}
+	<p style="margin-top: 10px; line-height: 30px;">{{index}}、{{subject_title}}
+	{{#is_multi}}[多选]{{/is_multi}}
+	{{#is_must}}<span style="color: red;">*</span>{{/is_must}}
+	<input type="hidden" name="SUBJECT_ID" value="{{subject_id}}"></input>
+	</p>
+	<p style="margin-left: 20px; line-height: 30px;">
+	{{#options}}
+		{{#is_single}}
+			<input name="{{subject_id}}" id="sub_{{subject_id}}_{{option_id}}" type="radio" value="{{option_id}}" /> <label for="sub_{{subject_id}}_{{option_id}}" style="margin-right: 20px;">{{option_title}}</label>
+		{{/is_single}}
+		{{#is_multi}}
+			<input name="{{subject_id}}" id="sub_{{subject_id}}_{{option_id}}" type="checkbox" value="{{option_id}}" /> <label for="sub_{{subject_id}}_{{option_id}}" style="margin-right: 20px;">{{option_title}}</label>
+		{{/is_multi}}
+	{{/options}}
+	{{#is_answer}}
+		<textarea rows="3" cols="50" id="{{subject_id}}" name="{{subject_id}}"></textarea>
+	{{/is_answer}}
+	</p>
+	{{/list}}
+	</div>
+	<div style="text-align: center; margin-top: 30px;">
+		<input type="button" class="primary_button" id="submit" value="提交" style="width: 100px;" />
+	</div>
+</div>
+</script>

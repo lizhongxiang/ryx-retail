@@ -1,0 +1,49 @@
+<script type="text/mustache" id="view_kcgl_hlkc">
+<div>
+	<div>
+		<table style="width: 100%;" class="table_view" data-onkey="true">
+			<thead>
+				<tr>
+					<th style="width: 5%;">序号</th>
+					<th style="width: 18%;">商品条码</th>
+					<th style="width: 15%;">商品名称</th>
+					<th style="width: 10%;">当前库存</th>
+					<th style="width: 10%;">单位</th>	
+					<th style="width: 10%;">合理库存</th>
+					<th style="width: 1%;"></th>
+					<th style="width: 10%;">建议合理库存</th>
+					<th style="width: 11%;">采购价</th>
+					<th style="width: 11%;">零售价</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#list}}
+				<tr>
+					<td>{{index}}</td>
+					<td>{{item_bar}}</td>
+					<td>{{item_name}}</td>
+					<td>{{qty_whse}}</td>				
+					<td>{{unit_name}}</td>
+					<td><lable style="display:none" >{{qty_whse_warn}}</lable>
+						<input class="qtyord" data-verify="number" style="width: 60px; text-align:center" type="text"
+						value="{{qty_whse_warn}}" data-id="{{item_id}}" data-ratio="{{unit_ratio}}"/>
+					</td>
+					<td>
+						<span name="whse_remind_icon" class="pageIcon pageIcon_info" alt='jifen' style='{{^whse_remind}}display:none;{{/whse_remind}} vertical-align:middle;cursor:pointer' title="{{whse_remind}}" />
+					</td>
+					<td>{{adv_whse}}</td>
+					<td>{{pri1}}</td>
+					<td>{{pri4}}</td>
+				</tr>
+				{{/list}}
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer">
+			 <input type="button" class="striking_button right" id="submit" value="提 交" />
+			
+			<input type="text" id="tiaoma" name="tiaoma" class="striking_input" data-enter="selewares" placeholder="请输入条码/品名/拼音" value="{{static_item_bar}}"/>
+		     <input type="button" class="primary_button" id="selewares" name="selewares" style="margin-left:10px;" value="查 询" />
+	</div>
+</div>
+</script>

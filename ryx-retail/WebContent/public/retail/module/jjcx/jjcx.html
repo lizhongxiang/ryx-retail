@@ -1,0 +1,45 @@
+<script type="text/mustache" id="view_jjcx">
+<div>
+	<div>
+		<!--data-onkey="true" -->
+		<table style="width: 100%; table-layout:fixed;" class="table_view">
+			<thead>
+				<tr>
+					<th style="width: 6%;">序号</th>
+					<th style="width: 6%;">操作人</th>
+					<th style="width: 10%;">刷卡销售</th>
+					<th style="width: 10%;">现金销售</th>
+					<th style="width: 10%;">退货金额</th>
+					<th style="width: 10%;">开始时间</th>
+					<th style="width: 10%;">交班时间</th>
+					<!--<th style="width: 10%;">交班</th>-->
+				</tr>
+			</thead>
+			<tbody>
+				{{#list}}
+				<tr data-id="{{user_code}}">
+					<td>{{index}}</td>
+					<td>{{user_code}}</td>
+					<td>{{amt_sale_card}}</td>
+					<td>{{amt_sale_cash}}</td>
+					<td>{{amt_return}}</td>
+					<td>{{last_shift_date}}</td>
+					<td>{{shift_date}}</td>
+					<!--<td>{{shift_time}}</td>-->
+				</tr>
+				{{/list}}
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer">
+		<!---->	
+		起止日期：
+		<input type="text" id="beginTime" name="beginTime" class="striking_input" style="width:100px;" data-verify="date" data-empty="false" verify-message="开始时间格式错误"/>
+		 - 
+		<input type="text" id="endTime"   name="endTime"   class="striking_input" style="width:100px;" data-verify="date" data-empty="false" verify-message="结束时间格式错误"/>
+			
+&nbsp;&nbsp;<input type="button" class="primary_button" id="selewares" name="selewares" value="查 询" />
+
+	</div>
+</div>
+</script>

@@ -1,0 +1,108 @@
+<script type="text/mustache" id="view_wgdd">
+<div>
+		<div>
+		<table style="width:100%;" data-onkey="true" class="table_view clickable">
+			<thead>
+				<tr>
+					<th style="width: 5%;">序号 </th>					
+					<th style="width: 14%;">销售单号 </th>
+					<th style="width: 14%;">销售日期 </th>
+					<th style="width: 7%;">商品数量 </th>
+					<th style="width: 7%;">应收金额 </th>
+					<th style="width: 7%;">销售状态 </th>
+					<th style="width: 7%;">支付状态 </th>
+					<th style="width: 7%;">销售单类型</th>
+					<th style="width: 10%;">顾客手机号</th>
+					<th style="width: 8%;">操作 </th>
+					
+				</tr>
+			</thead>
+
+			<tbody>
+				{{#list}}
+					<tr class="xiangxi" data-id="{{order_id}}" title="{{note}}">
+						<td><label data-id="{{order_id}}">{{index}}</label></td>
+						<td><label data-id="{{order_id}}">{{order_id}}</label></td>
+						<td><label data-id="{{order_id}}">{{order_date}}</label></td>
+						<td><label data-id="{{order_id}}">{{qty_ord_total}}</label></td>
+						<td><label data-id="{{order_id}}">{{amtys_ord_total}}</label></td>
+						<td><label data-id="{{order_id}}">{{salesStatus}}</label></td>
+						<td><label data-id="{{order_id}}">{{paymentStatus}}</label></td>
+						<td><label data-id="{{order_id}}">{{salesType}}</label></td>
+						<td><label data-id="{{order_id}}">{{telephone}}</label></td>
+						<td>
+                            <a class="pageIcon pageIcon_fahuo" title="发货" data-name="03" data-id="{{order_id}}" style="display:inline-block;background-position:-105px -70px;padding:5px 8px 5px 10px;{{display}}">
+                            </a>
+							<a class="pageIcon pageIcon_del" title="删除订单" data-name="04" data-id="{{order_id}}" style="display:inline-block;background-position:5px -23px;padding:5px 10px 5px 8px;{{display}}">
+                            </a>
+						</td>
+					</tr>
+				{{/list}}
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer" style="text-align:left;"> 
+<!--	
+		<input type="text" id="beginTime" name="beginTime" class="striking_input" style="width:90px;" data-empty="false" />
+		 - 
+		<input type="text" id="endTime"   name="endTime"   class="striking_input" style="width:90px;" data-empty="false" />
+		<input type="button" class="primary_button" id="query" name="query" value="查 询" />
+-->	
+	</div> 
+</div>
+</script>
+
+<script type="text/mustache" id="view_wgdd_detail">
+<div>
+	<div style="overflow-y: auto; position: absolute; top: 0px; left: 0px; bottom: 60px;width: 100%">
+		<table style="width:100%;"  class="table_view">
+			<thead>
+				<tr>
+					<th style="width: 10%">序号</th>
+					<th style="width: 15%">商品条码</th>
+					<th style="width: 15%">商品名称</th>
+					<th style="width: 10%">商品单位</th>
+					<th style="width: 10%">售价 </th>
+					<th style="width: 10%">销售数量 </th>
+					<th style="width: 10%">销售金额 </th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#wgddDetail.list}}
+					<tr>
+						<td>{{line_num}}</td>
+						<td>{{item_bar}}</td>
+						<td>{{item_name}}</td>
+						<td>{{big_unit_name}}</td>
+						<td>{{big_pri3}}</td>
+						<td>{{qty_ord}}</td>
+						<td>{{amt_ord}}</td>
+					</tr>
+				{{/wgddDetail.list}}
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer" style="height: 60px; line-height: 50px;margin-left: 0px;font-weight:bold;text-align:left;" class="view_footer">
+		销售单号：
+		<label  class="primary_label" style="font-size: 13px;">{{wgddDetail.order_id}} </label>
+		&nbsp; &nbsp;&nbsp;
+		应收金额：
+		<label  class="striking_label" style="font-size: 13px;"> {{wgddDetail.amtys_ord_total}} </label>
+		&nbsp;&nbsp;&nbsp;
+<!--
+		实收金额：
+		<label  class="striking_label" style="font-size: 13px;"> {{wgddDetail.amt_ord_total}} </label>
+		&nbsp;&nbsp;&nbsp;
+-->
+		总数量：
+		<label  class="striking_label" style="font-size: 13px;"> {{wgddDetail.qty_ord_total}} </label>
+		
+	
+	</div>
+</div>
+</script>
+<script type="text/mustache" id="view_wgdd_confirm_dialog">
+	<div>
+		<div style="margin: 20px 20px 0px 20px;">{{context}}</div>
+	</div>
+</script>

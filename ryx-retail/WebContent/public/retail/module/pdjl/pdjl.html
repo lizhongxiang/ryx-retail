@@ -1,0 +1,86 @@
+<script type="text/mustache" id="view_kcgl_pdjl">
+<input type="text" style="position:absolute;top:-1000px;left:-1000px"/>
+<div>
+	<div>
+		<table style="width:100%; " class="table_view clickable" data-onkey="true">
+			<thead>
+				<tr>
+					<th style="width: 5%;">序号</th>
+					<th style="width: 15%;">盘点单号</th>
+					<!--<th style="width: 10%;">状态</th>-->
+					<th style="width: 10%;">盘点增量</th>
+					<th style="width: 10%;">盘点损量</th>
+					<th style="width: 10%;">盘点增额</th>
+					<th style="width: 10%;">盘点损额</th>
+					<th style="width:15%">盘点时间</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				{{#list}}
+					<tr class="xiangxi" data-id="{{turn_id}}" title="{{note}}">
+						<td>{{index}}</td>
+						<td>{{turn_id}}</td>
+						<!--<td>{{status}}</td>-->
+						<td>{{qty_profit}}</td>
+						<td>{{qty_loss}}</td>
+						<td>{{amt_profit}}</td>
+						<td>{{amt_loss}}</td>
+						<td>{{crt_date}}</td>
+					</tr>
+				{{/list}}
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer">
+		起止日期：<input type="text" id="beginTime" name="beginTime" style="width:100px;"  class="striking_input" />
+		 - <input type="text" id="endTime" data-enter="selewares" name="endTime" value="" style="width:100px;"  class="striking_input" />
+		<input type="button" class="primary_button" id="selewares" style="margin-left:10px;" name="selewares" value="查 询" />
+	</div>
+</div>
+</script>
+<script type="text/mustache" id="view_kcgl_pdjl_right">
+<div>
+	<div style="overflow-y: auto; position: absolute; top: 0px; left: 0px; bottom: 60px;width: 100%">
+		<table style="width: 100%;" class="table_view" data-onkey="true">
+			<thead>
+				<tr>
+					<th width="5%">序号</th>
+					<th width="15%">商品条码</th>
+					<th width="15%">商品名称</th>
+					<th width="10%">原库存量</th>
+					<th width="10%">现库存量</th>
+					<th width="10%">损益量</th>
+					<th width="10%">损益额</th>
+					<th width="20%">损益原因</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#result}}
+					<tr>
+						<td>{{index}}</td>
+						<td>{{item_bar}}</td>
+						<td>{{item_name}}</td>
+						<td>{{qty_whse}}</td>
+						<td>{{qty_turn}}</td>
+						<td>{{qty_pl}}</td>
+						<td>{{amt_pl}}</td>
+						<td>{{pl_reason}}</td>
+					</tr>
+				{{/result}}
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer" style="height: 60px; line-height: 50px;margin-left: 0px;font-weight:bold;text-align:left;" class="view_footer" >
+		盘点单号：
+		<label  class="primary_label" style="font-size: 16px;">{{result.turn_id}} </label>
+		&nbsp; &nbsp;&nbsp;
+		总损益量：
+		<label  class="striking_label" style="font-size: 16px;"> {{result.qty_pl}} </label>
+		&nbsp;&nbsp;&nbsp;
+		总损益额：
+		<label  class="striking_label" style="font-size: 16px;"> {{result.amt_profit}} </label>
+		
+	</div>
+</div>
+</script>

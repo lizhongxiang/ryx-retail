@@ -1,0 +1,16 @@
+@charset "utf-8";
+
+.dialog_layer .ui-dialog-content {
+	padding: 0;
+	border-top-right-radius: 0px;
+	border-top-left-radius: 0px;
+}
+
+.ui-dialog-buttonpane {
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+.window .window_close, .single.window .window_close {
+	display: none;
+}

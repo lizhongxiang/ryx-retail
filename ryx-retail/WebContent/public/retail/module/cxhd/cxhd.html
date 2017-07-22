@@ -1,0 +1,585 @@
+<script type="text/mustache" id="view_cxhd">
+<div>
+	<div>
+<!--data-onkey="true" clickable-->
+		<table style="width: 100%; table-layout:fixed;" data-onkey="true"  class="table_view clickable">
+			<thead>
+				<tr>
+					<th style="width: 4%;">序号</th>
+					<th style="width: 10%;">促销标题</th>
+					<th style="width: 22%;">促销内容</th>
+					<th style="width: 13%;">开始时间</th>
+					<th style="width: 13%;">结束时间</th>
+					<th style="width: 8%;">活动类型</th>
+					<th style="width: 8%;">针对群体</th>
+					<th style="width: 7%;">是否共存</th>
+					<!--冲突策略-->
+					<th style="width: 9%;">取消冲突活动</th>
+					<th style="width: 6%;">是否有效</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#list}}
+				<tr data-id="{{promotion_id}}">
+					<td>{{index}}</td>
+					<td style="word-wrap: break-word;word-break:break-all;" title="{{promotion_desc_all}}">{{promotion_desc}}</td>
+					<td style="word-wrap: break-word;word-break:break-all;" title="{{promotion_content_all}}">{{promotion_content}}</td>
+					<td style="white-space: nowrap;">{{start_date_text}}&nbsp;{{start_time_text}}</td>
+					<td style="white-space: nowrap;">{{end_date_text}}&nbsp;{{end_time_text}}</td>
+					<td>{{promotion_type_text}}</td>
+					<td>{{promotion_must_text}}</td>
+					<td>{{is_coexistent_text}}</td>
+					<td>{{is_insistent_text}}</td>	
+					<td>{{status_text}}</td>		
+				</tr>
+				{{/list}}
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer">
+		<input type="button" class="striking_button right" data-doubleclick="false" id="add" value=" 新增促销活动 " />
+
+	  	起止日期：
+		<input type="text" id="beginTime" name="beginTime" data-enter="selewares" style="width:90px;"  class="striking_input" />
+		- 
+        <input type="text" id="endTime" name="endTime" data-enter="selewares" value="" style="width:90px;"  class="striking_input" />
+		<input type="button" class="primary_button" id="query" name="query" style="margin-left:5px;" value="查 询" />
+		
+	</div>
+</div>
+</script>
+
+<script type="text/mustache" id="view_cxhd_add">
+<div>
+<style>
+  .table_hyeditor tr{
+     height:40px;
+     text-align:center;
+}
+.input_width{
+	width:96px;
+}
+.input_time_width{
+	width:40px;
+}
+.td_right{
+	border:0px;
+	text-align: right;
+	width:250px;
+}
+</style>
+	<div>
+        <div style="text-align:center;margin-top:13px;">
+           <img alt="" src="../public/retail/img/cxhd_step1.png">
+        </div>
+		<table style="width: 100%;border:0px;margin-top:8px;" class="table_hyeditor">
+			<tr>
+				<td class="td_right">促销开始时间&nbsp;：&nbsp;</td>
+				<td colspan="2" style="border:0px;text-align: left;">
+					<input type="text" class="input_width" tabindex='108' value="{{result.start_date_text}}" id="startdate" maxlength="10" data-verify="date" data-empty="false" verify-message="促销开始日期格式错误！"/>
+					<input type="text" class="input_time_width" tabindex='109' id="starttime" value="{{result.start_time_text}}" placeholder="" data-verify="time" data-empty="false" verify-message="促销开始时间错误！"/>
+					<label style="color: red;">&nbsp;*</lable>
+					<label  style="color: #9C9C9C; ">&nbsp;&nbsp;时间格式&nbsp;&nbsp;08:00</label>
+				</td>
+			</tr>
+
+			<tr>
+				<td class="td_right">促销结束时间&nbsp;：&nbsp;</td>
+				<td colspan="2" style="border:0px;text-align: left;">
+					<input type="text" class="input_width" tabindex='110' value="{{result.end_date_text}}" id="enddate" maxlength="10" data-verify="date" data-empty="false" verify-message="促销结束日期格式错误！"/>
+					<input type="text" class="input_time_width" tabindex='111' id="endtime" value="{{result.end_time_text}}" placeholder="" data-verify="time" data-empty="false" verify-message="促销结束时间错误！"/>
+					<label style="color: red;">&nbsp;*</lable>
+                    <label  style="color: #9C9C9C; ">&nbsp;&nbsp;时间格式&nbsp;&nbsp;17:30</label>
+				</td>
+			</tr>
+			<tr>
+				<td class="td_right">促销活动类型&nbsp;：&nbsp;</td>
+				<td colspan="2" style="border:0px;text-align: left;">
+					<select id="promotion_type" tabindex='112' class="degree" style="width:157px;cursor:pointer;" data-empty="false" verify-message="活动类型不能为空！">
+						<option value="0" checked="checked">请选择活动类型</option>
+						<option value="10">商品折扣</option>
+<!--					<option value="13">会员折扣</option>           -->
+<!--						<option value="30">商品积分</option>        -->
+<!--						<option value="33">销售单积分</option>        -->
+						<option value="40">满减促销</option>
+					</select>
+					<label style="color: red;">*</lable>
+				</td>
+			</tr>
+			<tr>
+				<td class="td_right">活动针对群体&nbsp;：&nbsp;</td>
+				<td colspan="2" style="border:0px;text-align: left;">
+					<select id="consumer_type" tabindex='113' class="degree" style="width:157px;cursor:pointer;">
+						<option value="" id="null_promotion_checked">请选择针对群体</option>
+						<option value="all" id="promotion_checked">所有顾客</option>
+<!--						<option value="consumer" id="vip_promotion_checked">会员</option>           -->
+					</select>
+					<label style="color: red;">*</lable>
+				</td>
+			</tr>
+			<tr id="vipcheckboxtr" style="display:none;">
+				<td id="vipcheckboxid" colspan="2" style="border:0px; border-image: none; text-align: left; padding-left: 140px;">
+					
+				</td>
+			</tr>
+			<tr>
+				<td class="td_right">促销活动标题&nbsp;：&nbsp;</td>
+				<td colspan="2" style="border:0px;text-align: left;">
+                    <input type="text" style="width:368px;" maxlength="100" tabindex='114' value="{{result.promotion_desc}}" id="promotion_desc" maxlength="100" data-empty="false" verify-message="促销活动标题不能为空！"/>
+                    <label style="color: red;">&nbsp;*</lable></td>
+			</tr>
+			<tr>
+				<td class="td_right">促销活动内容&nbsp;：&nbsp;</td>
+				<td style="border:0px;text-align: left;width:300px;">
+					<textarea id="promotion_content" tabindex='115' rows="6" style="width:370px;border:1px solid #ddd;" data-empty="false" verify-message="促销活动内容不能为空！">{{result.promotion_content}}</textarea>
+				</td>
+				<td style="width:140px;text-align: left;"><label style="color: red;text-align: right;width:40px;">*</lable></td>
+			</tr>
+			<tr>
+				<td class="td_right">活动是否有效&nbsp;：&nbsp;</td>
+				<td colspan="2" style="border:0px;text-align: left;">
+					<input type="radio" name="status" id="status1" checked="checked" value="1"/>有效&nbsp;
+					<input type="radio" name="status" id="status0" value="0"/>无效
+				</td>
+			</tr>
+		</table>
+	</div>
+<!--data-doubleclick="false"-->
+	<div class="view_footer" style="text-align:right;"> 
+		<input type="button" class="primary_button" id="nextDialog" tabindex='116'  value="下一步" />
+		<!--<input type="button" style="margin-left:15px;" class="closebtn_button" id="quxiao" value="取 消" />-->
+	</div>
+</div>
+</script>
+
+<script type="text/mustache" id="view_cxhd_add_zkcx">
+<div>
+<style>
+   .deleteItem_img{
+     padding:5px 10px;
+	 display:inline-block;
+	 margin-left:10px;
+	 background-position:5px -23px;
+    }
+	.itemblockselect {
+		display:inline-block;
+		position:absolute;
+		width:30px;
+		height:28px;
+		top: 17px;
+		left: 178px;
+		cursor: pointer;
+	}
+</style>
+<div style="text-align:center;margin-top:13px;">
+           <img alt="" src="../public/retail/img/cxhd_step2.png">
+        </div>
+	<div style="overflow-y: auto; position: absolute; top: 62px; left: 0px; bottom: 60px;width: 100%;border-top:1px solid #ebebeb;">
+		<table style="width: 100%;border-top:none;" class="table_view">
+			<thead>
+				<tr>
+					<th style="width: 12%;">商品条码</th>
+					<th style="width: 18%;">商品名称</th>
+					<th style="width: 10%;">计量单位</th>
+					<th style="width: 10%;">成本价</th>
+					<th style="width: 10%;">零售价</th>
+					<th style="width: 10%;">折扣比例</th>
+					<th style="width: 10%;">折后价</th>
+					<th style="width: 6%;">操作</th>
+				</tr>
+			</thead>
+		<tbody id="adding" style="width: 100%;">
+			
+		</tbody>
+		</table>
+	</div>
+	<div class="view_footer">
+		<a class="itemblockselect pageIcon pageIcon_more" id="order_type" title="按类型选择商品"></a>
+		<input type="text" tabindex="1" class="striking_input" id="repeat_item_bar" name="repeat_item_bar" placeholder="请输入条码"/>
+		<input type="button" class="primary_button" tabindex="2" id="repeat_query" value="查 询" style="margin-left:10px;"/>
+		&nbsp;&nbsp;<input type="checkbox" id="zkcxcheckbox"/>&nbsp;&nbsp;默认折扣比例
+		&nbsp;&nbsp;<input type="text" disabled="disabled" id="zkcxmrzkbl" style="width:50px"/>%
+		<input type="button" class="primary_button right" id="zkcxsubmit" value="下一步" /> 
+        <input type="button" class="closebtn_button right" style="position:relative;left:10px; margin-right:30px;" id="back" value="上一步" />
+	</div>
+</div>
+</script>
+
+<script type="text/mustache" id="view_cxhd_add_mjcx">
+<div>
+<!--满减促销-->
+<style>
+   .deleteItem_img{
+     padding:5px 10px;
+	 display:inline-block;
+	 margin-left:10px;
+	 background-position:5px -23px;
+    }
+</style>
+	<div>
+        <div style="text-align:center;margin-top:13px;">
+           <img alt="" src="../public/retail/img/cxhd_step2.png">
+        </div>
+		<table style="width: 100%;border:0px;margin-top:50px;" class="table_view">
+			<thead>
+				<tr>
+					<td style="border:0px;text-align: right;width:54%;">
+						销售单满：&nbsp;&nbsp;
+						<input type="text" id="xsdm" value="{{crResult.ceiling}}" style="width:90px;" tabindex='108' maxlength="10" data-verify="number" data-empty="false" verify-message="销售单满额不能为空且必须为数字"/>
+						&nbsp;元&nbsp;&nbsp;&nbsp;
+					</td>
+					<td style="border:0px;text-align: left;">
+						减：&nbsp;&nbsp;
+						<input type="text" id="xsdj" style="width:90px;" tabindex='108' value="{{crResult.reduction}}" maxlength="10" data-verify="number" data-empty="false" verify-message="促减不能为空且必须为数字"/>
+						&nbsp;元
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2"><div class="redstar" style="align:left;">注：每个销售单的满减促销只会生效一次</div></td>
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<div class="view_footer" style="text-align;">
+		<input type="button" class="primary_button right" id="fullreductionsubmit" value="下一步" /> 
+        <input type="button" class="closebtn_button right" style="position:relative;left:10px; margin-right:30px;" id="back" value="上一步" />
+	</div>
+<div>
+</script>
+
+<script type="text/mustache" id="view_cxhd_makeSureSubmit">
+<div>
+	<style>
+		.itemblock {
+			/*border-top:1px solid #eee;*/
+			margin: 18px 0px;
+			padding: 16px 0px;
+			position: relative;
+		}
+		.itemblocklabel {
+			position: absolute;
+			top: -13px;
+			left: 0px;
+			padding: 0px 10px;
+			color: #888;
+			font-size: 14px;
+			font-weight: bold;
+		}
+        .helpContent{
+            position:absolute;
+            top:-26px;
+            left:294px;
+            display:none;
+            padding:10px;
+            width:350px;
+            min-height:50px;
+            font-size:13px;
+            line-height:1.8;
+            background-color:#fff;
+            border:1px solid #ddd;
+            box-shadow:0px 0px 3px #ddd;
+            border-radius:3px;
+        }
+	</style>
+
+        <div style="text-align:center;margin-top:13px;">
+           <img alt="" src="../public/retail/img/cxhd_step3.png">
+        </div>
+    <div style="overflow-y: auto; position: absolute; top: 45px; left: 0px; bottom: 60px;width: 100%">
+        <div class="itemblock">
+    <!--2014-02-02 12:22:11 至 2014-12-30 12:33:12-->
+            <div class="itemblocklabel" style="margin-top:10px;">
+                &nbsp;{{my_promotion.start_date_text}} {{my_promotion.start_time_text}} 至  {{my_promotion.end_date_text}} {{my_promotion.end_time_text}} 
+                &nbsp;生效的促销信息
+            </div>
+            <div id="consumer_container1" style="position:relative;margin:2px auto;width:100%;height:162px;overflow:auto;border-bottom:1px solid #ebebeb;">
+                <table class="table_view" style="border-bottom:none;">
+                    <thead>
+                        <tr>
+                            <th style="width: 10%;">标题</th>
+                            <!--<th style="width: 10%;">内容</th>-->
+                            <th style="width: 12%;">开始时间</th>
+                            <th style="width: 12%;">结束时间</th>
+                            <th style="width: 8%;">活动类型</th>
+                            <th style="width: 8%;">针对群体</th>
+                            <th style="width: 6%;">是否共存</th>
+                            <th style="width: 10%;">取消冲突活动</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#clash_promotion}}
+                        <tr >
+                            <td style="word-wrap: break-word;word-break:break-all;">{{promotion_desc_text}}</td>
+                            <!--<td style="word-wrap: break-word;word-break:break-all;">{{promotion_content}}</td>-->
+                            <td>{{start_date_text}} {{start_time_text}}</td>
+                            <td>{{end_date_text}} {{end_time_text}}</td>
+                            <td>{{promotion_type_text}}</td>
+                            <td>{{promotion_must_text}}</td>
+                            <td>{{is_coexistent_text}}</td>
+                            <td>{{is_insistent_text}}</td>	
+                        </tr>
+                        {{/clash_promotion}}
+                        {{^clash_promotion}}<tr><td colspan="8"><label>没有与之冲突的促销活动！</label></td></tr>{{/clash_promotion}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="itemblock">
+            <div class="itemblocklabel">&nbsp;当前促销信息</div>
+            <div id="consumer_container2" style="margin:-5px auto;width:100%;overflow:auto;">
+                <table class="table_view">
+                    <thead>
+                        <tr>
+                            <th style="width: 14%;">标题</th>
+                            <!--<th style="width: 10%;">内容</th>-->
+                            <th style="width: 10%;">开始时间</th>
+                            <th style="width: 10%;">结束时间</th>
+                            <th style="width: 8%;">活动类型</th>
+                            <th style="width: 8%;">针对群体</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--promotion_desc-->
+                        {{#my_promotion}}
+                        <tr >
+                            <td>{{promotion_desc_text}}</td>
+                            <!--<td>{{promotion_content}}</td>-->
+                            <td>{{start_date_text}} {{start_time_text}}</td>
+                            <td>{{end_date_text}} {{end_time_text}}</td>
+                            <td>{{promotion_type_text}}</td>
+                            <td>{{promotion_must_text}}</td>
+                        </tr>
+                        {{/my_promotion}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    
+        <div class="itemblock" style="padding:0px;">
+            <div class="helpContent">
+               <p><b>与其他促销共存：</b>与生效可用的促销活动一起存在使用。</p>
+               <p><b>取消冲突活动：</b>遇到冲突促销活动时，使用当前促销。</p>
+            </div>
+            <input type="checkbox" id="is_coexistent" style="margin-left:20px;vertical-align:middle;" />
+            <lable> 与其他促销共存</lable>
+            &nbsp;&nbsp;<!--是否取消冲突活动-->
+            <input type="checkbox" id="is_insistent" style="margin-left:20px;vertical-align:middle;" checked="checked" />
+            <lable>取消冲突活动</lable>
+			<span class="helpImg pageIcon pageIcon_tips" style="display:inline-block;vertical-align:middle;cursor:pointer;"></span>
+        </div>
+    </div>
+	<div class="view_footer"> 
+		<input type="button" class="primary_button right" data-doubleclick="false" id="lastsubmit" value="新 增" /> 
+        <input type="button" class="closebtn_button right" style="position:relative;left:10px; margin-right:30px;" id="lastback" value="上一步" />
+	</div>
+<div>
+</script>
+
+<script type="text/mustache" id="view_cxhd_vippromotion">
+<div>
+        <div style="text-align:center;margin-top:13px;">
+           <img alt="" src="../public/retail/img/cxhd_step2.png">
+        </div>
+	<div style="overflow-y: auto; position: absolute; top: 62px; left: 0px; bottom: 60px;width: 100%;">
+		<table style="width: 100%; table-layout:fixed;" data-onkey="true" class="table_view">
+			<thead>
+				<tr>
+					
+					<th style="width: 10%;height:32px;">会员级别</th>
+					<th style="width: 10%;height:32px;">会员名称</th>
+					<th style="width: 10%;height:32px;">折扣</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#list}}
+				<tr>
+					<td style="height:33px;">{{grade}}</td>
+					<td style="height:33px;">{{grade_name}}</td>
+					<td style="height:33px;">
+						<input type="text" data-id="{{grade}}" name="hyzkvalue" value="{{discount}}" style="width:50px;" data-verify="number" data-empty="false" verify-message="会员折扣不能为空且必须为数字" />%
+					</td>				
+				</tr>
+				{{/list}}
+			</tbody>
+		</table>
+	</div>
+
+	<div class="view_footer">
+		&nbsp;&nbsp;<input type="checkbox" id="consumerDefSwitch"/>&nbsp;&nbsp;默认折扣比例
+		&nbsp;&nbsp;<input type="text" id="consumerDefPromotion" disabled="disabled" style="width:50px" data-verify="number" />%
+		<!--data-doubleclick="false"-->
+		<input type="button" class="primary_button right" id="hyzksubmit" value="下一步" /> 
+        <input type="button" class="closebtn_button right" style="position:relative;left:10px; margin-right:30px;" id="lastback" value="上一步" />
+	</div>
+<div>
+</script>
+
+<!-- 销售单积分 -->
+<script type="text/mustache" id="view_cxhd_order_integral">
+<div>
+        <div style="text-align:center;margin-top:13px;">
+           <img alt="" src="../public/retail/img/cxhd_step2.png">
+        </div>
+	<div style="overflow-y: auto; position: absolute; top: 62px; left: 0px; bottom: 60px;width: 100%;">
+		<table style="width: 100%; table-layout:fixed;" data-onkey="true" class="table_view">
+			<thead>
+				<tr>
+					
+					<th style="width: 10%;height:32px;">会员级别</th>
+					<th style="width: 10%;height:32px;">会员名称</th>
+					<th style="width: 10%;height:32px;">元/积分</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#list}}
+				<tr>
+					<td style="height:33px;">{{grade}}</td>
+					<td style="height:33px;">{{grade_name}}</td>
+					<td style="height:33px;">
+						每 <input type="text" data-id="{{grade}}" name="order_integral" value="{{discount}}" style="width:50px;" data-verify="number" data-empty="false" verify-message="积分不能为空且必须为数字" /> 元 1 积分
+					</td>				
+				</tr>
+				{{/list}}
+			</tbody>
+		</table>
+	</div>
+
+	<div class="view_footer">
+		&nbsp;&nbsp;<input type="checkbox" id="orderIntegralDefSwitch"/>&nbsp;&nbsp;默认 
+		&nbsp;&nbsp;每 <input type="text" id="orderIntegralDefTest" disabled="disabled" style="width:50px" data-verify="number" /> 元 1  积分
+		<!--data-doubleclick="false"-->
+		<input type="button" id="orderIntegralNext" value="下一步" class="primary_button right"  /> 
+        <input type="button" id="orderIntegralBack" value="上一步" class="closebtn_button right" style="position:relative;left:10px; margin-right:20px;"  />
+	</div>
+<div>
+</script>
+
+<script type="text/mustache" id="view_cxhd_integral">
+<div>
+<!-- 积分 -->
+<style>
+   .deleteItem_img{
+     padding:5px 10px;
+	 display:inline-block;
+	 margin-left:10px;
+	 background-position:5px -23px;
+    }
+	.itemblockselect {
+		display:inline-block;
+		position:absolute;
+		width:30px;
+		height:28px;
+		top: 17px;
+		left: 178px;
+		cursor: pointer;
+	}
+</style>
+        <div style="text-align:center;margin-top:13px;">
+           <img alt="" src="../public/retail/img/cxhd_step2.png">
+        </div>
+	<div style="overflow-y: auto; position: absolute; top: 63px; left: 0px; bottom: 60px;width: 100%;border-top:1px solid #ebebeb;">
+		<table style="width: 100%;border-top:none;" class="table_view">
+			<thead>
+				<tr>
+					<th style="width: 12%;">商品条码</th>
+					<th style="width: 18%;">商品名称</th>
+					<th style="width: 10%;">计量单位</th>
+					<th style="width: 10%;">成本价</th>
+					<th style="width: 10%;">零售价</th>
+					<th style="width: 10%;">积分</th>
+					<th style="width: 10%;">操作</th>
+				</tr>
+			</thead>
+		<tbody id="adding" style="padding-right:10px;">
+			
+		</tbody>
+		</table>
+	</div>
+
+	<div class="view_footer">
+		<a class="itemblockselect pageIcon pageIcon_more" id="order_type" title="按类型选择商品"></a>
+		<input type="text" tabindex="1" class="striking_input" id="repeat_item_bar" name="repeat_item_bar" placeholder="请输入条码"/>
+		<input type="button" class="primary_button" tabindex="2" id="repeat_query" value="查 询" style="margin-left:10px;"/>
+<!--		&nbsp;&nbsp;<input type="checkbox" id="zkcxcheckbox"/>&nbsp;&nbsp;默认积分-->
+<!--		&nbsp;&nbsp;<input type="text" disabled="disabled" id="zkcxmrzkbl" style="width:50px"/>-->
+		&nbsp;&nbsp;<input type="checkbox" id="jfcxcheckbox"/>&nbsp;&nbsp;默认积分
+		&nbsp;&nbsp;<input type="text" id="jfcxmrzkbl" style="width:50px"  disabled="disabled"/>
+		<!--data-doubleclick="false"-->
+		<input type="button" class="primary_button right" id="integralsubmit" value="下一步" /> 
+        <input type="button" class="closebtn_button right" style="position:relative;left:10px; margin-right:30px;" id="back" value="上一步" />
+	</div>
+</div>
+</script>
+
+<script type="text/mustache" id="view_cxhd_select_item_dialog">
+<div>
+<table style="width: 100%;" class="table_view clickable">
+	<thead>
+		<tr>
+			<th style="width: 20%;">商品条码</th>
+			<th style="width: 20%;">商品名称</th>
+			<th style="width: 10%;">单位</th>
+			<!--th style="width: 15%;">单价</th>
+			<th style="width: 10%;">数量</th-->
+			<th style="width: 10%;">折扣</th>
+			<th style="width: 15%;">金额</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#list}}
+		<tr data-id="{{seq_id}}">
+			<td>{{big_bar}}</td>
+			<td>{{item_name}}</td>
+			<td>{{big_unit_name}}</td>
+			
+			<!--td id="pri">{{pri}}</td>
+			<td id="qtyord">{{qty_ord}}</td-->
+			
+			<td id="discount">{{discount}}</td>
+			<td id="amtord">{{big_pri4}}</td>
+		</tr>
+		{{/list}}
+	</tbody>
+</table>
+</div>
+</script>
+<script type="text/mustache" id="view_cxhd_item_row">
+	<tr name="repeat_item_tr" data-seq-id="{{seq_id}}" data-id="{{item_id}}" data-big-bar="{{big_bar}}" data-item-name="{{item_name}}" data-unit-name="{{big_unit_name}}" data-cost="{{cost}}" data-big-pri4="{{big_pri4}}" data-unit-ratio="{{unit_ratio}}">
+		<td style="padding-left:20px;"> {{big_bar}} </td>		
+		<td> {{item_name}} </td>
+		<td> {{big_unit_name}} </td>
+		<td> {{cost}} </td>
+		<td> {{big_pri4}} </td>
+		<td>
+			<input type="radio" checked="checked" name="radio{{seq_id}}" id="radio0{{seq_id}}"  value="0"/> 
+			<input type="text" name="promotionDesc" id="bl{{seq_id}}" data-seq-id="{{seq_id}}" style="width:40px;" value="{{discount}}" data-verify="number" data-empty="false" data-empty="false" verify-message="请完善商品折扣！" />%
+		</td>
+		<td>
+<!--item_id-->
+			<input type="radio" name="radio{{seq_id}}" id="radio1{{seq_id}}" value="1"/>
+			<input type="text" name="promotionPrice" id="jg{{seq_id}}" data-seq-id="{{seq_id}}" disabled="true" value="{{discount_price}}" style="width:40px;" data-verify="number" data-empty="true" verify-message="请完善商品折后价！" />元
+		</td>
+		<td>
+			{{#big_bar}}
+			<a title="取消" name="removeTr" value="{{seq_id}}" class="deleteItem_img pageIcon pageIcon_del" href="javascript:void(0);"></a>
+			{{/big_bar}}
+		</td>
+	</tr>
+</script>
+<script type="text/mustache" id="view_integral_item_row">
+<tr name="repeat_item_tr" data-seq-id="{{seq_id}}" data-id="{{item_id}}" data-big-bar="{{big_bar}}" data-item-name="{{item_name}}" data-unit-name="{{big_unit_name}}" data-cost="{{cost}}" data-big-pri4="{{big_pri4}}" data-unit-ratio="{{unit_ratio}}">
+	<td style="padding-left:20px;"> {{big_bar}} </td>		
+	<td> {{item_name}} </td>
+	<td> {{big_unit_name}} </td>
+	<td> {{cost}} </td>
+	<td> {{big_pri4}} </td>
+	<td>
+		<input type="text" name="promotionPoint" id="zkbl{{item_bar}}" data-seq-id="{{seq_id}}" style="width:60px;" value="{{point}}" data-verify="number" data-empty="false" verify-message="请完善商品积分！" />
+	</td>
+	<td>
+		{{#big_bar}}
+		<a title="取消" name="removeTr" value="{{seq_id}}" class="deleteItem_img pageIcon pageIcon_del" href="javascript:void(0);"></a>
+		{{/big_bar}}
+	</td>
+</tr>
+</script>

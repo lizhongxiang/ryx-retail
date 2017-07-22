@@ -1,0 +1,75 @@
+<script type="text/mustache" id="view_kcbb">
+	<style type="text/css">
+	.mytable
+	{
+		border:1px solid black;
+		text-align:center;
+		line-height:33px;
+	}
+	th{
+		text-align:center;
+		font-weight:bold;
+	}
+	td{
+		font-size:14px;
+	}
+	.tfootColor {
+		color: #FF9725;
+	}
+	</style>
+	<div>
+		<div>
+           
+			<table style="width:100%; float: left;" class="table_view">
+            	<thead>
+                  <tr>
+                    <th style="width: 10%;">商品名称</th>
+                    <th style="width: 10%;">商品条码</th>
+                    <th style="width: 8%;">商品单位</th>
+                    <th style="width: 10%;">成本价</th>
+                    <th style="width: 10%;">零售价</th>
+					<th style="width: 10%;">库存量</th>
+					<th style="width: 10%;">库存额</th>
+                  </tr>
+               </thead>
+               <tbody>
+				{{#result.list}}
+                  <tr>
+                    <td align="center">{{item_name}}</td>
+                    <td align="center">{{item_bar}}</td>
+                    <td align="center">{{unit_name}}</td>
+                    <td align="center">{{cost}}</td>
+					<td align="center">{{pri4}}</td>
+					<td align="center">{{qty_whse}}</td>
+					<td align="center">{{amt_whse}}</td>
+                  </tr>	
+				{{/result.list}}
+			</tbody> 
+
+			<tfoot class="tfoot">
+				<tr>
+				<td>合计/平均：</td>
+				<td></td>
+				<td></td>
+				<td><label class="tfootColor" style="font-size: 13px;">{{result.sum_cost}}</label></td>
+				<td><label class="tfootColor" style="font-size: 13px;">{{result.sum_pri4}}</label></td>
+				<td><label class="tfootColor" style="font-size: 13px;">{{result.sum_qty_whse}}</label></td>
+				<td><label class="tfootColor" style="font-size: 13px;">{{result.sum_amt_whse}}</label></td>
+				</tr>
+			</tfoot>
+		</table>
+		</div>
+		<div class="view_footer"  > 
+				<input  type="text" id="keyword" data-enter="selewares"  style="width:160px;"  class="striking_input" placeholder="请输入条码/品名"/>
+				&nbsp;
+				<select name="item_kind" id="item_kind" style="height:30px;">
+					<option value="00" >全部商品</option>
+					{{#item_kind_list}}
+					<option value="{{id}}">{{name}}</option>
+					{{/item_kind_list}}
+			    	</select>
+				<input type="button" class="primary_button" id="selewares" name="selewares" style="margin-left:5px;" value="查 询" />
+				
+		</div>
+</div>
+</script>

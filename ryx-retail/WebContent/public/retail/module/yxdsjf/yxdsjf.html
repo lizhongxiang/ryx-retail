@@ -1,0 +1,97 @@
+<script type="text/mustache" id="view_yxdsjf">
+<div style="width: 100%; height: 100%;">
+	<style>
+		.yxdsjf input{
+			margin: 18px 0 0 18px;
+		}
+		.itemblocklabel {
+			position: absolute;
+			top: -12px;
+			left: 20px;
+			background-color: #FFF;
+			padding: 0px 10px;
+			color: #999;
+			font-size: 15px;
+			font-weight: bold;
+		}
+		.curitem_ul li {
+			height: 40px;
+			line-height: 30px;
+			overflow: hidden;
+		}
+		.itemblock {
+			border:1px solid #CCC;
+			margin: 30px 16px;
+			padding: 16px;
+			position: relative;
+		}
+		#left_container {
+			width: 47%;
+			height: 100%;
+			float: left;
+			padding-left:20px;
+			position: relative;
+		}
+		#right_container {
+			width: 47%;
+			height: 100%;
+			float: right;
+			padding-right:20px;
+			position: relative;
+		}
+		.pay_info li{
+			margin: 42px 0 0 0;
+		}
+	</style>
+	<div class="pay_main" style="width:80%;height:100%;margin:0 auto;">
+	<div id="left_container" >
+		<div class="itemblock">
+			<div class="itemblocklabel">有线编号</div>
+			<input type="text" class="striking_input" id="TVNumInput" name="" maxlength="20" data-enter="selewares" placeholder="有线电视编号"  data-empty="false" verify-message="请输入有线电视编号"/>
+			&nbsp;&nbsp;
+			<input type="button" class="primary_button" id="TVNumCheck"  value="查询" />
+		</div>
+		<div class="itemblock">
+			<div class="itemblocklabel">当前用户</div>
+			<ul class="curitem_ul" style="list-style-type:none;">
+				<li>有线编号：	   <label id="TVNum" class="primary_label small_label" ></label></li>
+				<li>用户名称：	   <label id="TVUserName" class="primary_label small_label"></label></li>
+				<li>安装地址：	   <label id="TVInstallAddr" class="primary_label small_label"></label></li>
+				<li>应缴总额：　　　<label id="TVPayableTotal" class="striking_label right_label" style="width: 104px;"></label>元</li>
+				<li>账户余额：　　　<label id="AccountBalance" class="striking_label right_label" style="width: 104px;"></label>元</li>
+			</ul>
+		</div>
+	</div>
+	<div id="right_container">
+		<div class="itemblock">
+			<div class="itemblocklabel">本次缴费信息</div>
+			<ul id="curitem_ul" class="pay_info" style="list-style-type:none;">
+				<input type="hidden" name="hiddenData" id="hiddenData" value=""/> 
+				<li><span class="labeltitle">缴费金额：</span><input type="text" maxlength="12" class="striking_input" id="payMoney" name="payMoney" data-empty="false" verify-message="金额不能为空" placeholder="请输入缴费金额" /> 元</li>
+				<li><span class="labeltitle">银行卡号：</span><input type="text" maxlength="19" class="striking_input" id="cardNo" name="cardNo"   placeholder="银行账号" data-empty="false" verify-message="银行卡号不能为空"/></li>
+				<li><span class="labeltitle">卡号密码：</span><input type="password" class="striking_input" id="password" name="password" data-enter="selewares" placeholder="" data-empty="false" verify-message="卡号密码不能为空"/></li>
+				<li><input type="button" class="primary_button" id="payTVbutton"  style="margin-left:25%;" value="  确   认  缴  费    " /></li>
+			</ul>
+		</div>
+	</div>
+	</div>
+</div>
+</script>
+<script type="text/mustache" id="view_showPayMsg_success">
+<div style="width: 100%; height: 100%;">
+	<ul id="curitem_ul" class=" style="list-style-type:none;">
+		<li><span class="labeltitle">提示：{{result.fieldmessage}}</span></li>
+		<li><span class="labeltitle">缴费号码：</span></li>
+		<li><span class="labeltitle">充值金额：</span></li>
+		<li><span class="labeltitle">交易时间：</span></li>
+		<li><span class="labeltitle">付款人：{{result.pay_op_name}}</span></li>
+		<li><span class="labeltitle">付款人凭证号：</span></li>
+		<li><span class="labeltitle">转出账户余额：</span></li>
+	</ul>
+</div>
+</script>
+<script type="text/mustache" id="view_showPayMsg_error">
+<div style="width: 100%; height: 100%;">
+	缴费失败
+</div>
+</script>

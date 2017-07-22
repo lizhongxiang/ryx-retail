@@ -1,0 +1,344 @@
+<!-- 购物车 -->
+<script type="text/mustache" id="view_gwc">
+<div>
+<style>
+	.ml18{margin-left:18px;}
+	.mr15{margin-right:15px;}
+	.mr20{margin-right:20px;}
+	.table_view th{text-align:center;}
+	.table_view tbody tr.goods_list_tr{background:#FFFFFF;}	
+	.select_all{float:left; cursor:pointer; margin-left:20px;}
+	
+	.shop{width:100%; overflow:hidden;}
+	.shop .shop_info{height:40px; line-height:40px; text-align:left; border-bottom:1px solid #ddd;}
+	.shop .shop_info .cart_checkbox{margin-left:20px;}
+	.shop .order_content{width:100%; overflow:hidden; margin-left:auto; margin-right:auto;}
+	.shop .order_content .item_list{width:100%; overflow:hidden; }
+	.shop .order_content .item_body{overflow:hidden; padding:10px 0; border-bottom:1px solid #ddd;}
+	.shop .order_content .item_body_last{border-bottom:none;}
+	.shop .order_content ul li{float:left; overflow:hidden; text-align:center;}
+	.shop .order_content ul .td_chk{width:6%;}
+	.shop .order_content ul .td_item{width:38%;}
+	.shop .order_content ul .td_price{width:15%;}
+	.shop .order_content ul .td_amount{width:15%;}
+	.shop .order_content ul .td_sum{width:16%;}
+	.shop .order_content ul .td_opt{width:10%;}
+	.shop .shop_sum{overflow:hidden; height:38px; line-height:38px; text-align:right; padding-right:100px; border-bottom:1px #ddd solid;}
+	.shop .shop_sum em{font-size:16px; color:#FF9725;}
+	
+	.item_body .td_chk .item_checkbox{margin:20px 0 0 18px;} 
+	.item_body .td_item{float:left; text-align:left; overflow:hidden;}
+	.item_body .td_item .item_pic{width:54px; height:72px; line-height:72px; text-align:center; border:1px solid #eee; float:left; 
+									overflow:hidden; margin-right:15px;}
+	.item_body .td_item .item_pic a{display:table-cell; width:100%; height:100%; vertical-align:middle; text-align:center;}
+	.item_body .td_item .item_pic a img{max-width:54px; max-height:72px; vertical-align:middle;}
+	.item_body .td_item .item_basic_info{float:left; max-width:67%; text-align:left; padding-right:10px; line-height:22px; }
+	.item_body .td_item .item_basic_info .item_title{font_size:12px; display:block; max-height:80px; overflow:hidden; text-overflow:ellipsis;}
+	.item_body .td_item .item_basic_info .item_title:hover{text-decoration:underline;}
+	.item_body .td_price label{font-weight:700; color:#3c3c3c;}
+	
+	.item_body .item_amount{width:118px; height:25px; overflow:hidden; margin:0 auto;}
+	.item_body .item_amount a{width:23px; height:23px; border:1px solid #CCC; text-align:center;}
+	.item_body .item_amount a:hover{border:1px solid #999;}
+	.item_body .td_amount .text_amount{width:60px; height:15px; line-height:15px; text-align:center; padding:4px 0; margin:0px 3px;}
+	.item_body .td_opt .del_point {display:inline-block; width:15px; height:18px; background-image:url(../public/retail/img/delete.png); background-repeat:no-repeat;
+								cursor:pointer;}
+	.item_body .td_sum .item_sum{color:#FF9725; font-weight:bold;}
+	.footer_ul li{float:left; margin-right:20px;}
+</style>
+	<div>
+		<table class="table_view" style="width: 100%; border-bottom:none;">
+			<thead>
+				<tr>
+					<th class="th_chk" style="width:12%">
+						<!-- <div class="select_all">
+							<input type="checkbox" name="selectAll" value="" id="cbxSelectAllCarts" class="check_box"/>
+							<label>全选</label>-->
+						</div>
+					</th>
+					<th class="th_item" style="width:32%;">商品信息</th>
+					<th class="th_price" style="width:15%">单价（元）</th>
+					<th class="th_amount" style="width:15%">数量</th>
+					<th class="th_sum" style="width:16%">金额（元）</th>
+					<th class="th_opt" style="width:10%;">操作</th>
+				</tr>
+			</thead>
+			<tbody id="payContent">
+				
+			</tbody>
+		</table>
+	</div>
+	<!--------------底部悬浮条---------------->
+	<div class="view_footer" style="text-align:right;"> 
+	    <!-- <div class="select_all mr20" style="line-height:68px;" >
+			<input type="checkbox" name="selectAll" value="" id="selectAll02" class="check_box"/>
+			<label for="selectAll02">全选</label>
+	    </div>
+	    <a class="left mr20" style="line-height:68px;" href="">删除</a>-->
+		<ul class="footer_ul left">
+			<li>已选商品：<label id="allTotalNum" class="striking_label">0</label></li>
+			<li>金额合计：<label id="allTotalPrice" class="striking_label">0.00</label> 元</li>
+		</ul>
+		<div style="float:right;text-align: right;">
+	   		<input id="orderSubmit" type="button" class="primary_button" tabindex="5" value="提交订单" />
+	   		<input id="clearAllcarts" type="button" style="margin-left: 20px; width:100px;" tabindex="6" class="minor_button" value="清空购物车" />
+	   		<!--<input id="" type="button" style="margin-left: 20px;" tabindex="7" class="primary_button" value="返回购物" />-->
+        </div>
+	</div>
+</div>
+</script>
+<script type="text/mustache" id="view_gwc_cartContent">
+{{#list}}
+	<tr class="goods_list_tr">
+		<td colspan="6">
+			<!--------------------------供货商 开始------------------------------>
+			<div class="order_body shop">
+
+				<!---------------供货商信息开始---------------->	
+				<div class="shop_info">
+					<div class="cart_checkbox left mr15">
+						<input type="checkbox" name="supplier" checked="true" class="supplier" id="supplier_{{supplier_id}}" value="{{supplier_id}}">
+					</div>
+					<span class="mr15">&nbsp;&nbsp;供货商：{{supplier_name}}</span>
+					<span>联系电话：{{phone}}</span>
+				</div>
+				<!---------------供货商信息结束---------------->	
+				<div class="order_content">
+					{{#carts}}
+					<!--------------------商品信息列表-------------->
+					<div class="item_list">
+						<!----------------单条商品信息01--------------->
+						<div id="itemBody_01" class="item_body">
+							<ul class="item_content">
+							  <li class="td td_chk">
+									<div class="cart_checkbox left">
+										<input type="checkbox"  checked="true" supplierID="{{supplier_id}}" class="item_checkbox supplierItemCart  cart_{{supplier_id}}"  name="supplierItemCart" value="{{cart_id}}">
+									</div>
+							  </li>											
+							  <li class="td td_item">
+									<div class="td_inner">
+										<div class="item_pic">
+											<a href="javascript:void(0)">
+												<img src="http://www.ruishangtong.com:8889/resource/images/item/s/{{item_bar}}_s_face.png" class="item_img"/>
+											</a>
+										</div>
+										<div class="item_basic_info">
+											{{item_name}}
+										</div>												
+									</div>
+								</li>
+								<li class="td td_price">
+									<div class="td_inner" style="">
+										<label class="price">{{whole_price}}</label>									
+									</div>
+								</li>
+								<li class="td td_amount">
+									<div class="td_inner">
+										<div class="item_amount">
+											<a class="left downButton" href="#" cartID={{cart_id}}>-</a>
+											<input type="text" name="" class="text_amount left supplierItemCart_  item_num_{{supplier_id}}"  wholePrice="{{whole_price}}" supplierID ="{{supplier_id}}" cartID={{cart_id}} value="{{num}}" id="amount_{{cart_id}}"/>
+											<a class="left upButton" href="#" cartID={{cart_id}}>+</a>
+										</div>								
+									</div>
+								</li>
+								<li class="td td_sum">
+									<div class="td_inner">
+										<label class="item_sum item_price_{{supplier_id}}" id="cartPrice_{{cart_id}}">{{total}}</label>							
+									</div>
+								</li>												
+								<li class="td td_opt">
+									<div class="td_inner">
+										<a href="#" class="del_point" cartID="{{cart_id}}"></a>							
+									</div>
+								</li>
+							</ul>
+						</div>
+						{{/carts}}
+						<!-------------------单条商品信息结束01--------------------->
+					</div>
+					<!--------------------------该店铺内选购商品总价-------------------------->
+					<div class="shop_sum">
+						小计：<em class="item_sum" id="supplier_price_{{supplier_id}}">{{totalPrice}}</em> 元
+					</div>
+					<!--该店铺内选购商品总价结束-->
+				</div>
+			</div>
+		</td>
+	</tr>
+{{/list}}
+</script>
+<!-- 核对订单信息并提交 -->
+<script type="text/mustache" id="view_checkOrder">
+<div>
+	<style>
+	.ml15{margin-left:15px;}
+	.mr15{margin-right:15px;}
+	.ml20{margin-left:20px;}
+	.mr20{margin-right:20px;}
+	.pl20{padding-left:20px;}
+	.check_address{overflow:hidden; padding:20px; line-height:25px;}
+	.check_address .addres_content{padding-left:70px;}
+	.check_goods{width:100%; overflow:hidden; border-top:1px solid #ddd; border-bottom:1px solid #ddd;}
+	.shop{width:100%; overflow:hidden;}	
+	.shop .shop_goods_list .item_body{overflow:hidden; padding:10px 0; border-bottom:1px solid #ddd;}
+	.td_inner{overflow:hidden;}
+	.shop ul li{float:left; overflow:hidden; text-align:center;}
+	.shop ul .td_item{width:38%;}
+	.shop ul .td_goodNum{width:17%;}	
+	.shop ul .td_price{width:15%;}
+	.shop ul .td_amount{width:15%;}
+	.shop ul .td_sum{width:15%;}
+	.item_basic_info{float:left; overflow:hidden; width:65%; text-align:left; padding-right:10px; line-height:22px; }
+	.add_address{margin-left:70px; padding:10px 0; overflow:hidden; border:1px red solid; margin-top:10px; dispaly:none;}
+	.mess{padding:5px 0;}
+	.mess label{display:inline-block; width:85px; text-align:right; height:26px; margin-right:5px; line-height:26px;}
+	.mess label em{margin-right:5px; color:#f60;}
+	.footer_ul li{float:left; margin-right:20px;}
+</style>
+	<div style="position: absolute; left:0px; top:0px; bottom: 60px; overflow-y:auto; width:100%; ">
+		<div class="check_address">
+            <strong>收货人信息</strong>
+            <div class="addres_content">
+                <p>
+                     {{address.manager}} -  {{address.telephone}}      <br />
+					 {{address.address}}{{address.merch_name}}
+                </p>
+				<p><a href="" style="text-decoration:underline; color:#f6a828;disabled:false;">修改收货信息</a></p>
+            </div>
+			<!--<div class="add_address">
+				<div class="name mess">
+					<label><em>*</em>收货人：</label>
+					<input type="text" class="textbox" id="consignee_name" name="consigneeParam.name" maxlength="20">
+				</div>
+				<div class="mess">
+					<label><em>*</em>所在地区：</label>
+					<span id="span_province">
+						<select id="consignee_province" name="">
+							<option value="">请选择：</option>
+							<option value="1">北京*</option>
+							<option value="2">上海*</option>
+							<option value="3">天津*</option>
+							<option value="4">重庆*</option>
+						</select>
+					</span>
+					<span id="span_city">
+						<select id="consignee_province" name="consigneeParam.provinceId" onchange="loadCitys()">
+							<option value="">请选择：</option>
+						</select>
+					</span>						
+					<span id="span_county">
+						<select id="consignee_province" name="consigneeParam.provinceId" onchange="loadCitys()">
+							<option value="">请选择：</option>
+						</select>
+					</span>	
+				</div>
+				<div class="select-address mess">
+					<label><em>*</em>详细地址：</label>
+					<input type="text" class="textbox"  maxlength="50" onblur="">
+				</div>
+				<div class="select-address mess">
+					<label><em>*</em>手机号码：</label>
+					<input type="text" class="textbox"  maxlength="50" onblur="">
+				</div>
+				<div class="select-address mess">
+					<label>邮箱：</label>
+					<input type="text" class="textbox"  maxlength="50" onblur="">
+				</div>
+				<div class="mess">
+					<input style="margin-left:105px; margin-top:10px; width:130px;" id="" type="button" class="minor_button" tabindex="5" value="保存收货地址" />
+				</div>
+			</div>-->
+        </div>
+		<p style="height:35px; line-height:35px; border-top:1px solid #ddd;"><strong class="ml20">商品清单</strong></p>
+		<table style="width: 100%; border-bottom:none;" class="table_view" >
+				  <thead>
+                        <tr>
+                            <th style="width:38%;">商品名称</th>
+                            <th style="width:17%;">商品条码</th>
+                            <th style="width:15%">单价（元）</th>
+                            <th style="width:15%">订购数量</th>
+                            <th style="width:15%">金额（元）</th>
+                        </tr>
+                    </thead>
+			<tbody>
+				{{#list}}
+					<tr style="background:none;">
+                            <td colspan="5">
+                                <div class="shop">
+                                    <!---------------供货商信息开始---------------->	
+                                    <div class="shop_info pl20" style="border-bottom:1px solid #ddd;">
+                                        <span class="mr20">订单编号：{{orderid}}</span>
+                                        <span class="mr15">供货商：{{supplier_name}}</span>
+                                        <span>联系电话：{{phone}}</span>
+                                    </div>
+                                    <!---------------供货商信息结束---------------->	
+                                    
+                                    <!--------------------商品信息列表-------------->
+                                    <div class="shop_goods_list">
+                                    	{{#orders}}
+                                        <!----------------单条商品信息--------------->
+                                        <div id="itemBody_01" class="item_body">
+                                            <ul class="item_content">
+                                                <li class="td td_item">
+                                                    <div class="td_inner">
+                                                        <div class="item_pic ml15">
+                                                            <a href="#">
+                                                                <img src="http://www.ruishangtong.com:8889/resource/images/item/s/{{item_bar}}_s_face.png" class="item_img"/>
+                                                            </a>
+                                                        </div>
+                                                        <div class="item_basic_info">
+                                                          		{{item_name}}
+                                                        </div>												
+                                                    </div>
+                                                </li>
+                                                <li class="td td_goodNum">
+                                                    <div class="td_inner">
+                                                        <a href="" class="del_point">{{item_bar}}</a>							
+                                                    </div>
+                                                </li>
+                                                <li class="td td_price">
+                                                    <div class="td_inner" style="">
+                                                        <label class="price">{{whole_prise}}</label>									
+                                                    </div>
+                                                </li>
+                                                <li class="td td_amount">
+                                                    <div class="td_inner">
+                                                       <label class="amount">{{num}}</label>								
+                                                    </div>
+                                                </li>
+                                                <li class="td td_sum">
+                                                    <div class="td_inner">
+                                                        <label class="item_sum">{{prise_total}}</label>							
+                                                    </div>
+                                                </li>												
+                                                
+                                            </ul>
+                                        </div>
+                                        {{/orders}}
+                                        <!-------------------单条商品信息结束--------------------->
+                                    </div>
+                                    <!--------------------------该店铺内选购商品总价-------------------------->
+                                    <div class="shop_sum">
+                                        <span class="mr20">订购数量：{{num}}</span>
+                                        <span>小计：<em class="item_sum">{{prise_total}}</em> 元</span>
+                                    </div>
+                                    <!--该店铺内选购商品总价结束-->
+                                </div>
+                            </td>
+                        </tr>
+					{{/list}}
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer" style="height: 60px; line-height: 50px;margin-left: 0px;font-weight:bold;text-align:left;">
+		<ul class="footer_ul left">
+			<li>已选商品总数：<label id="itemTotalNum" class="striking_label">{{totalNum}}</label></li>
+			<li>金额合计：<label id="" class="striking_label">{{totalPrice}}</label> 元</li>
+		</ul>
+		<div style="float:right;text-align: right;">
+	   		<!--<input id="" type="button" class="primary_button" tabindex="5" style="width:132px;" data-doubleclick="false" value="返回修改购物车" />-->
+	   		<input id="payOrder" type="button" style="margin-left: 20px;disabled:true;" tabindex="7" class="primary_button" value="支付" />
+        </div>
+	</div>
+</div>
+</script>

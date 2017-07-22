@@ -1,0 +1,112 @@
+<script type="text/mustache" id="view_jyrk">
+<div>
+<style>
+   .ItemInstorage_img{
+     padding:5px 20px;
+     background-image:url(../public/retail/img/instorage.png);
+     background-repeat:no-repeat;
+     background-position:50%;
+    }
+</style>
+	<div>
+		<table style="width:100%; " data-onkey="true" class="table_view clickable">
+			<thead>
+				<tr>
+					<th style="width: 8%;">序号</th>
+					<th style="width: 12%;">订单编号</th>
+					<th style="width: 10%;">订单日期</th>
+					<th style="width: 8%;">订购数量(条)</th>
+					<th style="width: 8%;">订购金额</th>
+					<th style="width: 8%;">订单状态</th>
+					<!--<th style="width: 8%;">支付状态</th>-->
+					<th style="width: 10%;">操作</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				{{#list}}
+					<tr data-id="{{order_id}}">
+						<td>{{number}}</td>
+						<td>{{order_id}}</td>
+						<td>{{order_date}}</td>
+						<td>{{qty_purch_total}}</td>
+						<td>{{amt_purch_total}}</td>
+						<td>{{status_label}}</td>
+						<!--<td>{{pmt_label}}</td>-->
+						<td>
+							{{#su_in}}已入库{{/su_in}}
+							{{#order_status}}未完成{{/order_status}}
+							{{#order_status2}}
+                                <!--a title="入库" data-doubleclick="false" data-id="{{order_id}}" class="ItemInstorage_img"></a-->
+                                <a title="到货确认" data-doubleclick="false" data-id="{{order_id}}">到货确认</a>
+							{{/order_status2}}
+						</td>
+					</tr>
+				{{/list}}
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer">
+
+		<input style="position:absolute;margin-left:325px;margin-top:15px;" tabindex="3" type="button" class="primary_button" id="selewares" name="selewares" value="查 询" />
+		起止日期：
+		<input tabindex="1" type="text" id="beginTime" name="beginTime" class="striking_input" style="width:100px;" />
+		 -
+		<input tabindex="2" type="text" id="endTime"  name="endTime" data-enter="selewares" class="striking_input" style="width:100px;" />
+	</div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+</div>
+</script>
+
+<script type="text/mustache" id="view_jyrk_detail">
+<div>
+	<div style="overflow-y: auto; position: absolute; top: 0px; left: 0px; bottom: 60px; width:100%;">
+		<table style="width: 100%"  class="table_view" >
+			<thead>
+				<tr>
+					<th style='width: 10%'>序号</th>
+					<th style='width: 15%'>商品条码</th>
+					<th style='width: 15%'>商品名称</th>
+					<th style='width: 15%'>批发价</th>
+					<th style='width: 10%'>需求量(条)</th>
+					<th style='width: 10%'>订购量(条)</th>
+					<th style='width: 15%'>金额</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#result.purch_order_line}}
+				<tr>
+					<td>{{number}}</td>
+					<td>{{item_id}}</td>
+					<td>{{item_name}}</td>
+					<td>{{pri_wsale}}</td>
+					<td>{{qty_req}}</td>
+					<td>{{qty_ord}}</td>
+					<td>{{amt_ord}}</td>
+				</tr>
+				{{/result.purch_order_line}}
+			</tbody>
+		</table>
+		
+		<div id="feedback_div">
+			<div style="border-top: 1px solid #CCC; height: 1px; margin: 20px auto; "></div> 
+			<div style="float:left;">
+			<label style='margin-left:20px;'>意见反馈：</label>
+			<lable id="feedback_lable" style=" margin-top:-45px;">{{result.note}}</lable>
+			</div>
+			
+			<textarea rows="4" cols="1" id='feedback_textarea' maxlength="200" style=" width:670px; " >{{result.note}}</textarea>
+			
+		</div>
+
+	</div>
+	<div style="height: 60px; line-height: 50px;margin-left: 0px;font-weight:bold" class="view_footer" style="text-align:left;">
+		{{#result.order_status2}}
+			<input type="button" id="detailPut" data-doubleclick="false" data-id="{{result.order_id}}" class="primary_button right" value="到货确认" />
+		{{/result.order_status2}}	
+		编号：<label id="orderStatus" class="primary_label" style="font-size: 16px;">{{result.order_id}}</label>&nbsp;&nbsp;
+		日期：<label id="orderStatus" class="primary_label" style="font-size: 16px;">{{result.order_date}}</label>&nbsp;&nbsp;
+		数量：<label id="orderStatus" class="striking_label" style="font-size: 16px;">{{result.qty_purch_total}}</label> 条&nbsp;&nbsp;
+		金额：<label id="orderStatus" class="striking_label" style="font-size: 16px;">{{result.amt_purch_total}}</label> 元&nbsp;&nbsp;
+	</div>
+</div>
+</script>

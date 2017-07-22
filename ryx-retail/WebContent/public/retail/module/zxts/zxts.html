@@ -1,0 +1,105 @@
+<script type="text/mustache" id="view_yxhd_zxts">
+<div>	
+	<div>
+		<table style="width: 100%; text-align:center;" class="table_view clickable" data-onkey="true">
+			<thead>
+				<tr>
+					<th style="width: 10%;">序号</th>
+					<th style="width: 70%;">标题</th>
+					<th style="width: 20%;">日期</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#list}}
+				<tr data-id="{{info_id}}">
+					<td>{{index}}</td>
+					<td>{{info_title}}<lable style="color:#ff9a18;font-size:12px;"> {{yhf}}</lable></td>
+					<td>{{submit_date}}</td>
+				</tr>
+				{{/list}}
+			</tbody>
+		</table>
+	</div>
+
+	<div class="view_footer">
+		<input type="button" class="striking_button right" id="forInsert" value="我要咨询" />
+	</div>
+</div>
+</script>
+<script type="text/mustache" id="view_yxhd_zxts_insert">
+<div>
+	<style>
+	.viewtable {
+		border: none;
+	}
+	.viewtable td {
+		padding: 8px;
+		border: none;
+	}
+	</style>
+	<table style="width: 100%; margin-top: 30px;" class="table_view viewtable">
+	<tr>
+		<td style="text-align:right;width:23%">标题：</td>
+		<td style="text-align:left;"><input id="infoTitle" tabindex="1" type="text" style="width: 360px;" maxlength="50" name = "infoTitle" value="" placeholder="请输入标题"/> </td>
+	</tr>
+	<tr style="background:#FFFFFF">
+		<td style="text-align:right;width:23%">类型：</td>
+		<td style="text-align:left;">
+			<input type="radio" id="infoType1" tabindex="2" name="infoType" value="01" checked="checked">
+			<label for="infoType1">咨询</label>
+			&nbsp;&nbsp;&nbsp;
+			<input type="radio" id="infoType2" tabindex="3" name="infoType" value="02">
+			<label for="infoType2">投诉</label></td>
+	</tr>
+	<tr>
+		<td style="text-align:right;width:23%">内容：</td>
+		<td style="text-align:left;">
+			<textarea id="infoDesc" name="infoDesc" tabindex="4" maxlength="200" style="width:360px;" rows="5"placeholder=请将内容输入此区域></textarea>
+		</td>
+	</tr>
+	<tr style="background:#FFFFFF">
+		<td style="text-align:right;width:23%">姓名：</td>
+		<td style="text-align:left;"> <input type="text" tabindex="5" id="userName" style="width: 360px;"  name="userName" placeholder="请输入您的姓名" value=""/>
+		</td>
+	</tr>
+	<tr>
+		<td style="text-align:right;width:23%">联系方式：</td>
+		<td style="text-align:left;"><input type="text" id="telephone" tabindex="6" style="width: 360px;" name="telephone" placeholder="请输入手机号或邮箱" value="" maxlength="50"/></td>
+	</tr>
+	</table>
+
+	<div style="text-align: center; margin-top: 30px;">
+		<input type="button" tabindex="7" class="primary_button" id="submit" style="width: 100px;" value="提交" />
+	</div>
+</div>
+</script>
+<script type="text/mustache" id="view_yxhd_zxts_detail">
+<div style="padding: 10px;margin-left:10px;">
+<style>
+.zxcontent_title{
+font-size: 15px; 
+font-weight: bold;
+position:absolute;
+margin-top:-10px;
+background-color:#fff;
+padding-right:10px;
+}
+.zxcontent_text{
+padding: 10px 5px 5px 38px;
+margin-top:20px;
+margin-right:20px;
+line-height:25px;
+border-top:1px solid #eee;
+}
+</style>
+	<h3 style="margin: 10px auto; font-weight: bold; text-align: center;">{{info_title}}</h3>
+	<div style="min-height: 100px;margin-top:30px;"> 
+		<div class="zxcontent_title">内容</div>
+		<p class="zxcontent_text">{{info_desc}}</p>
+	</div>
+	<div style="min-height: 100px;margin-top:50px;"> 
+		<div class="zxcontent_title">回复</div>
+		<p class="zxcontent_text">{{vfy_desc}}</p>
+	</div>	
+</div>
+</script>

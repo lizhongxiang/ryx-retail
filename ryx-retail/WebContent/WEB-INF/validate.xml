@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<validate-mapping>
+<base-url>/tobacco</base-url>
+<mapping>
+	<url>/consumer/sale/submitConsumerSaleOrder</url>
+	<desc>楼下店提交销售单</desc>
+	<params name='request_parameters' type='Map' required='true'>
+		<param name="params" type="Map" required="true" verify="notempty">
+			<param name="consumer_id" type="String" required="false"/>
+			<param name="card_id" type="String" required="false"/>
+			<param name="merch_id" type="String" required="true" verify="notempty"/>
+			<param name="qty_ord_total" type="BigDecimal" required="true"/>
+			<param name="qty_ord_count" type="Integer" required="true"/>
+			<param name="amt_ord_total" type="BigDecimal" required="true"/>
+			<param name="note" type="String" required="false"/>
+			<param name="list" type="List" required="true">
+				<param name="line_label" type="String" required="true" verify="number"/>
+				<param name="item_id" type="String" required="true" verify="notempty"/>
+				<param name="item_kind_id" type="String" required="true"/>
+				<param name="item_bar" type="String" required="true" verify="notempty"/>
+				<param name="big_bar" type="String" required="true" verify="notempty"/>
+				<param name="item_name" type="String" required="true" verify="notempty"/>
+				<param name="unit_name" type="String" required="true"/>
+				<param name="big_unit_name" type="String" required="true"/>
+				<param name="note" type="String" required="false"/>
+				<param name="cost" type="BigDecimal" required="true"/>
+				<param name="pri4" type="BigDecimal" required="true"/>
+				<param name="discount" type="BigDecimal" required="true"/>
+				<param name="unit_ratio" type="BigDecimal" required="true"/>
+				<param name="big_pri4" type="BigDecimal" required="true"/>
+				<param name="qty_ord" type="BigDecimal" required="true"/>
+				<param name="amt_ord" type="BigDecimal" required="true"/>
+			</param>
+		</param>
+	</params>
+</mapping>
+<mapping>
+	<url>/consumer/sale/searchConsumerSaleOrder</url>
+	<desc>楼下店查询销售单流水</desc>
+	<params name='request_parameters' type='Map' required='true'>
+		<param name="params" type="Map" required="true" verify="notempty">
+			<param name="consumer_id" type="String" required="true" verify="notempty"/>
+		</param>
+	</params>
+</mapping>
+<mapping>
+	<url>/consumer/sale/searchConsumerSaleOrderDetail</url>
+	<desc>楼下店查询销售单详情</desc>
+	<params name='request_parameters' type='Map' required='true'>
+		<param name="params" type="Map" required="true" verify="notempty">
+			<param name="order_id" type="String" required="true" verify="notempty"/>
+		</param>
+	</params>
+</mapping>
+<mapping>
+	<url>/consumer/item/searchMerchItemDetail</url>
+	<desc>楼下店根据商户编码和商品编码获取商户商品列表</desc>
+	<params name='request_parameters' type='Map' required='true'>
+		<param name="params" type="Map" required="true" verify="notempty">
+			<param name="merch_id" type="String" required="true" verify="notempty"/>
+			<param name="item_id" type="String" required="true" verify="notempty"/>
+			<param name="page_index" type="String" required="false" verify="number"/>
+			<param name="page_size" type="String" required="false" verify="number"/>
+		</param>
+	</params>
+</mapping>
+<mapping>
+	<url>/consumer/item/searchItemOfInSaleByMerchId</url>
+	<desc>楼下店根据商户编码获取商户在售商品列表</desc>
+	<params name='request_parameters' type='Map' required='true'>
+		<param name="params" type="Map" required="true" verify="notempty">
+			<param name="merch_id" type="String" required="true" verify="notempty"/>
+			<param name="item_id" type="String" required="false" verify="notempty"/>
+			<param name="item_kind_id" type="String" required="false"/>
+			<param name="page_index" type="String" required="false" verify="number"/>
+			<param name="page_size" type="String" required="false" verify="number"/>
+		</param>
+	</params>
+</mapping>
+
+<mapping>
+	<url>/retail/sale/submitSaleOrder</url>
+	<desc>管店宝提交销售单</desc>
+	<params name='request_parameters' type='Map' required='true'>
+		<param name="params" type="Map" required="true" verify="notempty">
+			<param name="consumer_id" type="String" required="false"/>
+			<param name="card_id" type="String" required="false"/>
+			<param name="qty_ord_total" type="BigDecimal" required="true"/>
+			<param name="qty_ord_count" type="Integer" required="true"/>
+			<param name="amt_ord_total" type="BigDecimal" required="true"/>
+			<param name="amtys_ord_total" type="BigDecimal" required="true"/>
+			<param name="amt_ord_change" type="BigDecimal" required="true"/>
+			<param name="note" type="String" required="false"/>
+			<param name="list" type="List" required="true">
+				<param name="line_label" type="String" required="true" verify="number"/>
+				<param name="item_id" type="String" required="true" verify="notempty"/>
+				<param name="item_bar" type="String" required="true" verify="notempty"/>
+				<param name="big_bar" type="String" required="true" verify="notempty"/>
+				<param name="item_name" type="String" required="true" verify="notempty"/>
+				<param name="unit_name" type="String" required="true" verigy="notempty"/>
+				<param name="big_unit_name" type="String" required="true" verify="notempty"/>
+				<param name="note" type="String" required="false"/>
+				<param name="cost" type="BigDecimal" required="true"/>
+				<param name="pri4" type="BigDecimal" required="true"/>
+				<param name="discount" type="BigDecimal" required="true"/>
+				<param name="unit_ratio" type="BigDecimal" required="true"/>
+				<param name="big_pri4" type="BigDecimal" required="true"/>
+				<param name="qty_ord" type="BigDecimal" required="true"/>
+				<param name="amt_ord" type="BigDecimal" required="true"/>
+			</param>
+		</param>
+	</params>
+</mapping>
+<mapping>
+	<url>/retail/file/modifyShopPortrait</url>
+	<desc>管店宝设置店铺头像</desc>
+	<params name='request_parameters' type='Map' required='true'>
+		<param name="params" type="Map" required="true" verify="notempty">
+			<param name="file_id" type="String" required="true" verify="notempty"/>
+		</param>
+	</params>
+</mapping>
+<mapping>
+	<url>/retail/file/removeMerchFile</url>
+	<desc>管店宝删除店铺文件</desc>
+	<params name='request_parameters' type='Map' required='true'>
+		<param name="params" type="Map" required="true" verify="notempty">
+			<param name="file_id" type="String" required="true" verify="notempty"/>
+		</param>
+	</params>
+</mapping>
+<mapping>
+	<url>/retail/file/downloadMerchFile</url>
+	<desc>管店宝下载商户文件</desc>
+	<params name='request_parameters' type='Map' required='true'>
+		<param name="params" type="Map" required="true" verify="notempty">
+			<param name="file_id" type="String" required="true" verify="notempty"/>
+		</param>
+	</params>
+</mapping>
+<mapping>
+	<url>/retail/order/searchOnlineSaleOrder</url>
+	<desc>管店宝查询网购订单流水</desc>
+	<params name='request_parameters' type='Map' required="false">
+		<param name="params" type="Map" required="false" verify="notempty">
+			<param name="merch_id" type="String" required="false" verify="notempty"/>
+			<param name="order_date" type="String" required="false" verify="number"/>
+			<param name="order_date_floor" type="String" required="false" verify="number"/>
+			<param name="order_date_ceiling" type="String" required="false" verify="number"/>
+			<param name="order_time" type="String" required="false" verify="number"/>
+			<param name="order_time_floor" type="String" required="false" verify="number"/>
+			<param name="order_time_ceiling" type="String" required="false" verify="number"/>
+			<param name="pmt_status" type="String" required="false" verify="notempty"/>
+			<param name="page_index" type="String" required="false" verify="number"/>
+			<param name="page_size" type="String" required="false" verify="number"/>
+		</param>
+	</params>
+</mapping>
+<mapping>
+	<url>/retail/sales/addSalePromotion</url>
+	<desc>管店宝新增商户促销活动</desc>
+	<params name='request_parameters' type='Map' required='true'>
+		<param name="params" type="Map" required="true" verify="notempty">
+			<param name="promotion_description" type="String" required="false" verify="notempty"/>
+			<param name="promotion_start_date" type="String" required="false" verify="number"/>
+			<param name="promotion_end_date" type="String" required="false" verify="number"/>
+		</param>
+	</params>
+</mapping>
+<mapping>
+	<url>/retail/sales/delSalePromotion</url>
+	<desc>管店宝删除商户促销活动</desc>
+	<params name='request_parameters' type='Map' required='false'>
+	</params>
+</mapping>
+<mapping>
+	<url>/retail/sales/updateSalePromotion</url>
+	<desc>管店宝修改商户促销活动</desc>
+	<params name='request_parameters' type='Map' required='true'>
+		<param name="params" type="Map" required="true" verify="notempty">
+			<param name="promotion_description" type="String" required="false" verify="notempty"/>
+			<param name="promotion_start_date" type="String" required="false" verify="number"/>
+			<param name="promotion_end_date" type="String" required="false" verify="number"/>
+		</param>
+	</params>
+</mapping>
+<mapping>
+	<url>/retail/sales/searchSalePromotion</url>
+	<desc>管店宝查询商户促销活动</desc>
+	<params name='request_parameters' type='Map' required='false'>
+		<param name="params" type="Map" required="false" verify="notempty">
+			<param name="merch_id" type="String" required="false" verify="notempty"/>
+			<param name="promotion_id" type="String" required="false" verify="notempty"/>
+			<param name="page_index" type="String" required="false" verify="number"/>
+			<param name="page_size" type="String" required="false" verify="number"/>
+		</param>
+	</params>
+</mapping>
+
+<mapping>
+	<url>/retail/item/updateOrInsertItems</url>
+	<desc>pos修改或者新增商品</desc>
+	<params name='request_parameters' type='Map' required='true'>
+		<param name="params" type="Map" required="true" verify="notempty">
+			<param name="item_id" type="String" required="true" verify="notempty"/>
+			<param name="item_bar" type="String" required="true" verify="notempty"/>
+			<param name="item_name" type="String" required="true" verify="notempty"/>
+			<param name="pri1" type="BigDecimal" required="true"/>
+			<param name="pri4" type="BigDecimal" required="true"/>
+		</param>
+	</params>
+</mapping>
+<mapping>
+	<url>/retail/tobacco/putOrder</url>
+	<desc>pos订单入库</desc>
+	<params name='request_parameters' type='Map' required='true'>
+		<param name="params" type="Map" required="true" verify="notempty">
+			<param name="order_id" type="String" required="true" verify="notempty"/>
+		</param>
+	</params>
+</mapping>
+<mapping>
+	<url>/file/uploadMerchFile</url>
+	<desc>pos上传文件</desc>
+	<params name='request_parameters' type='Map' required='true'>
+		<param name="params" type="Map" required="true" verify="notempty">
+			<param name="merch_id" type="String" required="true" verify="notempty"/>
+		</param>
+	</params>
+</mapping>
+<mapping>
+	<url>/ipos/postdata/recommend2POS</url>
+	<desc>向pos推送商品</desc>
+	<params name='request_parameters' type='Map' required='true'>
+		<param name="params" type="Map" required="true" verify="notempty">
+			<param name="merch_id" type="String" required="true" verify="notempty"/>
+		</param>
+	</params>
+</mapping>
+<mapping>
+	<url>/retail/whse/updateStocktakingList</url>
+	<desc>库存盘点</desc>
+	<params name='request_parameters' type='Map' required='true'>
+		<param name="params" type="Map" required="true" verify="notempty">
+			<param name="list" type="List" required="true">
+				<param name="item_id" type="String" required="true" verify="notempty"/>
+				<param name="qty_turn" type="BigDecimal" required="true" verify="notempty"/>
+				<param name="qty_whse" type="BigDecimal" required="true" verify="notempty"/>
+				<param name="qty_pl" type="BigDecimal" required="true" verify="notempty"/>
+				<param name="item_kind_id" type="String" required="true" verify="notempty"/>
+			</param>
+		</param>
+	</params>
+</mapping>
+</validate-mapping>

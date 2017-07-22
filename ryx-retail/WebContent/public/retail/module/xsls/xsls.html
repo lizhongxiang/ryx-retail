@@ -1,0 +1,203 @@
+<script type="text/mustache" id="view_xsls">
+<div>
+	<div>
+		<table style="width:100%;" data-onkey="true" class="table_view clickable">
+			<thead>
+				<tr>
+					<th style="width: 4%;">序号</th>
+					<th style="width: 16%;">销售单号</th>
+					<th style="width: 16%;">销售时间</th>
+					<!--<th style="width: 8%;">销售时间</th>-->
+					<th style="width: 8%;">销量/退量</th>
+					<th style="width: 10%;">应收金额</th>
+					<th style="width: 8%;">销售单利润</th>
+					<th style="width: 7%;">销售状态</th>
+					<th style="width: 7%;">支付状态</th>
+					<th style="width: 7%;">支付类型</th>
+					<th style="width: 7%;">销售类型</th>
+					<th style="width: 10%;">会员手机号</th> 
+				</tr>
+			</thead>
+			<tbody>
+				{{#list}}
+					<tr class="xiangxi" data-id="{{order_id}}" title="{{note}}">
+						<td>{{index}}</td>
+						<td>{{order_id}}</td>
+						<td>{{order_date}}</td>
+						<!--<td>{{order_time}}</td>-->
+						<td>{{qty_ord_total}}/<span style="color:{{color}}">{{qty_return_total}}</span></td>
+						<td>{{amtys_ord_total}}</td>
+						<td>{{amt_ord_profit}}</td>
+						<td>{{salesStatus}}</td>
+						<td>{{paymentStatus}}</td>
+						<td>{{pay_type_label}}</td>
+						<td>{{salesType}}</td>
+						<td>{{telephone}}</td>				
+					</tr>
+				{{/list}}
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer">
+		<div class="view_adSearch">
+			&nbsp;&nbsp;<input type="text" data-enter="selewares" tabindex="4"  id="consumer_keyword" class="striking_input" maxlength="25" 
+				placeholder="请输入会员手机号/卡号"/>
+			&nbsp;
+			<input type="text" data-enter="selewares" tabindex="5" id="order_id_keyword" class="striking_input" maxlength="25" 
+				placeholder="请输入销售单号"/>
+		</div>
+		&nbsp;&nbsp;起止日期：
+		<input type="text" id="beginTime" tabindex="1" name="beginTime" class="striking_input" style="width:90px;" 
+				data-verify="date" data-empty="false" verify-message="开始时间格式错误"/>
+		 - 
+		<input type="text" id="endTime" tabindex="2" name="endTime" class="striking_input" style="width:90px;" 
+				data-verify="date" verify-message="结束时间格式错误"/>
+		 
+			<!--select name="salesStatus" id="salesStatus" class="striking_input">
+				<option value="">销售状态</option>
+				<option value="01">已下单</option> 
+   				<option value="02">已审核</option>
+   				<option value="03">已完成</option>
+   				<option value="04">已取消</option>
+			</select-->
+			<select name="paymentStatus" id="paymentStatus" data-enter="selewares" tabindex="3" class="striking_input" style="height:30px;" >  
+				<option value="">支付状态</option>
+				<option value="01">未收款</option>
+				<option value="02">挂账</option>
+				<option value="03">已收款</option>
+  			</select>  
+			<!--select name="orderType" id="orderType" class="striking_input" style="height:30px;">  
+				<option value="">销售单类型</option>
+				<option value="01">电脑</option>
+				<option value="02">POS</option>
+				<option value="03">管店宝</option>
+				<option value="04">楼下店</option>
+  			</select-->&nbsp;
+		<input type="button" class="primary_button" id="selewares" name="selewares" value="查 询" />
+		<!--
+		<input id="printButton" data-doubleclick="false" type="button" class="primary_button" style="margin-left:10px;" value="打印日结" />
+		-->
+		<input id="printButtons" type="button" class="primary_button" style="margin-left:10px;" value="今日汇总" />
+	</div>
+</div>
+</script>
+
+<script type="text/mustache" id="view_xsls_detail">
+<div>
+	<div style="position: absolute; left:0px; top:0px; bottom: 60px; overflow-y:auto; width:100%; ">
+		<table style="width: 100%" class="table_view" >
+			<thead>
+				<tr>
+					<th style="width: 4%">序号</th>
+					<th style="width: 12%">商品条码 </th> 
+					<th style="width: 12%">商品名称 </th>
+					<th style="width: 9%">商品单位</th>
+					<th style="width: 9%">单价 </th>
+					<th style="width: 9%">零售价 </th>
+					<th style="width: 9%">销售量 </th>
+					<th style="width: 9%">让利金额 </th>
+					<th style="width: 9%">销售金额 </th>
+					<!--th style="width: 9%">销售利润 </th-->
+					<th style="width: 9%">已退货量</th>
+					<th style="width: 9%">已退货金额</th>	
+				</tr>
+			</thead>
+			<tbody>
+				{{#result.list}}
+					<tr>
+						<td>{{line_num}}</td>
+						<td>{{big_bar}}</td>
+						<td>{{item_name}}</td>
+						<td>{{big_unit_name}}</td>
+						<td>{{big_pri3}}</td>
+						<td>{{promotion_price}}</td>
+						<td>{{qty_ord}}</td>
+						<td>{{new_adjusted_amount}}</td>
+						<td>{{amt_ord}}</td>
+						<!--td>{{big_profit}}</td-->
+						<td name='qtyRetTd'>{{qty_ret}}</td>
+						<td name='amtRetTd'>{{amt_ret}}</td>
+					</tr>
+				{{/result.list}}
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer" style="height: 60px; line-height: 50px;margin-left: 0px;font-weight:bold;text-align:left;" class="view_footer">
+		销售单号：
+		<label  class="primary_label" style="font-size: 13px;"> {{result.order_id}}</label>
+		&nbsp;
+		应收金额：
+		<label  class="striking_label" style="font-size: 13px;">{{result.amtys_ord_total}}</label>
+		&nbsp;
+		优惠金额：
+		<label  class="striking_label" style="font-size: 13px;">{{result.adjusted_amount}}</label>
+		&nbsp;
+		销售总量：
+		<label  class="striking_label" style="font-size: 13px;">{{result.qty_ord_total}}</label>
+		&nbsp;
+		退货总额：
+		<label id="amt_ret_total" class="striking_label" style="font-size: 13px;">{{result.sum_return_amt}}</label>
+		&nbsp;
+		退货总量：
+		<label id="qty_ret_total" class="striking_label" style="font-size: 13px;">{{result.sum_return_qty}}</label>
+		&nbsp;
+		<input style="float:right; margin-top:15px;" id="resetPrintButton"  type="button" class="primary_button" value="重打小票" />
+	</div>
+</div>
+</script>
+<script type="text/mustache" id="view_today_xsls_detail">
+<div>
+	<div style="position: absolute; left:0px; top:0px; bottom: 60px; overflow-y:auto; width:100%; ">
+		<table style="width: 100%" class="table_view">
+			<thead>
+				<tr>
+					<th style="width: 5%">序号</th>
+					<th style="width: 12%">商品名称 </th>
+					<th style="width: 8%">商品利润 </th>
+					<th style="width: 8%">销售/退货量 </th>			
+					<th style="width: 8%">销售/退货金额 </th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#result.sale_list}}
+					<tr>
+						<td>{{index}}</td>
+						<td>{{item_name}}</td>
+						<td>{{profit_amount}}</td>
+						<td>{{sale_quantity}}</td>
+						<td>{{sale_amount}}</td>
+					</tr>
+				{{/result.sale_list}}
+				{{#result.return_list}}
+					<tr style="color:red;">
+						<td>{{index}}</td>
+						<td>{{item_name}}</td>
+						<td>{{profit_amount}}</td>
+						<td>{{return_quantity}}</td>
+						<td>{{return_amount}}</td>
+					</tr>
+				{{/result.return_list}}
+				
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer" style="height: 60px; line-height: 50px;margin-left: 0px;font-weight:bold;text-align:left;" class="view_footer">
+		销售总额：
+		<label  class="striking_label" style="font-size: 13px;">{{result.amtys_ord_total}}</label>
+		&nbsp; &nbsp;&nbsp;
+		销售总量：
+		<label  class="striking_label" style="font-size: 13px;">{{result.qty_ord_total}}</label>
+		&nbsp;&nbsp;&nbsp;
+		销售总利润：
+		<label  class="striking_label" style="font-size: 13px;">{{result.sale_profit_amount}}</label>
+		&nbsp;&nbsp;&nbsp;
+		退货总额：
+		<label id="amt_ret_total" class="striking_label" style="font-size: 13px;">-{{result.return_ord_amount}}</label>
+		&nbsp;&nbsp;&nbsp;
+		退货总量：
+		<label id="qty_ret_total" class="striking_label" style="font-size: 13px;">-{{result.return_ord_quantity}}</label>
+		&nbsp;&nbsp;&nbsp;
+		<input style="float:right; margin-top:15px;" id="todayXslsDetailButton" type="button" class="primary_button" value="打印" />
+	</div>
+</div>
+</script>

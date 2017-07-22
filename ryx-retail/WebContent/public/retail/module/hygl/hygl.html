@@ -1,0 +1,289 @@
+<script type="text/mustache" id="view_hygl">
+<div>
+	<div>
+		<table id="myconsumer_list" style="width: 100%; table-layout:fixed;" data-onkey="true" class="table_view clickable">
+			<thead>
+				<tr>
+					<th style="width: 6%;">序号</th>
+					<th style="width: 10%;">会员名称</th>
+					<th style="width: 15%;">会员卡号</th>
+					<th style="width: 15%;">会员手机</th>
+					<th style="width: 8%;">当前积分</th>
+					<th style="width: 8%;">总积分</th>
+					<th style="width: 10%;">会员级别</th>
+<!--
+					<th style="width: 18%;">地址</th>
+-->
+					<th style="width: 10%;">是否有效</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#consumer_list}}
+				<tr data-consumer-id="{{consumer_id}}" data-is-upgradable="{{is_upgradable}}" data-grade="{{grade}}" >
+					<td>{{index}}</td>
+					<td>{{consumer_name}}</td>
+					<td>{{card_id}}</td>
+					<td>{{telephone}}</td>
+					<td>{{curscore}}</td>
+					<td>{{topscore}}</td>
+					<td name="grade_name">{{grade_name}}</td>
+<!--
+					<td>{{address}}</td>
+-->
+					<td>{{status_info}}</td>
+				</tr>
+				{{/consumer_list}}
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer">
+		<input type="button" id="addconsumer" class="striking_button right" value="新增会员"/>
+		<input type="text" class="striking_input" style='margin-right:12px;' id="keyword" data-enter="queryKeywordOrGrade" placeholder="请输入会员手机号/卡号"/>
+		<select id="grade_list" style="width:157px;height:30px;margin-right:12px;" >
+			<option value="" checked="checked">会员级别</option>
+			{{#grade_list}}
+			<option value="{{grade}}" checked="checked">{{grade_name}}</option>
+			{{/grade_list}}
+		</select>
+		<input type="button" class="primary_button" style='margin-right:20px;' id="queryKeywordOrGrade" name="queryKeywordOrGrade" value="查 询" />
+		<!--input type="checkbox" style='margin-right:12px;' id="is_upgradable"/><label>只查询可晋升会员</label-->
+<!- data-doubleclick="false"--->
+	</div>
+</div>
+</script>
+
+<script type="text/mustache" id="view_hygl_add1">
+<div>
+<style>
+  	.table_hyeditor tr{
+		height:40px;
+		text-align:center;
+	}
+</style>
+	<div>
+		<table style="width: 100%;border:0px;margin-top:10px;" class="table_hyeditor">
+			<tr>
+				<td style="border:0px;text-align: right;width:23%;">会员卡号：</td>
+				<td style="border:0px;text-align: left;width:25%;">
+					<input type="text" tabindex='100' consumer-id="{{consumer.consumer_id}}" value="{{consumer.card_id}}" id="card_id" data-empty="false" verify-message="消费者卡号不能为空"/>
+					<span class="redstar">*</span></td>
+				
+				<td style="border:0px;text-align: right;width:10%;">手机号码：</td>
+				<td style="border:0px;text-align: left;width:37%">
+					<input type="text" tabindex='101' value="{{consumer.telephone}}" id="telephone" data-empty="false" data-verify="number" verify-message="手机号不能为空"/>
+					<span class="redstar">*</span></td>
+			</tr>
+			<tr>
+				<td style="border:0px;text-align: right;">会员名称：</td>
+				<td style="border:0px;text-align: left;">
+					<input type="text" tabindex='102' value="{{consumer.consumer_name}}" id="consumer_name" data-empty="false" maxlength="50" verify-message="消费者姓名不能为空"/>
+					<span class="redstar">*</span></td>
+				<td style="border:0px;text-align: right;">会员级别：</td>
+				<td style="border:0px;text-align: left;">
+					<select data-empty="false" verify-message="请选择会员级别" style="width:157px;" id="upd_grade_list">
+						<option value="" checked="checked">请选择会员级别</option>
+						{{#grade_list}}
+							<option value="{{grade}}">{{grade_name}}</option>
+						{{/grade_list}}
+					</select><span class="redstar">*</span></td>
+			</tr>
+			<tr>
+				<td style="border:0px;text-align: right;">证件类型：</td>
+				<td style="border:0px;text-align: left; width:157px;">
+					<select id="cert_type" class="certType" tabindex='105' style="width:157px;">
+						<option value="0">请选择证件类型</option>
+						<option value="001">身份证</option>
+					</select>
+				</td>
+				<td style="border:0px;text-align: right;">证件号码：</td>
+				<td style="border:0px;text-align: left;">
+					<input type="text" tabindex='106' value="{{consumer.cert_id}}" maxlength="20" id="cert_id" data-verify="card" verify-message="证件号码输入错误" />
+				</td>
+			</tr>
+			<tr>
+				<td style="border:0px;text-align: right;">会员性别：</td>
+				<td style="border:0px;text-align: left;">
+					<input id="man" class="rad" type="radio" name="radio_sex" value="0" checked="checked" /><label for="man">男</label>&nbsp;&nbsp;
+  					<input id="women" class="rad" type="radio" name="radio_sex" value="1" /><label for="women">女</label>
+				</td>
+				<td style="border:0px;text-align: right;">出生日期：</td>
+				<td style="border:0px;text-align: left;"><input type="text" tabindex='108' value="{{consumer.birthday}}" id="birth_day" maxlength="10" date-verify="int"/></td>
+			</tr>
+			<tr>
+				<td style="border:0px;text-align: right;">邮编：</td>
+				<td style="border:0px;text-align: left;">
+					<input type="text" tabindex='109' value="{{consumer.zipcode}}" id="zip_code" maxlength="8" date-verify="int" data-verify="number" verify-message="邮编必须为数字！"/>
+				</td>
+				<td style="border:0px;text-align: right;">月收入：</td>
+				<td style="border:0px;text-align: left;">
+					<select id="month_salary" class="certType" tabindex='105' style="width:157px;">
+						<option value="">请选择月收入</option>
+						<option value="01">1000以下</option>
+						<option value="02">1000~2000</option>
+						<option value="03">2000~3000</option>
+						<option value="04">3000~4000</option>
+						<option value="05">4000~5000</option>
+						<option value="06">5000元以上</option>
+						<option value="07">其他</option>
+					</select>
+<!--
+					<input type="text" tabindex='110' value="{{consumer.month_salary}}" id="month_salary" data-verify="number" verify-message="月收入必须为数字！"/>
+-->
+				</td>
+			</tr>
+			<tr>
+				<td style="border:0px;text-align: right;">地址：</td>
+				<td style="text-align: left;border:0px;">
+					<input type="text" tabindex='114' value="{{consumer.address}}" maxlength="25" id="address" />
+				</td>
+				<td style="border:0px;text-align: right;">总积分：</td>
+				<td style="text-align:left;border:0px;">
+					<input type="text" tabindex='112' value="{{consumer.topscore}}"  data-verify="number" disabled />
+				</td>
+			</tr>
+			<tr>
+				<td style="border:0px;text-align: right;">邮箱：</td>
+				<td style="text-align:left;border:0px;">
+					<input type="text" value="{{consumer.email}}" data-enter="submit" tabindex='116' id="email" maxlength="48" data-verify="email" verify-message="邮件格式不正确"/>
+				</td>
+
+				<td style="border:0px;text-align: right;">当前积分：</td>
+				<td style="border:0px;text-align: left;">
+					<input type="text" tabindex='113' value="{{consumer.curscore}}" id="mycurscore" data-verify="number" value="0" disabled/>
+				</td>
+			</tr>
+			<tr>
+				<td style="border:0px;text-align: right;">学历：</td>
+				<td style="border:0px;text-align: left;">
+					<select id="degree" class="certType" tabindex='105' style="width:157px;">
+						<option value="">请选择会员学历</option>
+						<option value="01">小学</option>
+						<option value="02">初中</option>
+						<option value="03">高中</option>
+						<option value="04">专科</option>
+						<option value="05">本科</option>
+						<option value="06">硕士</option>
+						<option value="07">博士</option>
+						<option value="08">其他</option>		
+					</select>
+				</td>
+				<td style="border:0px;text-align: right;">是否有效：</td>
+				<td style="border:0px;text-align: left;">
+					<input type="radio" name="status_radio" value="1" checked="checked" id="yes" /><label for="yes">有效</label>&nbsp;&nbsp;
+					<input type="radio" name="status_radio" value="2" id="no" /><label for="no">无效</label>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="view_footer" style="text-align:right;"> 
+		<input type="button" class="primary_button" id="submit" tabindex='117' value="保 存" style="margin-right:16px;" data-consumer-id={{consumer.consumer_id}} />
+		<input type="button" class="closebtn_button" id="quxiao" value="取 消" />
+	</div>
+</div>
+</script>
+
+<!-- 设置默认会员级别 -->
+<script type="text/mustache" id="view_default_hyjb">
+<div>
+	<style>
+	.add_button{
+		text-align:center;
+		margin-top:30px;
+		margin-bottom:30px;
+	}
+	.deleteItem_img{
+		padding:5px 10px;
+		display:inline-block;
+		background-position:9px -23px;
+	}
+	.input_width{
+		width:60px;
+	}
+	</style>
+	<div>
+		<table style="width: 100%; table-layout:fixed;" data-onkey="true" class="table_view">
+			<thead>
+				<tr>
+					<th style="width: 10%;">是否默认</th>
+					<th style="width: 10%;">等级名称</th>
+					<th style="width: 10%;">折扣</th>
+					<th style="width: 12%;">操作</th>
+				</tr>
+			</thead>
+			<tbody id="main_body">
+				<tr>
+					<td><input class="default" name="is_default_grade" value="1" type="radio"/></td>
+					<td>
+						<input type="text" class="grade_name" id="grade_name" style="width:60px;" name="grade_name"  
+						value="钻石" data-empty="false" verify-message="填写级别名称"/></td>
+					<td>
+						<input type="text" style="width:60px;" id="discount" name="discount" value="100" data-empty="false" data-verify="number" verify-message="折扣必须为数字！"/><label>%</label>
+					</td>
+					<td>
+						<a title="删除" name="remove_tr_link" value="" class="deleteItem_img pageIcon pageIcon_del" href="javascript:void(0);"></a>
+					</td>
+				</tr>
+				<tr>
+					<td><input class="default" name="is_default_grade" value="1" type="radio"/></td>
+					<td>
+						<input type="text" class="grade_name" id="grade_name" style="width:60px;" name="grade_name"  
+						value="金卡" data-empty="false" verify-message="填写级别名称"/></td>
+					<td>
+						<input type="text" style="width:60px;" id="discount" name="discount" value="100" data-empty="false" data-verify="number" verify-message="折扣必须为数字！"/><label>%</label>
+					</td>
+					<td>
+						<a title="删除" name="remove_tr_link" value="" class="deleteItem_img pageIcon pageIcon_del" href="javascript:void(0);"></a>
+					</td>
+				</tr>
+				<tr>
+					<td><input class="default" name="is_default_grade" value="1" type="radio" checked="true"/></td>
+					<td>
+						<input type="text" class="grade_name" id="grade_name" style="width:60px;" name="grade_name"  
+						value="银卡" data-empty="false" verify-message="填写级别名称"/></td>
+					<td>
+						<input type="text" style="width:60px;" id="discount" name="discount" value="100" data-empty="false" data-verify="number" verify-message="折扣必须为数字！"/><label>%</label>
+					</td>
+					<td>
+						<a title="删除" name="remove_tr_link" value="" class="deleteItem_img pageIcon pageIcon_del" href="javascript:void(0);"></a>
+					</td>
+				</tr>
+				<!--
+				{{#list}}
+				<tr>
+					<td><input class="default" id="" value="" name="is_default_grade" type="radio" /></td>
+					<td><input type="text" class="grade_name" style="width:60px;" name="grade_name"  value="{{grade_name}}" data-empty="false" verify-message="请输入级别的名称！"/></td>
+					<td>
+						<input type="text" style="width:60px;" name="discount" value="{{discount}}" data-empty="false" data-verify="number" verify-message="折扣必须为数字！"/><label>%</label>
+					</td>
+					<td>
+						<a title="删除" name="remove_tr_link" value="" class="deleteItem_img pageIcon pageIcon_del" href="javascript:void(0);"></a>
+					</td>
+				</tr>
+				{{/list}}
+			-->
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer">
+		<input type="button" class="striking_button right" style="margin-left:20px;" id="submit_grade_button" value="保 存" />		
+		<input type="button" class="striking_button right" style="margin-left:20px;" id="add_grade_button" value="增  加" />
+	</div>
+</div>
+</script>
+
+<script type="text/mustache" id="view_default_hyjb_row">
+<tr>
+	<td><input class="default" name="is_default_grade" type="radio" value="1" /></td>
+	<td>
+		<input type="text" class="grade_name" id="grade_name" style="width:60px;" name="grade_name"  value="{{grade_name}}" 
+		data-empty="false" verify-message="请输入等级名称！"/>
+	</td>
+	<td>
+		<input type="text" style="width:60px;" id="discount" name="discount" value="100" data-empty="false" data-verify="number" 
+			verify-message="折扣必须为数字！"/><label>%</label>
+	</td>
+	<td>
+		<a title="删除" name="remove_tr_link" value="" class="deleteItem_img pageIcon pageIcon_del" href="javascript:void(0);"></a>
+	</td>
+</tr>
+</script>

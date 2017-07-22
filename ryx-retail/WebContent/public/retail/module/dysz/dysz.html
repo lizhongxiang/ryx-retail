@@ -1,0 +1,83 @@
+<script type="text/mustache" id="view_dysz">
+	<style type="text/css">
+		.bas {
+		width:700px;
+		font-size:14px;
+		margin:0 auto;
+	}
+		
+		.view_dysz_list {
+		width:410px;
+		padding-left: 0px;
+		height:260px;
+		padding-top:60px;
+		padding-right:20px;
+		border: 0px solid #ccc;
+		margin:auto;
+		float:left;
+		margin-top:30px;
+	}
+		
+		.view_dysz_list p {
+		text-align:right;
+	}
+		
+		.view_dysz_list p > input[type="text"] {
+		width:300px;
+	}
+		
+		.pass {
+		background-color:#F0F0F0;
+		width:225px;
+		padding-left:10px;
+		height:320px;
+		padding-top:20px;
+		border: 0px solid #000;
+		margin:auto;
+		float:right;
+		margin-top:60px;
+	}
+	</style>
+	<div class="bas">
+		<div class="view_dysz_list">
+		        <p>
+		        小票欢迎语：<input type="text" value="{{welcome_word}}" id="welcomeDiscourse" ></p>
+		        <br />
+		    	<p>本店电话：<input type="text" data-verify="phone" value="{{phone}}" id="welcomePhone" /></p>
+		    	<br />
+		    	<p >备注：<input type="text"  value="{{note}}" id="welcomeRemark" /></p>
+		    	<br />
+		    	<p>连打次数：<input type="text" data-verify="pint"  maxlength="3" value="{{num}}" id="welcomeNUm" /></p>
+		    	<br />
+		    	<p>
+					<a id="downpd" href="javascript:void(0);">下载打印机驱动</a>
+				</p>
+		    	<br /> 
+		    	<br />
+		        <p style="text-align:center;">
+					<input type="button" id="saveButton" class="primary_button" value="保 存" />
+		        	<input type="button" style="margin-left: 40px;" id="printButton" class="primary_button" title="打印一份测试页" value="打印测试页" />
+					
+		        </p>
+		</div>
+		<div class="pass">
+	    	<span id="ShowDiscourse"></span><br/>
+				-----------------------------------<br/>
+				单号：13963398888XXXXX<br/>
+				时间：2014-01-01 12:00:00<br/>
+				-----------------------------------<br/>
+				&nbsp;&nbsp;商品名 &nbsp;&nbsp;|&nbsp; 数量&nbsp; |&nbsp;售价 &nbsp;|&nbsp; 金额&nbsp;<br />
+				娇子(软阳光) 1  &nbsp;&nbsp;&nbsp;&nbsp; 9.50 &nbsp;&nbsp;&nbsp; &nbsp; 9.50<br/>
+				双喜(硬经典) 1 &nbsp;&nbsp; 11.00 &nbsp;&nbsp;110.00<br/>
+				-----------------------------------<br/>
+				数量： &nbsp;&nbsp;&nbsp;&nbsp;2  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;合计：&nbsp;&nbsp;119.50<br/>
+				实收：119.50 &nbsp;&nbsp; 找零：&nbsp; &nbsp;&nbsp;0.00<br/>
+				-----------------------------------<br/>
+				会员卡号：10000100<br/>
+				本店电话：<span id="showPhone"></span><br/>
+				<span id="showRemork">
+				期待您的下次光临
+				</span>
+	    </div>
+	</div>
+</script>

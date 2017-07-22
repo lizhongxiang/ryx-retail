@@ -1,0 +1,187 @@
+<script type="text/mustache" id="view_yxhd_ggxx_fix">
+<div style="height: 100%;">
+<style>
+	#left_container {
+		width: 220px;
+		height: 100%;
+		float: left;
+		position: relative;
+		background :#f9f9f9;
+	}
+	#right_container {
+		margin: 0 0 0 219px;
+		min-height: 100%;
+		border-left: 1px solid #CCC;
+		position: relative;
+		overflow-y:hidden;
+		background: #fff;
+	}
+	#left_view{
+		height: 100%;
+		background-color: #f9f9f9;
+	}
+
+.left_table_view {
+	/*border: 1px solid #efefef;
+	border-right: none;
+    border-top:none;
+	border-style: solid none solid solid;
+    border-width: 0 medium 1px 0;*/
+}
+.left_table_view ul, .left_table_view li {
+	padding: 8px 0;
+}
+.left_table_view ul {
+	font-weight: bold;
+	/*border-bottom: 1px solid #D3D8DD;*/
+	border-right: 1px solid #D3D8DD;
+	background: #D3D8DD;
+}
+.left_table_view li {
+	border-bottom: 1px solid #f0f0f0;
+	/*border-right: 1px solid #E6EAED;*/
+	cursor: pointer;
+	height: 50px;
+	*line-height:30px;
+    font-size: 16px;
+}
+
+.left_table_view li span {
+	margin-left: 24px;
+    margin-top:9px;
+	*margin-top: 12px;
+}
+.left_table_view li p {
+	margin-left: 55px;
+    margin-top: -28px;
+	text-align: center;
+}
+
+.left_table_view li:HOVER {
+	background: #f0f0f0;
+}
+
+.left_table_view li.selected{
+	/*color: #3399CC;*/
+   background:#f0f0f0;
+}
+</style>
+<div style="height:100%; width:100%; background-color: #D4D9D9;">
+	<div style="width: 100%; height: 100%;">
+
+	<div id="left_container">
+		<div id="left_view">
+			<ul class="left_table_view" >
+				<li id="sys_info" name="sys_xtgg" class="selected">
+					<span class="leftIcon leftIcon_xtgg"></span>
+					<p><b>系统公告</b></p>
+				</li>
+				<li id="xsm_info" name="sys_xsmhd">
+					<a style="color: #484848;" href="http://www.xinshangmeng.com/" target="_blank">
+						<span class="leftIcon leftIcon_xsmhd"></span><p><b>新商盟活动</b></p>
+					</a>
+				</li>
+				<li id="act_info" name="sys_hyxx">
+					<span class="leftIcon leftIcon_hyxx"></span>
+					<p><b>货源信息</b></p>
+				</li>
+				<li id="feiyan_info" name="sys_hyxx">
+					<span class="leftIcon leftIcon_1532"></span>
+					<p><b>1532非烟商品专栏</b></p>
+				</li>
+				<li id="marketing_info" name="sys_yxhd">
+					<span class="leftIcon leftIcon_yxhd"></span>
+					<p><b>营销活动</b></p>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div id="right_container">
+		<div id="notice" style="position: absolute; width: 100%; top: 0px; bottom: 0; overflow-y:auto; overflow-x: hidden;">
+		
+		</div>
+	</div>
+
+	</div>
+	<div class="view_footer"></div>
+</div>
+</div>
+</script>
+
+<!-- 系统公告·列表 -->
+<script type="text/mustache" id="view_yxhd_ggxx">
+	<table class="table_view clickable" data-onkey="true">
+		<thead>
+			<tr>
+				<th style="width: 10%;">序号</th>
+				<th style="width: 50%;">公告标题</th>
+				<th style="width: 15%;">发送者</th>
+				<th style="width: 15%;">发送日期</th>
+			</tr>
+		</thead>
+		<tbody id = "table_view_tbody_list">
+			{{#list}}
+				<tr data-id="{{notice_id}}" indexId="{{index}}" >
+					<td>{{index}}</td>
+					<td style="text-align:left; padding-left:20px;">{{notice_title}}</td>
+					<td>{{crt_user}}</td>
+					<td>{{crt_date}}</td>		
+				</tr>
+			{{/list}}	
+		</tbody>
+	</table>
+</script>
+
+<!-- 营销活动·列表 -->
+<script type="text/mustache" id="view_yxhd_yxhd">
+<div style="height: 100%;">
+	<div style="height: 100%; ">
+		{{#list}}
+		<div style="margin-left: 10px; padding-top: 20px; height: 130px; border-bottom: 1px solid #E6EAED;">
+			<div style="float:left;"><img style="width: 106px;" src="{{imgSrc}}" alt="{{act_title}}"/></div>
+			<div style="margin-left: 120px;">
+				<div style="font-size:20px;">
+					<a name="yyhdTitle" data-id="{{act_id}}" href="javascript:void(0);">{{act_title}}</a>
+				</div>
+				<div style="margin-top:10px; margin-right: 30px; "><p>{{act_simple}}</p></div>
+				<div style="margin-top:10px;"><label style="color:#1E90FF;float:left;">活动时间：{{start_time}}--{{end_time}}</label>
+					<input name="yyhdInfoBtn" data-id="{{act_id}}" class="primary_button right" type="button" value="查看详情" style="margin:0 40px 0 0;">
+					</div>
+			</div>
+		</div>
+		{{/list}}
+	</div>
+	
+</div>
+</script>
+
+<!-- 公告消息·详情 -->
+<script type="text/mustache" id="view_yxhd_hyxx_detail">
+<div>
+<div style="overflow-y: scroll; position: absolute; top: 0px; left: 0px; bottom: 60px; width:100%;">
+	<div style="text-align: center;">
+		<h3 style="font-size: 16px; margin: 10px auto; font-weight: bold;">{{notice_title}}</h3>
+		<p style="width: 50%; float: right; text-align: left;">发送者：{{crt_user}}&nbsp;&nbsp;&nbsp;发送日期：{{crt_date}}</p>
+	</div>
+
+	<div style="margin: 40px 40px 0 40px; clear: both;">
+		<p style="border-top:1px dashed #efefef;height:1px;width:100%;margin-bottom:10px;"></p>
+		{{{notice_desc}}}
+	</div>
+</div>
+	<div class="view_footer" >
+			<input  type="button" id="closeButton"  class="closebtn_button right" style="margin-left:20px;" value="关 闭" />
+			{{#notOnlyOne}}
+			<input  type="button" id="nextButton" data-type="{{notice_type}}"   data-inid="{{next_id}}" class="primary_button right" style="margin-left:20px;" value="下一条" />
+			<input  type="button" id="upButton" data-type="{{notice_type}}"   data-inid="{{up_id}}" class="primary_button right" value="上一条" />
+			{{/notOnlyOne}}
+	</div>
+</div>
+</script>
+
+<script type="text/mustache" id="view_yxhd_yxhd_detail">
+<div style="height: 100%;width: 100%;">
+	<iframe scrolling="auto" frameborder="0" style="width: 100%; height: 100%" src={{url}}></iframe>
+</div>
+</script>

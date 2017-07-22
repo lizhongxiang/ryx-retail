@@ -1,0 +1,137 @@
+<script type="text/mustache" id="view_hyjb">
+<div>
+	<style>
+	.add_button{
+		text-align:center;
+		margin-top:30px;
+		margin-bottom:30px;
+	}
+	.deleteItem_img{
+		padding:5px 10px;
+		display:inline-block;
+		background-position:5px -23px;
+	}
+	.input_width{
+		width:60px;
+	}
+	</style>
+	<div>
+		<table style="width: 100%; table-layout:fixed;" data-onkey="true" class="table_view">
+			<thead>
+				<tr>
+					<th style="width: 10%;">级别</th>
+					<th style="width: 10%;">名称</th>
+					<th style="width: 10%;">晋升规则</th>
+					<th style="width: 10%;">会员人数</th>
+					<th style="width: 10%;">折扣</th>
+					<th style="width: 12%;">操作</th>
+				</tr>
+			</thead>
+			<tbody id="main_body">
+				{{#list}}
+				<tr data-id="{{grade_id}}" operation_type="{{operation_type}}">
+					<td>级别<label id="grade" name="grade">{{grade}}</label></td>
+					<td><input type="text" class="grade_name" style="width:60px;" name="grade_name"  value="{{grade_name}}" data-empty="false" verify-message="请输入级别{{grade}}的名称！"/></td>
+					<td><label>无</label></td>
+					<td><label id="consumer_number" name="grade_number">{{consumer_number}}</label></td>
+					<td>
+						<input type="text" style="width:60px;" name="discount" value="{{discount}}" data-empty="false" data-verify="number" verify-message="折扣必须为数字（级别{{grade}}）！"/><label>%</label>
+					</td>
+					<td>
+						<a title="删除" name="remove_tr_link" value="{{grade_id}}" class="deleteItem_img pageIcon pageIcon_del" href="javascript:void(0);"></a>
+					</td>
+				</tr>
+				{{/list}}
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer">
+		<input type="button" class="striking_button right" style="margin-left:20px;" id="submit_grade_button" value="保 存" />		
+		<!--input type="button" class="striking_button right" style="margin-left:20px;" id="promotionrules" value="选择晋升规则" /-->
+		<input type="button" class="striking_button right" style="margin-left:20px;" id="add_grade_button" value="增  加" />
+	</div>
+</div>
+</script>
+<script type="text/mustache" id="view_hyjb_jsgz">
+<div>
+<style>
+.table_hyeditor tr{
+	height:40px;
+    text-align:center;
+}
+.td_right{
+	border:0px;
+	text-align: right;
+	width:150px;
+	height:60px;
+}
+.td_left{
+	border:0px;
+	text-align: left;
+
+}
+</style>
+	<div>
+		<table style="width: 100%;border:0px;margin-top:30px;" class="table_hyeditor">
+			<tr>
+				<td class="td_right">成交笔数&nbsp;：&nbsp;</td>
+				<td class="td_left">
+					<input type="radio" name="traded" value="0" />必要条件&nbsp;&nbsp;
+					<input type="radio" name="traded" value="1"/>可选条件&nbsp;&nbsp;
+					<input type="radio" name="traded" value="" checked="checked"/>禁用&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td class="td_right">成交金额&nbsp;：&nbsp;</td>
+				<td class="td_left">
+					<input type="radio" name="turnover" value="0" />必要条件&nbsp;&nbsp;
+					<input type="radio" name="turnover" value="1"/>可选条件&nbsp;&nbsp;
+					<input type="radio" name="turnover" value="" checked="checked"/>禁用&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td class="td_right">成交利润&nbsp;：&nbsp;</td>
+				<td class="td_left">
+					<input type="radio" name="profit" value="0" />必要条件&nbsp;&nbsp;
+					<input type="radio" name="profit" value="1"/>可选条件&nbsp;&nbsp;
+					<input type="radio" name="profit" value="" checked="checked"/>禁用&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td class="td_right">会员存续&nbsp;：&nbsp;</td>
+				<td class="td_left">
+					<input type="radio" name="deposit" value="0" />必要条件&nbsp;&nbsp;
+					<input type="radio" name="deposit" value="1"/>可选条件&nbsp;&nbsp;
+					<input type="radio" name="deposit" value="" checked="checked"/>禁用&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td class="td_right">会员积分&nbsp;：&nbsp;</td>
+				<td class="td_left">
+					<input type="radio" name="points" value="0" checked="checked"/>必要条件&nbsp;&nbsp;
+					<input type="radio" name="points" value="1"/>可选条件&nbsp;&nbsp;
+					<input type="radio" name="points" value=""/>禁用&nbsp;
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="view_footer" style="text-align:right;">
+		<input type="button" class="primary_button" id="submit" tabindex='117' value="保 存" />	
+		<input type="button" style="margin-left:15px;" class="closebtn_button" id="quxiao" value="取 消" />
+	</div>
+</div>
+</script>
+<script type="text/mustache" id="view_hyjb_row">
+<tr data-id="{{grade_id}}" operation_type="{{operation_type}}">
+	<td>级别<label id="grade" name="grade">{{grade}}</label></td>
+	<td><input type="text" class="grade_name" style="width:60px;" name="grade_name"  value="{{grade_name}}" data-empty="false" verify-message="请输入等级{{grade}}的名称！"/></td>
+	<td><label>无</label></td>
+	<td><label id="consumer_number">{{consumer_number}}</label></td>
+	<td>
+		<input type="text" style="width:60px;" name="discount" value="100" data-empty="false" data-verify="number" verify-message="折扣必须为数字（级别 {{grade}}）！"/><label>%</label>
+	</td>
+	<td>
+		<a title="删除" name="remove_tr_link" value="{{grade_id}}" class="deleteItem_img pageIcon pageIcon_del" href="javascript:void(0);"></a>
+	</td>
+</tr>
+</script>

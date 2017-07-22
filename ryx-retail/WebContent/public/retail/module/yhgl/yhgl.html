@@ -1,0 +1,274 @@
+<script type="text/mustache" id="view_yhgl">
+<div style="width: 100%; height: 100%;">
+	<style>
+	#left_container {
+		width: 220px;
+		height: 100%;
+		float: left;
+		position: relative;
+		background :#D4D9D9;
+	}
+	#right_container {
+		margin: 0 0 0 179px;
+		min-height: 100%;
+		border-left: 1px solid #CCC;
+		position: relative;
+		overflow-y:hidden;
+		background: white;
+	}
+	#left_view{
+		height: 100%;
+		background-color: #f9f9f9;
+	}
+
+	.left_table_view {
+		border: 1px solid #E6EAED;
+		border-right: none;
+		border-style: solid none solid solid;
+	    border-width: 0 medium 1px 0;
+	}
+	.left_table_view ul, .left_table_view li {
+		padding: 8px 0;
+	}
+	.left_table_view ul {
+		font-weight: bold;
+		/*border-bottom: 1px solid #D3D8DD;*/
+		border-right: 1px solid #D3D8DD;
+		background: #D3D8DD;
+	}
+	.left_table_view li {
+		border-top: 1px solid #f0f0f0;
+		/*border-right: 1px solid #E6EAED;*/
+		cursor: pointer;
+		height: 50px;
+		*line-height:30px;
+	    font-size: 16px;
+	}
+	.left_table_view li span {
+		margin-left: 40px;
+		margin-top:  10px;
+		*margin-top: 12px;
+	}
+	.left_table_view li p {
+		margin-left: 60px;
+	    margin-top: -27px;
+		text-align: center;
+	}
+	
+	.left_table_view li:HOVER {
+		background: #f0f0f0;
+	}
+	.liselected{
+		background: #f0f0f0;
+	}
+	.left_table_view li.selected p{
+		/*color: #3399CC;*/
+	}
+	.right_container .yxdsjf input{
+		margin: 18px 0 0 18px;
+	}
+	.itemblocklabel {
+		position: absolute;
+		top: -12px;
+		left: 20px;
+		background-color: #F5F5F5;
+		padding: 0px 10px;
+		color: #999;
+		font-size: 15px;
+		font-weight: bold;
+	}
+	.curitem_ul li {
+		height: 40px;
+		line-height: 30px;
+		overflow: hidden;
+	}
+	.itemblock {
+		border:1px solid #CCC;
+		margin: 30px 16px;
+		padding: 16px;
+		position: relative;
+	}
+	#left_container_ {
+		width: 47%;
+		height: 100%;
+		float: left;
+		padding-left:20px;
+		position: relative;
+	}
+	#right_container_ {
+		width: 47%;
+		height: 100%;
+		float: right;
+		padding-right:20px;
+		position: relative;
+	}
+	.pay_info li{
+		margin: 42px 0 0 0;
+	}
+	.yd_search_ul li{
+		margin: 4px 0 0 0;
+	}
+	.right_container .yxds_pay_callback li{
+		margin: 8px 0 0 12px;
+	}
+	#payMsg_ul li{
+		margin: 12px 0 0 14px;
+	}
+	#role_div{
+		padding:10px 10px 10px 20px;
+		border-bottom: 1px solid #D3D8DD;
+	}
+	#resources ul{
+		margin-left:10px;
+		padding-left:10px;
+		padding-top:3px;
+	}
+	.ul_children li{
+		float:left;
+		padding-left:30px;
+	}
+	.ul_children{
+		float:left;
+		padding-top:3px;
+		width:100%;
+	}
+	.user_add li{
+		margin-top:10px;
+		height:35px
+	}
+	.user_add span{
+		width:100px;
+		text-align:right;
+		display:inline-block
+	}
+	</style>
+	<div style="height:100%; width:100%; background-color: #D4D9D9;">
+		<div id="left_container">
+			<div id="left_view">
+				<ul class="left_table_view" >
+					<!-- <li id="jsgl" class="selected liselected"><img src="../public/retail/resource/zzfw/dhjf1.png"/><p><b>角色管理</b></p></li>-->
+					<li id="yhgl"  class="selected liselected"><span class="leftIcon leftIcon_yhgl"></span><p><b>用户管理</b></p></li>
+				</ul>
+			</div>
+		</div>
+		<div id="right_container">
+			<div id="container" style="position: absolute; width: 100%; top: 0px; bottom: 60px; overflow-y:auto; overflow-x: hidden;">
+						
+			</div>
+		</div>
+		<div class="view_footer" id="view_footer">
+			<input type="button" class="striking_button right" id="add" value="新增用户" />
+		</div>
+	</div>
+</div>
+</script>
+<script type="text/mustache" id="view_yhgl_jsgl">
+<div>
+	<div>
+		<table style="width: 100%;" class="table_view" data-onkey="true" >
+			<thead>
+				<tr>
+					<th style="width: 100%;">角色名称</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#list}}
+					<tr class="rolelist" role_id="{{role_id}}" resourcesID="{{resources_id}}" roleName="{{role_name}}">
+						<td>{{role_name}}</td>
+					</tr>
+				{{/list}}
+			</tbody>
+		</table>
+	</div>
+</div>
+</script>
+
+<script type="text/mustache" id="view_yhgl_yhgl">
+<div>
+	<div>
+		<table style="width: 100%;" class="table_view clickable" data-onkey="true">
+			<thead>
+				<tr style="border-bottom:1px solid #ebebeb;">
+					<th style="width: 33%;">编号</th>
+					<th style="width: 33%;">工号</th>
+					<th style="width: 33%;">角色名称</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#list}}
+					<tr class="userList" roleID="{{role_id}}" userID="{{user_id}}" userCode="{{user_code}}" islocked="{{is_locked}}">
+						<td>{{line_num}}</td>
+						<td>{{clertNum}}</td>
+						<td>{{role_name}}</td>
+					</tr>
+				{{/list}}
+			</tbody>
+		</table>
+	</div>
+</div>
+</script>
+<script type="text/mustache" id="view_yhgl_add_role">
+<div>
+	<div id="resources" style="position: absolute; width: 100%; top: 0px; bottom:62px; overflow-y:auto; overflow-x: hidden;"></div>
+	<div class="view_footer" id="view_footer">
+		角色名称：<input type="text" class="striking_input" id="rolename" name="rolename" data-enter="selewares" placeholder="角色名称"/>
+		<input type="hidden" id="roleID" name="roleID" />
+		<input type="button" class="closebtn_button right" id="quxiao" value="取 消" />
+		<input type="button" class="primary_button right" id="addRoleButton" tabindex='117' value="保 存" style="margin-right:20px"/>
+	</div>
+</div>
+</script>
+
+<script type="text/mustache" id="view_yhgl_add_user">
+<div>
+	<div id="resources" style="position: absolute; width: 100%; top: 0px; bottom:62px; overflow-y:auto; overflow-x: hidden;">
+			<ul class="user_add" style="margin: 0 auto; width: 360px; padding-top:20px;">
+				<li>
+					<span id="userName_lable">商户号：</span>
+					<input type="hidden" name="userID" id="userID">
+				</li>
+				<li><span>工号：</span><input style="width: 200px;" type="text" name="jobNum" id="jobNum" data-empty="false" verify-message="请填写工号!"><span class="redstar" style="width:10px;">*</span></li>
+				<li><span>登录密码：</span><input style="width: 200px;" type="password" name="password" id="password" data-empty="false" verify-message="密码不能为空!"><span class="redstar" style="width:10px;">*</span></li>
+				<li><span>重复密码：</span><input style="width: 200px;" type="password" name="rePassword" id="rePassword" data-empty="false" verify-message="两次输入的密码不一致!"><span class="redstar" style="width:10px;">*</span></li>
+				<li><span>用户角色：</span>
+					<select id="clerkRole" style="width: 200px;">
+					</select>
+				</li>
+				<li>
+					<span>是否有效：</span>
+					<input id="jobyes" type="radio" checked="true" value="0" name="islocked"><label for="jobyes">&nbsp;是</label>&nbsp;&nbsp;
+					<input id="jobno" type="radio" value="1" name="islocked"><label for="jobno">&nbsp;否</label></li>
+				</li>
+			</ul>
+	</div>
+	<div class="view_footer" id="view_footer">
+		<input type="hidden" id="roleID" name="roleID" />
+		<input type="button" class="closebtn_button right" id="quxiao" value="取 消" />
+		<input type="button" class="primary_button right" id="addUserButton" tabindex='117' value="保 存" style="margin-right:20px"/>
+	</div>
+</div>
+</script>
+<script type="text/mustache" id="view_dpsz_pwd">
+	<div >
+		<div align="center" style="padding-top: 30px;" >
+				<form>
+					<p>
+						<span>原密码：</span><input type="password" id="oldPwd" size=22 placeholder=""/>
+					</p>
+					<br/>
+					<p>
+						<span>新密码：</span><input type="password" id="newPwd1" size=22   placeholder=""/>
+					</p>
+					<br/>
+					<p>
+						<span>新密码：</span><input type="password" id="newPwd2" size=22  placeholder=""/>
+					</p>
+					<br/>
+					<p>
+						<!--<input type="reset" style="" class="primary_button" value="重置" />-->
+						<input type="button" style="margin-top: 20px;" class="primary_button" value="保 存" id="pwdSubmit" />
+					</p>
+				</form>
+		</div>
+	</div>
+</script>

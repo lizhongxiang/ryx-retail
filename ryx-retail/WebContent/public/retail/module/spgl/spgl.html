@@ -1,0 +1,480 @@
+<script type="text/mustache" id="view_spgl">
+<div>
+	<style>
+		.ttb td{
+			padding:5px;
+		}
+	</style>
+	<div>
+		<table id="all_item_list" style="width: 100%;" data-onkey="true" class="table_view clickable">
+			<thead>
+				<tr>
+					<th style="width: 5%;">序号</th>
+					<th style="width: 18%;">商品条码</th>
+					<th style="width: 18%;">商品名称</th>
+					<th style="width: 10%;">商品类别</th>
+					<th style="width: 10%;">单位名称</th>
+					<th style="width: 10%;">采购价</th>
+					<th style="width: 10%;">零售价</th>
+					<th style="width: 9%;">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#merch_item_list}}
+				<tr data-id="{{item_id}}" data-seq="{{seq_id}}" data-name="{{item_name}}" data-status="{{status}}" data-short="{{short_name}}" data-code="{{short_code}}" data-spec="{{spec}}" data-pri1="{{pri1}}" data-pri2="{{pri2}}">
+					<td>{{index}}</td>
+					<td>{{big_bar}}</td>
+					<td data-short_name="{{short_name}}" >{{item_name}}</td>
+					<td>{{item_kind_name}}</td>
+					<td>{{big_unit_name}}</td>
+					<td>{{pri1}}</td>
+					<td>{{big_pri4}}</td>
+					<td>
+                      <a title="{{status_text}}" name="unsale" style="padding:5px 20px;background-image:url({{status_title}});background-repeat:no-repeat;background-position:50%;"></a>
+                      <a title="{{delete_status_text}}" name="delete" style="padding:5px 20px;background-image:url({{delete_status_title}});background-repeat:no-repeat;background-position:50%;"></a>
+					</td>
+				</tr>
+				{{/merch_item_list}}
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer">
+		<div class="view_adSearch">
+			零售价：
+			<input  type="text"  id="floor_big_pri4" data-enter="selewares" style="width:60px;"  class="striking_input"/>
+			-
+			<input  type="text"  id="ceiling_big_pri4" data-enter="selewares" style="width:60px;"  class="striking_input"/>
+		</div>
+		<input type="button" class="striking_button right" tabindex="4" id="repeatGoods" value=" 新增重码商品 " style="position:relative; left:10px;"/>
+		<input type="button" class="striking_button right" tabindex="3" id="newGoods"  data-doubleclick="false" value="新增商品" style="position:relative ;left:-10px ;"/>
+		<input type="text" data-enter="query" tabindex="1" class="striking_input" id="item_bar" name="item_bar" value="{{item_bar}}" placeholder="请输入条码/品名/拼音"/>&nbsp;
+		<select name="item_kind" id="item_kind" style="height:30px;">
+			<option value="">全部商品</option>
+			{{#item_kind_list}}
+			<option value="{{id}}">{{name}}</option>
+			{{/item_kind_list}}
+		</select>
+		<input style="margin-left:5px;" type="button" class="primary_button" tabindex="2" id="query" value="查 询"/>
+	</div>
+</div>
+</script>
+<script type="text/mustache" id="view_spge_addGoods">
+<div>
+<style>
+   .deleteItem_img{
+     padding:5px 10px;
+	 display:inline-block;
+	 background-position: 5px -25px;
+    }
+</style>
+	<div style="overflow-y: auto; position: absolute; top: 0px; left: 0px; bottom: 60px; width:100%;" >
+		<table class="table_view">
+			<thead>
+				<tr>
+					<th style="width: 12%;">商品条码</th>
+					<th style="width: 18%;">商品名称</th>
+					<th style="width: 10%;">商品类别</th>
+					<th style="width: 10%;">单位名称</th>
+					<th style="width: 10%;">采购价</th>
+					<th style="width: 10%;">零售价</th>
+					<!--th style="width: 10%;">库存量</th-->
+					<th style="width: 10%;">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
+	<div class="view_footer" style="text-align:right;"> 
+		<input type="button" class="primary_button" data-doubleclick="false" id="submit" value="保 存" />
+        <input style="margin-left:15px;" type="button" class="closebtn_button" id="quxiao" value="取 消" />
+	</div>
+	
+</div>
+</script>
+
+<script type="text/mustache" id="view_spge_addGoodsTr">
+{{#item}}
+	<tr name="new_item_tr" data-id="{{item_id}}" data-bar="{{item_bar}}"  data-index="{{indexs}}">
+		<td> <input name="newgoodbar" data-respond="false"  type="text" style="width:92%; " tabindex={{index1}}  value="{{item_bar}}" data-empty="false" data-verify="word" verify-message="条码不能为空！" {{#item_bar}}disabled{{/item_bar}}/> </td>
+		<td> <input name="newgoodname"  value="{{item_name}}" type="text" style="width:93%; " tabindex={{index2}} maxlength="32"  data-empty="false" verify-message="商品名称不能为空！" /> </td>
+		<td> <input name="newgoodkind" value="{{item_kind_name}}" type="text" style="width:90%; " tabindex={{index3}}    />  </td>
+		<td> <input name="newgoodunitname" value="{{unit_name}}" type="text" style="width:90%; " tabindex={{index4}}   />  </td>
+		<td> <input name="newgoodpri1" value="{{pri1}}" type="text" style="width:90%; " tabindex={{index5}}   data-verify="number" data-empty="false" verify-message="采购价不能为空且必须为数字！" />  </td>
+		<td> <input name="newgoodpri4" value="{{pri4}}" type="text" style="width:90%; "  tabindex={{index6}}  data-verify="number" data-empty="false" verify-message="零售价不能为空且必须为数字！"  />  </td>
+		<!--td> <input name="newgoodwhse" value="0" type="text" style="width:90%; " tabindex={{index8}} data-verify="number"   />  </td-->
+		<td>
+			{{#item_bar}}
+			<a title="取消" name="removeTr" class="deleteItem_img pageIcon pageIcon_del" href="javascript:void(0);"></a>
+			{{/item_bar}}
+		</td>
+	</tr>
+{{/item}}
+</script>
+
+<script type="text/mustache" id="view_spge_addEmptyTr">
+	<tr name="new_item_tr" data-id="" data-bar="">
+		<td> <input name="newgoodbar" data-respond="false"  type="text" style="width:92%;" tabindex={{item.index1}} /> </td>
+		<td> <input name="newgoodname" type="text" style="width:93%; " tabindex={{item.index2}}    /> </td>
+		<td> <input name="newgoodkind" type="text" style="width:90%; " tabindex={{item.index3}}    />  </td>
+		<td> <input name="newgoodunitname" type="text" style="width:90%; " tabindex={{item.index4}}   />  </td>
+		<td> <input name="newgoodpri1" type="text" style="width:90%; " data-verify="number" tabindex={{item.index5}} />  </td>
+		<td> <input name="newgoodpri4" type="text" style="width:90%; "  data-verify="number" tabindex={{item.index6}} />  </td>
+		<!--td> <input name="newgoodwhse" type="text" style="width:90%;" data-verify="number" tabindex={{item.index8}}/>  </td-->
+		<td>
+		</td>
+	</tr>
+</script>
+
+<script type="text/mustache" id="view_spge_add_repeat_item">
+<div>
+	<div style="overflow-y: auto; position: absolute; top: 0px; left: 0px; bottom: 60px; width:100%;" >
+		<div id="add_repeat_item_div" style="padding:5px 0px 5px 0px;">
+			<label style="display:block;margin:20px;">请输入条码获取商品信息后，再新增重码商品！</label>
+		</div>
+	</div>
+	<div class="view_footer" style="text-align;"> 
+		<input type="text" tabindex="1" class="striking_input" id="repeat_item_bar" name="repeat_item_bar" placeholder="请输入条码/品名/拼音"/>
+		<input type="button" class="primary_button" tabindex="2" id="repeat_query" value="查 询" style="margin-left:10px;"/>
+		<input type="button" class="closebtn_button right" id="cancel_save_repeat_item" value="取 消"/>
+		<input type="button" class="primary_button right" data-doubleclick="false" style="position:relative;left:10px; margin-right:20px;" id="save_repeat_item" value="保 存"/>
+	</div>
+</div>
+</script>
+
+<script type="text/mustache" id="view_spge_repeat_item_label">
+<label style="display:block;margin:20px;">请输入条码获取商品信息后，再新增重码商品！</label>
+</script>
+<script type="text/mustache" id="view_spge_repeat_item_table">
+
+<style>
+	.curitem_ul li {
+		height: 40px;
+		line-height: 30px;
+		overflow: hidden;
+	}
+	.footer_ul li {
+		float: left;
+		margin-right: 40px;
+	}
+	#left_container {
+		width: 280px;
+		height: 100%;
+		float: left;
+		position: relative;
+	}
+	#right_container {
+		margin: 0 0 0 280px;
+		min-height: 100%;
+		max-height: 100%;
+		overflow-y: auto;
+		border-left: 1px solid #CCC;
+		position: relative;
+	}
+
+	.itemblock {
+		/*border-top:1px solid #eee;*/
+		margin: 18px 0px;
+		padding: 16px 0px;
+		position: relative;
+	}
+	.itemblocklabel {
+		position: absolute;
+		top: -12px;
+		left: 0px;
+		background-color: #FFF;
+		padding: 0px 10px;
+		color: #888;
+		font-size: 14px;
+		font-weight: bold;
+	}
+.deleteItem_img{
+     padding:5px 10px;
+	 display:inline-block;
+	 background-position: 5px -25px;
+    }
+	</style>
+
+<div class="itemblock">
+	<div class="itemblocklabel">已有商品</div>
+	<div id="consumer_container">
+<table class="table_view">
+	<thead>
+		<tr>
+			<th style="width: 18%;">商品名称</th>
+			<th style="width: 10%;">商品类别</th>
+			<th style="width: 10%;">单位名称</th>
+			<th style="width: 10%;">采购价</th>
+			<th style="width: 10%;">零售价</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#list}}
+		<tr name="repeat_item_tr" data-seq="{{seq_id}}" data-id="{{item_id}}" data-bar="{{item_bar}}">
+			<td> {{item_name}} </td>
+			<td> {{item_kind_name}} </td>
+			<td> {{unit_name}} </td>
+			<td> {{pri1}} </td>
+			<td> {{pri4}} </td>
+		</tr>
+		{{/list}}
+		{{^list}}<tr><td colspan="6"><label>根据输入的条码没有获取商品信息！</label></td></tr>{{/list}}
+	</tbody>
+</table>
+</div>
+</div>
+<div class="itemblock">
+	<div class="itemblocklabel">新增商品</div>
+	<div id="consumer_container">
+
+<table id="repeatTable" class="table_view">
+	<thead>
+		<tr>
+			<th style="width: 18%;">商品名称</th>
+			<th style="width: 10%;">商品类别</th>
+			<th style="width: 10%;">单位名称</th>
+			<th style="width: 10%;">采购价</th>
+			<th style="width: 10%;">零售价</th>
+			<th style="width: 10%;">操作</th>
+		</tr>
+	</thead>
+	<tbody id="adding">
+	</tbody>
+</table>
+</div>
+</div>
+</script>
+
+<script type="text/mustache" id="view_spgl_repeat_item_tr">
+<tr name="repeat_item_tr" data-seq="{{seq_id}}" data-id="{{item_id}}" data-bar="{{item_bar}}">
+	<td><input name="repeat_item_name" type="text" style="width:93%; " value="{{item_name}}"/></td>
+	<td><input name="repeat_item_kind" type="text" style="width:90%; " value="{{item_kind_name}}"/></td>
+	<td><input name="repeat_item_unit" type="text" style="width:90%; " value="{{unit_name}}"/></td>
+	<td><input name="repeat_item_pri1" type="text" style="width:90%; " value="{{pri1}}"/></td>
+	<td><input name="repeat_item_pri4" type="text" style="width:90%; " value="{{pri4}}"/></td>
+	<!--<td><a name="removeTr" class="optionbtn" href="javascript:void(0);" style="display:none;">取消</a></td>-->
+    <td>
+         <a title="取消" name="removeTr" class="deleteItem_img pageIcon pageIcon_del" href="javascript:void(0);" style="display:none;"></a>
+    </td>
+</tr>
+</script>
+
+<script type="text/mustache" id="view_spgl_editor">
+<div id="editor_container" style="*overflow:hidden;">
+<style>
+  .table_editor tr{
+     height:35px;
+     text-align:center;
+}
+  .errorCls{
+     border : 1px solid #f00;
+}
+</style>
+	{{#merchItem}}
+	<div id="view_editor">
+		<div id="item_container">
+			<input type="hidden" id="seq_id" value="{{seq_id}}"/>
+			<input type="hidden" id="item_id" value="{{item_id}}"/>
+			<table style="width: 100%;border:0px;" class="table_editor">
+				<tr>
+					<td style="border:0px;text-align: right;">商品名称:&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td style="border:0px;text-align: left;">
+						<input type="text" id="item_name" value="{{item_name}}" data-empty="false" verify-message="商品名称不能为空或错误"/>
+						<span class="redstar">*</span>
+					</td>
+					<td style="border:0px;text-align: right;">商品条码:&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td style="border:0px;text-align: left;">
+						<input type="text" id="item_bar" value="{{item_bar}}" data-empty="false" data-respond="false" data-verify="word" data-uniq="bar" verify-message="商品条码不能为空或错误" uniq-message="包装条码不可重复"/>
+						<span class="redstar">*</span>
+					</td>
+				</tr>
+				<tr>
+					<td style="border:0px;text-align: right;">商品简称:&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td style="border:0px;text-align: left;">
+						<input type="text" id="short_name" value="{{short_name}}" disabled/>
+					</td>
+					<td style="border:0px;text-align: right;">成本价:&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td style="border:0px;text-align: left;">
+						<input type="text" id="cost" value="{{cost}}" data-verify="number" disabled/>
+                        <!-- <a id="modify_cost" class="optionbtn" href="javascript:void(0);">修改</a> -->
+						<a id="modify_cost" href="javascript:void(0);"> 
+							<span class="pageIcon pageIcon_edit" style="display:inline-block;" title="修改成本价"></span>
+                        <!--  <img style="vertical-align:middle;" alt="" src="../public/retail/img/editPrice.png" />-->
+                        </a>
+					</td>
+				</tr>
+				<tr>
+					<td style="border:0px;text-align: right;">商品简码:&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td style="border:0px;text-align: left;">
+						<input type="text" title="{{short_code}}" id="short_code" value="{{short_code}}"  disabled/>
+					</td>
+					<td style="border:0px;text-align: right;">采购价:&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td style="border:0px;text-align: left;">
+						<input type="text" id="pri1" value="{{pri1}}" data-verify="number" data-empty="false" verify-message="采购价不能为空或错误"/>
+						<span class="redstar">*</span>
+					</td>
+				<tr>
+					<td style="border:0px;text-align: right;">商品类别:&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td style="border:0px;text-align: left;">
+						<input type="text" id="item_kind_id" value="{{item_kind_name}}"/>
+					</td>
+					<td style="border:0px;text-align: right;">调拨价:&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td style="border:0px;text-align: left;">
+						<input type="text" id="pri2" value="{{pri2}}" data-verify="number" verify-message="调拨价必须为数字"/>
+					</td>
+				</tr>
+				<tr>
+					<td style="border:0px;text-align: right;">单位名称:&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td style="border:0px;text-align: left; ">
+						<input type="text" id="unit_name" value="{{unit_name}}"/>
+					</td>
+					<td style="border:0px;text-align: right;">零售价:&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td style="border:0px;text-align: left;">
+						<input type="text" id="pri4" value="{{pri4}}" data-verify="number" data-empty="false" verify-message="零售价不能为空或错误"/>
+						<span class="redstar">*</span>
+					</td>
+				</tr>
+				<tr>
+					<td style="border:0px;text-align: right;">规格:&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td style="border:0px;text-align: left;">
+						<input type="text" id="spec" value="{{spec}}"/>
+					</td>
+					<td style="border:0px;text-align: right;"></td>
+					<td style="border:0px;text-align: left;"></td>
+				</tr>
+                <tr>
+					<td colspan="4" style="position:relative; z-index:1;">
+                        <button class="primary_button" id="add_unit" style="margin-right:40px; position:relative; z-index:3; *width:100px;">
+                            <img style="margin:0px 7px; alt="" src="../public/retail/img/addpack.png"><span style="margin-right:7px;">添加包装</span> 
+                        </button>
+                        <div style="border:position:absoulte; z-index:2; margin-top:-15px;margin-left:15px;*margin-left:10px;width:95%; height:1px;background-color:#eee;"></div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div id="unit_container" style="margin:2px auto;width:100%;height:220px;overflow:auto;">
+			{{#list}}
+			<div id="{{seq_id}}" data-big-bar='{{big_bar}}' style="margin:0px 15px 5px 0px;border-bottom:1px dotted #e8e8e8;padding-bottom:15px; overflow:hidden;">
+				<input type="hidden" id="seq_id" value="{{seq_id}}"/>
+				<table style="width:100%;border:0px;" class="ttb">
+					<tr style="">
+						<!--<th colspan="3" style="border:0px;text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;--==&nbsp;包装&nbsp;==--</th>-->
+						<th colspan="4" style="border:0px;text-align:right;">
+                          <a style="padding:5px 10px;cursor:pointer;display:inline-block; *display:inline-block;" class="pageIcon pageIcon_smalldel" name="delete_unit" title="删除此包装"></a>
+                        </th>
+					</tr>
+					<tr>
+						<td style="border:0px;text-align:right;">单位名称:&nbsp;&nbsp;</td>
+						<td style="border:0px;text-align:left;">
+						<input type="text" id="big_unit_name" name="big_unit_name" value="{{big_unit_name}}"/>
+						</td>
+						<td style="border:0px;text-align: right;">包装条码:&nbsp;&nbsp;</td>
+						<td style="border:0px;text-align: left;">
+							<input type="text" id="big_bar" value="{{big_bar}}" data-empty="false" data-respond="false" verify-message="包装条码不能为空" data-uniq="bar" uniq-message="包装条码不可重复"/>
+							<span class="redstar">*</span>
+						</td>
+					</tr>
+					<tr>
+						<td style="border:0px;text-align: right;">转换系数:&nbsp;&nbsp;</td>
+						<td style="border:0px;text-align: left;">
+							<input type="text" class="unit_ratio" id="unit_ratio" value="{{unit_ratio}}" data-empty="false" data-verify="number" verify-message="转换系数不能为空" uniq-message="转换系数不能为1"/>
+							<span class="redstar">*</span>
+						</td>
+						<td style="border:0px;text-align: right;">零售价:&nbsp;&nbsp;</td>
+						<td style="border:0px;text-align: left;">
+							<input type="text" id="pri4" value="{{pri4}}" data-empty="false" data-verify="number" verify-message="零售价不能为空"/>
+							<span class="redstar">*</span>
+						</td>
+					</tr>
+				</table>
+			</div>
+			{{/list}}
+		</div>
+	</div>
+	<div class="view_footer" style="text-align:center;">
+		<ul style="list-style-type:none; float:right;">
+			<!--<li style="float:left;"><input type="button" class="primary_button" id="add_unit" value="添加包装"/></li>	-->		
+			<li style="float:left; margin-left:20px; *margin-top:15px;"><input type="button" class="primary_button" id="submit" value="保 存"/></li>
+			<li style="float:left; margin-left:20px; *margin-top:15px;"><input type="button" class="closebtn_button" id="cancel" value="取 消"/></li>
+		</ul>
+	</div> 
+	{{/merchItem}}
+</div>
+</script>
+<script type="text/mustache" id="view_spgl_unit">
+<div id="{{seq_id}}" style="margin:0px 15px 5px 0px;border-bottom:1px dotted #e8e8e8;padding-bottom:15px; overflow:hidden;">
+	<table style="width:100%;border:0px;" class="ttb">
+		<tr>
+			<!--<th colspan="3" style="border:0px;text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;--==&nbsp;包装&nbsp;==--</th> -->
+			<th colspan="4" style="border:0px;text-align:right;">
+             <a style="padding:5px 10px;cursor:pointer; display:inline-block;*display:inline-block;" class="pageIcon pageIcon_smalldel" name="delete_unit" title="删除此包装"></a>
+            </th>
+		</tr>
+		<tr>
+			<td style="border:0px;text-align:right;">单位名称:&nbsp;&nbsp;</td>
+			<td style="border:0px;text-align:left;">
+			<input type="text" id="big_unit_name" name="big_unit_name" value="{{big_unit_name}}"/>
+			</td>
+			<td style="border:0px;text-align: right;">包装条码:&nbsp;&nbsp;</td>
+			<td style="border:0px;text-align: left;">
+				<input type="text" id="big_bar" value="{{big_bar}}" data-empty="false" data-respond="false" verify-message="包装条码不能为空" data-uniq="bar" uniq-message="包装条码不可重复"/>
+				<span class="redstar">*</span>
+			</td>
+		</tr>
+		<tr>
+			<td style="border:0px;text-align: right;">转换系数:&nbsp;&nbsp;</td>
+			<td style="border:0px;text-align: left;">
+				<input type="text" class="unit_ratio" id="unit_ratio" value="{{unit_ratio}}" data-empty="false" data-verify="number" verify-message="转换系数不能为空"/>
+				<span class="redstar">*</span>
+			</td>
+			<td style="border:0px;text-align: right;">零售价:&nbsp;&nbsp;</td>
+			<td style="border:0px;text-align: left;">
+				<input type="text" id="pri4" value="{{pri4}}" data-empty="false" data-verify="number" verify-message="零售价不能为空"/>
+				<span class="redstar">*</span>
+			</td>
+		</tr>
+	</table>
+</div>
+</script>
+
+<script type="text/mustache" id="view_spgl_confirm_dialog">
+	<div>
+		<div style="margin:20px 20px 0px 20px;">{{context}}</div>
+	</div>
+</script>
+
+
+<script type="text/mustache" id="view_spgl_modify_cost_dialog">
+<div>
+	<style>
+p {
+margin:0px 20px;
+line-height:1.8em;
+}
+ .modify_btn{
+margin-right:20px;
+text-align:right;
+line-heigth:150%;
+}
+#modified_cost {
+font-size:16px;
+width: 80px;
+}
+a {
+
+}
+	</style>
+	<p style="margin-top:15px;margin-bottom:10px; line-height:1.5em;">成本价在每次入库时自动计算，如果您修改这个价格可能会影响本系统计算贵店利润的准确性!</p>
+	<p style="margin-bottom:10px;"><input id="confirm_modify" type="checkbox"/>&nbsp;我已知晓，并要修改成本价</p>
+	<div id="modify_div" style="display:none;">
+		<p>当前成本价：{{cost}}&nbsp;元</p>
+		<p>修改为：<input id="modified_cost" data-empty="false" data-verify="number" value="{{cost}}"/>&nbsp;元</p>
+		<br/>
+		<div class="modify_btn">
+			<input type="button" class="primary_button" id="confirm_modify_button" style="position:relative;" value="保 存"/>
+			<input type="button" class="closebtn_button" id="cancel_modify_button" style="position:relative;margin-left:15px;" value="取 消"/>
+		</div>
+	</div>
+</div>
+</script>
+

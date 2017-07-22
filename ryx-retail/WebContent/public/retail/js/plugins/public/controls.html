@@ -1,0 +1,313 @@
+
+<script type="text/mustache" id="r_window">
+	<div class="window haspager">
+<style>
+	.window_header_tip ul{display:inline-block;}
+	.window_header_tip ul li{float:left; margin-right:30px;}
+	.window_header_tip ul li a{display:inline-block; width:100%; height:100%; color:#FFF; cursor:pointer;}
+	.window_header_tip ul li a:hover{color:#FFF;}
+	.window .window_pager label,.window .window_pager img{
+	   cursor:pointer;
+	}
+    .window .window_pager .window_pager_update{
+       position:absolute;
+       padding:12px 0px;
+       width:130px;
+       text-align:center;
+       margin-top:-45px;
+       display:none;
+       border:1px solid #ccc;
+       background-color:#f9f9f9;
+       box-shadow:0px 0px 2px #bbb;
+       border-radius:3px;
+     }
+    .window .window_pager .window_pager_update label:HOVER{
+	   color:#0a9ae8;
+       font-weight:bold;
+     }
+</style>
+		<div class="window_header">
+			{{{header}}}
+			<div class="window_header_tip"></div>
+		</div>
+		<div class="window_content_cont">
+			<div class="window_content"></div>
+		</div>
+		<div class="window_search">
+		</div>
+		<div class="window_message" style="display:none;">
+			您所输入的信息没有查询到结果！
+		</div>
+		<div class="window_footer"></div>
+        <div class="window_adSearch">
+          <a title="展开" id="footer_adSearch" data-state="up">
+           <!--<img alt="" src="../public/retail/img/up.png">-->
+			<span class="pageIcon pageIcon_upArrrow"></span>
+          </a>
+        </div>
+		<div class="window_pager">
+			<a class="window_pager_prev" title="上一页(PageUp)"><span>&nbsp;</span></a>
+			<a class="window_pager_next" title="下一页(PageDown)"><span>&nbsp;</span></a>
+            <div class="window_pager_update">
+				<span class="window_pager_first pageIcon pageIcon_prev" title="返回首页" style="display:inline-block;cursor:pointer;"></span>
+                <input class="window_pager_custom" style="display:inline-block;width:50px;height:20px;margin:0px 8px;text-align:center;" data-verify="pint" type="text" />	
+				<span class="window_pager_last pageIcon pageIcon_next" title="最后一页" style="display:inline-block;cursor:pointer;"></span>               
+            </div>
+			<div title="点击选择页码" class="window_pager_index" style="cursor:pointer;">
+				<label class="window_pager_start"></label>
+				<div style="background: #CCC; height: 1px; width: 24px; margin: 0 auto;"></div>
+				<label class="window_pager_count"></label>
+			</div>
+		</div>
+		<a class="window_close" title="关闭(Esc)"><span class="pageIcon pageIcon_close"></span></a>
+	</div>
+</script>
+<script type="text/mustache" id="r_window_header">
+	<ul class="window_header_ul">
+		{{#children}}
+		<li><a class="subnavlink window_header_item" data-module="{{module_id}}">
+			<span class="window_header_item_icon {{icon}}" alt="{{title}}"></span>
+			<label class="window_header_item_title">{{title}}</label>
+			<label class="quick_key">{{quick_key}}</label>
+		</a></li>
+		{{/children}}
+	</ul>
+</script>
+
+<script type="text/mustache" id="r_dialog">
+	<div class="dialog">
+	</div>
+</script>
+
+<script type="text/mustache" id="r_iframedialog">
+	<div style="width: 100%; height: 100%">
+		<iframe src="{{url}}" style="width: 100%; height: 99%"
+			frameborder="0" scrolling="auto"></iframe> 
+	</div>
+</script>
+
+<script type="text/mustache" id="roll_jydh_item1">
+		<li>
+			<div style="text-align: left; margin: 0 0 5px 20px; padding-top: 20px;">您的订货时间：</div>
+			开始：<span style="line-height: 30px;">{{order_begintime}}</span><br />
+			结束：<span style="line-height: 30px;">{{order_endtime}}</span>
+		</li>
+</script>
+<script type="text/mustache" id="roll_ad_item">
+		<li style="background: url('{{adimg}}')"></li>
+</script>
+
+<script type="text/mustache" id="back_skin">
+	<div class="back_skin">
+		<div class="back_skin_back">&nbsp;</div>
+		<ul>
+			{{#list}}
+			<li>
+				<a href="javascript:void(0)" data-url="{{url}}">
+					<!--<img alt="" src="{{small_url}}">-->
+					<span class="{{small_url}}"></span>
+				</a>
+			</li>
+			{{/list}}
+		</ul>
+	</div>
+</script>
+
+<script type="text/mustache" id="new_item_dialog">
+<div>
+<table style="width: 100%;" class="table_view">
+	<thead>
+		<tr>
+			<th style="width: 20%;">商品条码</th>
+			<th style="width: 20%;">商品名称</th>
+			<th style="width: 20%;">单位</th>
+			<th style="width: 20%;">零售价</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><label style="width:120px;">{{big_bar}}</label></td>
+			<td><input type="text" id="new_item_dialog_item_name"  style="width:120px;" data-empty="false" value="{{item_name}}" verify-message="请输入商品名称！"/></td>
+			<td><input type="text" id="new_item_dialog_unit_name"  style="width:80px;" maxlength="6" value="件"/></td>
+			<td><input type="text" id="new_item_dialog_pri4" style="width:80px;" data-empty="false" data-verify="number" data-enter="new_item_dialog_submit" verify-message="请输入商品售价！"/></td>
+		</tr>
+	</tbody>
+</table>
+<div class="view_footer">
+	<input type="button" id="new_item_dialog_cancel" class="closebtn_button right" style="margin-right:20px" value="取 消"/>
+	<input type="button" id="new_item_dialog_submit" class="primary_button right" style="margin-right:20px" value="保 存"/>
+</div>
+</div>
+</script>
+
+<script type="text/mustache" id="new_item_dialog2">
+<div>
+<table style="width: 100%;" class="table_view">
+	<thead>
+		<tr>
+			<th style="width: 15%;">商品条码</th>
+			<th style="width: 20%;">商品名称</th>
+			<th style="width: 10%;">单位</th>
+			<th style="width: 20%;">商品类型</th>
+			<th style="width: 15%;">采购价</th>
+			<th style="width: 15%;">销售价</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="height: 37px;"><label style="width:100px;">{{big_bar}}</label></td>
+			<td><input type="text" id="new_item_dialog_item_name"  style="width:110px;" data-empty="false" value="{{item_name}}" verify-message="请输入商品名称！"/></td>
+			<td><input type="text" id="new_item_dialog_unit_name"  style="width:60px;" maxlength="6" value="件"/></td>
+			<td><input type="text" id="new_item_dialog_item_kind"  style="width:70px;"/></td>
+			<td><input type="text" id="new_item_dialog_pri1" style="width:70px;" data-empty="false" data-verify="number" verify-message="请输入正确的商品采购价！"/></td>
+			<td><input type="text" id="new_item_dialog_pri4" style="width:70px;" data-empty="false" data-verify="number" data-enter="new_item_dialog_submit" verify-message="请输入正确的商品销售价！"/></td>
+		</tr>
+	</tbody>
+</table>
+<div class="view_footer">
+	<input type="button" id="new_item_dialog_cancel" class="closebtn_button right" value="取 消"/>
+	<input type="button" id="new_item_dialog_submit" class="primary_button right" style="margin-right:20px" value="保 存"/>
+</div>
+</div>
+</script>
+
+<script type="text/mustache" id="choice_item_dialog">
+<div>
+<style>
+.item_typelist li:hover{
+background-color:#f0f0f0;
+}
+.item_typelist li a:hover{
+    color:inherit;
+}
+.selected_a {
+display:inline-block;
+width:100%;
+height:100%;
+background-color:#f0f0f0;
+}
+.unselected_a {
+display:inline-block;
+width:100%;
+height:100%;
+/*background-color:#E0E0E0;*/
+}
+</style>
+<div style="width:210px;position:absolute;overflow-x:hidden;overflow-y:auto;height:444px;background-color:#f9f9f9;bottom:60px; left: 0;">
+	<ul class="item_typelist" style="list-style-type:none;text-align:center;line-height:43px;font-size:18px;cursor:pointer;">
+		<li style="padding:0 0 0 1px;float:left;width:100%;border-bottom:1px solid #f0f0f0;"><a name="item_kind_a" class="unselected_a">全部</a></li>
+		{{#item_kind_list}}
+		<li style="padding:0 0 0 1px;float:left;width:100%;border-bottom:1px solid #f0f0f0;"><a data-id="{{id}}" name="item_kind_a" class="unselected_a">{{name}}</a></li>
+		{{/item_kind_list}}
+	</ul>
+</div>
+<div id="item_list_content" style="margin: 0 0 0 210px;height:444px;overflow:auto;border-left: 1px solid #CCC;bottom: 60px;">
+</div>
+<div class="view_footer">
+	<input id="choice_item_dialog_cancel" value="关 闭" type="button" name="choice_item_dialog_cancel" class="closebtn_button right"/>
+	<input id="key" class="striking_input" type="text" value="" placeholder="请输入商品信息" data-enter="query_by_key" name="item_key_input"/>
+	<input id="query_by_key" class="primary_button" type="button" style="margin-left:10px;" value="查 询" name="query_by_key"/>
+</div>
+</div>
+</script>
+
+<script type="text/mustache" id="choice_item_dialog_li">
+<ul style="list-style-type:none;">
+	<style>
+		.cat_item {
+			padding: 3px 4px;
+			float: left;
+		}
+		.cat_item a {
+			height:120px; 
+			width:100px;
+			display: inline-block;
+			text-align: center;
+			cursor: pointer;
+			border: 1px solid #eee;
+		}
+		.cat_item a:hover {
+			background: #F3F3F3;
+		}
+	</style>
+	
+	{{#item_list}}
+	<li class="cat_item">
+		<a data-id="{{item_id}}" data-bar="{{item_bar}}" name="item_button" title="{{item_name}}">
+			<div style="height: 90px; margin: 5px auto;">
+				<img data-src="{{item_url}}" src="{{reload}}" style="max-width: 90px; max-height: 90px;" />
+			</div>
+			<label style="white-space:nowrap; display:inline-block; max-width: 100px; overflow:hidden;">{{item_name}}</label>
+		</a>
+	</li>
+	{{/item_list}}
+</ul>
+</script>
+
+<script type="text/mustache" id="widget_weather">
+<div>
+<div class="weathericon weathericon{{img_single}}"></div>
+<p>{{city}}&nbsp;&nbsp;{{weather}}<br />{{temp1}}~{{temp2}}</p>
+</div>
+</script>
+
+<!--消息推送：系统公告-->
+<script type="text/mustache" id="msg_purch_detail_xxgg">
+<div style="z-index:1000">
+<div style="overflow-y: scroll; position: absolute; top: 0px; left: 0px; bottom: 60px; width:100%;">
+	<div style="text-align: center;">
+		<h3 style="font-size: 16px; margin: 10px auto; font-weight: bold;">{{ref_desc}}</h3>
+		<p style="width: 50%; float: right; text-align: left;">&nbsp;&nbsp;&nbsp;发送日期：{{end_date}}</p>
+	</div>
+
+	<div style="margin: 40px 40px 0 40px; clear: both;">
+		<p style="border-top:1px dashed #efefef;height:1px;width:100%;margin-bottom:10px;"></p>
+		{{{info_content}}}
+	</div>
+</div>
+<div class="view_footer" >
+	<input  type="button" id="msgPushInfoCloseBtn"  class="closebtn_button right" style="margin-left:20px;" value="关 闭" />
+</div>
+</div>
+</script>
+
+<!--消息推送：咨询反馈-->
+<script type="text/mustache" id="msg_purch_detail_zxfk">
+<div style="z-index:1000">
+
+<style>
+.zxcontent_title{
+	font-size: 15px; 
+	font-weight: bold;
+	position:absolute;
+	margin-top:-10px;
+	background-color:#fff;
+	padding-right:10px;
+}
+.zxcontent_text{
+	padding: 10px 5px 5px 38px;
+	margin-top:20px;
+	margin-right:20px;
+	line-height:25px;
+	border-top:1px solid #eee;
+}
+</style>
+<div style="overflow-y:scroll; position:absolute; top:0px; left:0px; bottom:60px; width:100%;">
+	<div style="padding:20px;">
+	<h3 style="margin:10px auto;font-weight:bold;text-align:center;">{{info_title}}</h3>
+		<div style="min-height: 100px;margin-top:30px;"> 
+			<div class="zxcontent_title">内容</div>
+			<p class="zxcontent_text">{{info_desc}}</p>
+		</div>
+		<div style="min-height: 100px;margin-top:50px;"> 
+			<div class="zxcontent_title">回复</div>
+			<p class="zxcontent_text">{{vfy_desc}}</p>
+		</div>
+	</div>	
+</div>
+
+<div class="view_footer" >
+	<input  type="button" id="msgPushInfoCloseBtn"  class="closebtn_button right" style="margin-left:20px;" value="关 闭" />
+</div>
+</div>
+</script>

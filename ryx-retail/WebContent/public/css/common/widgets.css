@@ -1,0 +1,450 @@
+@charset "utf-8";
+
+.primary,
+.primary_button, a.primary_button,
+.table_view tr.primary
+{
+	background-color: #098ad0;
+}
+.primary:HOVER,
+.primary_button:HOVER, a.primary_button:HOVER
+{
+	background-color: #0a9ae8;
+}
+
+.minor,
+.minor_button, a.minor_button,
+.table_view tr.minor
+{
+	background-color: #56AD02;
+	/*background-color: #4ecb2c;*/
+}
+.minor:HOVER,
+.minor_button:HOVER, a.minor_button:HOVER
+{
+	background-color: #4ecb2c;
+	/*background-color: #57e231;*/
+}
+
+.closebtn_button, a.closebtn_button
+{
+	background-color: #56AD02;
+	/*background-color: #a5a7a9;*/
+}
+.closebtn_button:HOVER, a.closebtn_button:HOVER
+{
+	background-color: #4ecb2c;
+	/*background-color: #b8babc;*/
+}
+
+.striking,
+.striking_button, a.striking_button,
+.table_view tr.striking
+{
+	/*background-color: #FF8500;*/
+	background-color: #098ad0;
+}
+.striking:HOVER,
+.striking_button:HOVER, a.striking_button:HOVER
+{
+	/*background-color: #FF9725;*/
+	background-color: #0a9ae8;
+}
+
+.primary_button, .minor_button, .striking_button,.closebtn_button {
+	height: 30px;
+	min-width: 80px;
+	padding: 0 3px;
+	color: #FFFFFF;
+	border-radius: 2px;
+	border: none;
+	font: 15px "Microsoft YaHei",STXihei,Arial,Helvetica,sans-serif,Simsun;
+	cursor: pointer;
+}
+.primary_button.small, .minor_button.small, .striking_button.small {
+	height: 26px;
+	min-width: 50px;
+}
+
+/*提示框中的按钮间距*/
+.ui-dialog .ui-dialog-buttonpane button {
+	margin: .5em 1.3em .5em 0;
+}
+.ui-button-text-only .ui-button-text {
+	padding: .3em 0em;
+}
+.ui-dialog .ui-dialog-buttonpane {
+	margin-top:1.5em;
+	padding: .5em .3em .8em .4em;
+}
+
+
+input[type=text], input[type=password], select { 
+	border: 1px solid #ddd;
+}
+input.primary_input {
+	border: 1px solid #0F76BC;
+}
+input.striking_input {
+	/*border: 1px solid #FF9725;*/
+}
+input[disabled],input[disabled]:hover{
+	background-color:#ebebeb;
+	color:#bbb;
+	cursor:default;
+}
+input[type='button'][disabled],input[type='button'][disabled]:hover{
+	background-color:#c6c6c6;
+	color:#eee;
+}
+input[type="text"]:focus{
+	border: 1px solid #2caef8;  
+} /*add focus border*/
+input.primary_input, input.striking_input {
+	padding: 5px;
+	font-size: 16px;
+}
+input.primary_input.small, input.striking_input.small {
+	padding: 4px;
+	font-size: 14px;
+}
+
+.primary_label {
+	color: #0F76BC;
+}
+.striking_label {
+	color: #FF9725;
+}
+.primary_label, .striking_label {
+	font-size: 24px;
+	font-weight: bold;
+}
+.small_label {
+	font-size: 18px;
+}
+.right_label {
+	display: inline-block;
+	text-align: right;
+}
+
+input.primary_text {
+	color: #0F76BC;
+}
+input.striking_text {
+	color: #FF9725;
+}
+input.primary_text, input.striking_text {
+	padding: 1px 2px;
+	font-size: 24px;
+	font-weight: bold;
+}
+.small_text {
+	font-size: 18px;
+}
+
+
+.prompt_label, input.prompt_label {
+	color: #999;
+}
+
+.table_view {
+	border: 1px solid #ebebeb;
+	border-right: none;
+	border-left:none;
+}
+.table_view th, .table_view td {
+	padding: 3px 1px;
+}
+.table_view thead tr th{
+	border-bottom: 1px solid #ebebeb;
+}
+.table_view th {
+	font-weight: bold;
+	text-align: center;
+	background: #f9f9f9;
+	height:34px;
+}
+.table_view td {
+	text-align: center;
+	height: 34px;
+}
+.table_view tbody tr:nth-of-type(odd), .table_view tbody tr.odd{
+	background: #FFFFFF;
+}
+.table_view tbody tr:nth-of-type(even), .table_view tbody tr.even{
+	background: #f4f7fb;
+}
+.table_view.clickable tbody tr {
+	cursor: pointer;
+}
+
+.table_view.clickable label {
+	cursor: pointer;
+}
+/*
+.table_view.clickable tbody tr:HOVER {
+	background: #C5DAFF;
+}*/
+.table_view tbody tr.warnRow, .table_view.clickable tbody tr.warnRow{
+	background: #F2DEDE;
+}
+.table_view tbody tr.selectRow, .table_view.clickable tbody tr.selectRow{
+	background: #d5e7ec;
+}
+.table_view tbody tr.selectRow td {
+	/*border-right: 1px solid #FFFBF7;*/
+}
+.table_view .tfoot tr, .table_view tfoot tr, .table_view tbody.tfoot tr{
+	font-weight: bold;
+	text-align: center;
+	background: #f9f9f9;
+	height:34px;
+}
+.table_view .tfoot tr td, .table_view tfoot tr td, .table_view tbody.tfoot tr td{
+	border-top: 1px solid #ebebeb;
+}
+.tableSortA:hover{
+	background:#f0f0f0;
+	cursor:pointer;
+}
+.datagrid-sort-desc .datagrid-sort-icon {
+  padding: 0 13px 0 0;
+  background: url('images/datagrid_sort_icons.png') no-repeat -16px center;
+}
+.datagrid-sort-asc .datagrid-sort-icon {
+  padding: 0 13px 0 0;
+  background: url('images/datagrid_sort_icons.png') no-repeat 0px center;
+}
+
+
+.list_view {
+	/*border-top: 1px solid #E6EAED;*/
+}
+.list_view li{
+	padding: 5px;
+	margin: 0px;
+}
+.list_view.clickable li {
+	cursor: pointer;
+}
+.list_view li:nth-of-type(odd){
+	background: #FFFFFF;
+}
+.list_view li:nth-of-type(even){
+	background: #f4f7fb;
+}
+.list_view li.selectRow, .list_view.clickable li.selectRow{
+	background: #d5e7ec;
+}
+
+.list_view2 {
+	/*border-top: 1px solid #E6EAED;*/
+}
+.list_view2 li{
+	padding: 10px;
+	margin: 0px;
+	position: relative;
+}
+.list_view.clickable li {
+	cursor: pointer;
+}
+.list_view2 li:nth-of-type(odd){
+	background: #FFFFFF;
+}
+.list_view2 li:nth-of-type(even){
+	background: #f4f7fb;
+}
+.list_view2 li.selectRow, .list_view.clickable li.selectRow{
+	background: #d5e7ec;
+}
+.list_view2 div {
+	float: left;
+	margin-right: 10px;
+}
+.list_view2 div.right {
+	float: right;
+	margin-left: 10px;
+}
+.list_view2 .lefticon {
+	max-height: 100%;
+}
+.list_view2 .title {
+	font-size: 1.1em;
+	font-weight: bold;
+	margin: 5px 0;
+}
+.list_view2 .desc {
+	
+}
+.list_view2 .gray {
+	color: #AAA;
+}
+
+.clearfix {
+	clear: both;
+	height: 0px;
+}
+
+.loading_view {
+	position: absolute;
+	display: none;
+	z-index: 2500;
+	top: 0;
+	left: 0;
+	min-width: 100%;
+	min-height: 100%;
+}
+.loading_view .loading_view_rect {
+	position: relative;
+	margin: 0 auto;
+	top: 160px;
+	width: 80px;
+	height: 80px;
+	background: #FFF;
+	opacity: .9;
+	filter: Alpha(Opacity=90);
+	border-radius: 4px;
+}
+.loading_view .window_loading {
+	display: block;
+	margin: 0 auto;
+	position: relative;
+	top: 20px;
+}
+
+.alert_view {
+	position: absolute;
+	display: none;
+	z-index: 3000;
+	min-width: 200px;
+	max-width: 320px;
+	min-height: 30px;
+	max-height: 100px;
+	line-height: 24px;
+	overflow:hidden;
+	padding: 0 10px;
+	text-align: center;
+	background: #000000;
+	color: #FFFFFF;
+	opacity: .7;
+	filter: Alpha(Opacity=70);
+	border-radius: 4px;
+}
+
+.confirm_view {
+	position: absolute;
+	display: none;
+	z-index: 3000;
+	min-width: 320px;
+	max-width: 400px;
+	min-height: 30px;
+	max-height: 100px;
+	line-height: 24px;
+	overflow:hidden;
+	padding: 0 10px;
+	margin-top:25px;
+	text-align: left;
+	background: #000000;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	font-size:15px;
+	margin-left:20px;
+	margin-right:20px;
+}
+
+.mask_view {
+	position: absolute;
+	display: none;
+	z-index: 2501;
+	top: 0;
+	left: 0;
+	min-width: 100%;
+	min-height: 100%;
+}
+.mask_view .mask_back {
+	position: absolute;
+	top: 0;
+	left: 0;
+	min-width: 100%;
+	min-height: 100%;
+	background: #000000;
+	opacity: .2;
+	filter: Alpha(Opacity=20);
+	
+}
+.mask_view .mask_view_rect {
+	position: relative;
+	margin: 0 auto;
+	top: 180px;
+	width: 380px;
+	height: 200px;
+	text-align: center;
+	background-color: #f5f5f5;
+	border-radius:5px;
+	box-shadow:0px 1px 3px #aaa;
+}
+.mask_view .window_loading {
+	display: block;
+	margin: 0 auto;
+	position: relative;
+}
+.mask_view .mask_message {
+	margin-top: 5px;
+	font-size:16px;
+}
+.mask_view .mask_buttons {
+	margin-top: 10px;
+}
+
+
+.redstar, span.redstar {
+	color: red;
+}
+
+.optionbtn, a.optionbtn {
+	display: inline-block;
+	padding: 1px 5px;
+	background: #098ad0;
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	color: #FFF;
+}
+.optionbtn:HOVER, a.optionbtn:HOVER {
+	background-color: #0a9ae8;
+	color: #FFF;
+}
+
+/*日期弹出框内容居中*/
+.ui-datepicker td span,
+.ui-datepicker td a {
+	text-align:center;
+}
+.ui-datepicker .ui-datepicker-buttonpane button{
+	border:1px solid #fed22f;
+	background-color:#fefded;
+	color:#f48c12;
+	opacity:1;
+	font-weight:normal;
+}
+.ui-datepicker .ui-datepicker-buttonpane button:hover{
+	background-color:#feecdc;
+}
+#ui-datepicker-div{
+	border:1px solid #eee;
+}
+
+/*时间弹出框样式*/
+.ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+.ui-timepicker-div dl { text-align: left; }
+.ui-timepicker-div dl dt { float: left; clear:left; padding: 0 0 0 5px; }
+.ui-timepicker-div dl dd { margin: 0 10px 5px 50px; }
+.ui-timepicker-div td { font-size: 90%; }
+.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+.ui-timepicker-div dl dd .ui_tpicker_hour_slider,.ui-timepicker-div dl dd .ui_tpicker_minute_slider{margin-top:12px;}
+
+.ui-timepicker-rtl{ direction: rtl; }
+.ui-timepicker-rtl dl { text-align: right; padding: 0 5px 0 0; }
+.ui-timepicker-rtl dl dt{ float: right; clear: right; }
+.ui-timepicker-rtl dl dd { margin: 0 40% 10px 10px; }

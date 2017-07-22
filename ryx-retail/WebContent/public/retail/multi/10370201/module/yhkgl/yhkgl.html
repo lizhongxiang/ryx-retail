@@ -1,0 +1,167 @@
+<script type="text/mustache" id="view_yhklb">
+<div>
+	<div>
+		<ul class="list_view2">
+			{{#bank_card_list}}
+			<li style="height: 54px;" data-bank-id="{{accno}}">
+				<div style="height: 54px; width: 220px; text-align:center;"><img style="height: 100%;" src="{{bank_imp}}" /></div>
+				<div>
+					<p class="title">{{newaccno}} &nbsp;&nbsp;&nbsp;&nbsp; {{username}} </p>
+					<p class="gray">
+						<span>
+							卡类型：{{paycard_type_name}}
+						</span>
+						<span style="margin:0px 52px 0px 22px;">
+							预留手机：{{newphoneno}}
+						</span>
+						<span>
+							开通日期：{{new_bind_date}}
+						</span>
+					</p>
+
+				</div>
+				<div class="unbund_div right" style="line-height: 54px; margin-right: 20px;">
+					<a href="javascript:void(0);">解除绑定</a>
+				</div>
+			</li>
+			{{/bank_card_list}}
+		</ul>
+	</div>
+	<div class="view_footer">
+		<input type="button" id="bind_bank_card_btn" class="striking_button right" value="绑定银行卡"/>
+	</div>
+</div>
+</script>
+
+<script type="text/mustache" id="view_bind_bank_card">
+<div>
+<style>
+  .table_hyeditor tr{
+     height:40px;
+     text-align:center;
+  }
+
+  .title_td {
+	text-align: right; 
+	width:142px;
+	//border:1px solid #00f; 
+  }
+
+  .content_td {
+     text-align:left; 
+//	border:1px solid #00f;
+  }
+  .content_td input{
+	width:222px; 
+	height:22px;
+	font-size:16px;
+}
+
+</style>
+	<div id="bank_adddiv">
+		<table style="width:100%;  margin-top:10px;" class="table_hyeditor" data-bank-name="" data-bank-code="" >
+			<tr >
+				<td class='title_td' >银行卡类型：</td>
+				<td class='content_td'>
+					<input id="credit_card" class="rad" type="radio" name="bank_card_type" style="width:22px; height:16px;" value="01" checked="checked" />
+					借记卡 
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<input id="debit_card" class="rad" type="radio" name="bank_card_type" style="width:22px; height:16px;" value="02" />
+					信用卡 
+				</td>
+			</tr>
+			
+			<tr>
+				<td class='title_td'>银行卡号：</td>
+				<td class='content_td' style="border:0px solid #000; ">
+					<div style=" float:left; ">
+						<input style=" " type="text" value="" id="bank_card_id" maxlength='27' data-empty="false" data-verify="number" verify-message="银行卡号不能为空且必须为数字！" />
+					</div>
+					<div id="bank_icon" style=" float:left; width:22px; height:33px;  margin-left:10px; display:none">
+						<img id="new_bank_icon" title="" style="height: 100%;" src="" />
+					</div>
+				</td>
+			</tr>
+			
+			<tr>
+				<td class='title_td'>真实姓名：</td>
+				<td class='content_td'>
+					<input type="text" value="{{}}" id="user_name" data-empty="false"  verify-message="真实姓名不能为空！"/>
+				</td>
+			</tr>
+			
+			<tr>
+				<td class='title_td'>身份证号码：</td>
+				<td class='content_td'>
+					<input type="text" value="{{}}" id="identity_card_id" data-empty="false" maxlength="20" data-verify="card" verify-message="身份证号码不能为空或错误！"/>
+				</td>
+			</tr>
+			
+			<tr>
+				<td class='title_td'>手机号码：</td>
+				<td class='content_td'>
+					<input type="text" value="{{}}" id="user_telephone" data-empty="false" data-verify="phone" maxlength='11' verify-message="手机号码不能为空且必须为数字！"/>
+				</td>
+			</tr>
+			
+			<tr id="validate_sms_tr">
+				<td class='title_td'>短信验证码：</td>
+				<td  class='content_td'>
+					<input type="text" value="{{}}" id="sms_code" style="width:82px;" maxlength='6' data-empty="false" data-verify="number" verify-message="短信验证码不能为空且必须为数字！"/>
+					&nbsp;&nbsp;&nbsp;
+					<input type="button" class="primary_button" id="send_sms_code_btn" style="width:22px; height:31px; font-size:12px;" value="获取验证码" style="margin-right:16px;" />
+				</td>
+			</tr>
+			<tr >
+				<td  colspan="2" >
+					<input type="checkbox" id="user_agreement" value="" checked> 我已经阅读并接受《烟草用户协议》
+				</td>
+			</tr>
+		</table>
+
+		<div id="format_card_div" style="position:absolute;margin-top:-277px; margin-left:143px; font-size: 16px; display:none;">
+			<div id="format_bank_card_id" style="border:1px solid #f00;padding:0px 5px; min-width: 225px; max-width:320px; height:33px;line-height:33px; background-color: #FFFDCA; color: #F73200; font-size: 18px; ">
+				
+			</div>
+		</div>
+	</div>
+
+	<div class="view_footer" style="text-align:right;"> 
+		<input type="button" class="primary_button" id="submit" tabindex='117' value="绑定银行卡" style="margin-right:16px;" data-consumer-id={{consumer.consumer_id}} />
+		<input type="button" class="closebtn_button" id="cancel" value="取 消" />
+	</div>
+</div>
+</script>
+
+
+<script type="text/mustache" id="view_bind_determine">
+
+<div style="border:0px solid #f00;">
+	<div style='border:0px solid #f00; margin-top:22px; margin-right:10px;'>
+		<div style='float:left; margin-left:17px;  border:0px solid #0f0;'>
+			<img style="" alt="" src="../public/retail/img/working.gif" />
+		</div>
+		<div style='margin-top:+2px; margin-left:98px; border:0px solid #00f; '>
+			<p style="font-size:14px; ">请在新页面填写信用卡信息，完成绑定</p>
+			<p style="font-size:14px; ">完成后，请点击下面按钮。</p>
+		</div>
+	</div>
+	<div class="view_footer" style="text-align:center;"> 
+		<input type="button" class="closebtn_button" id="submit_determine" value="绑定检测" />
+	</div>
+
+</div>
+</script>
+
+<script type="text/mustache" id="view_yhkgl_list_item">
+	<li style="height: 54px;">
+		<div style="height: 54px; width: 200px; text-align:center;"><img style="height: 100%;" src="/t2/public/img/1021.jpg" /></div>
+		<div>
+			<p class="title">62202 ***** ***** 2993 &nbsp;&nbsp;&nbsp;&nbsp; **现 </p>
+			<p class="gray">卡类型：信用卡&nbsp;&nbsp;&nbsp;&nbsp;预留手机：158****8910&nbsp;&nbsp;&nbsp;&nbsp;开通日期：2014-12-03</p>
+		</div>
+		<div class="right" style="line-height: 54px;">
+			<a>解除绑定</a>
+		</div>
+	</li>
+</script>
